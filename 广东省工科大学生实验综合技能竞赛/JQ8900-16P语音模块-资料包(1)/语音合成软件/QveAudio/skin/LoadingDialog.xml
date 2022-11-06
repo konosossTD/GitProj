@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="150,40" roundcorner="4,4" layeredimage="" layeredopacity="200">
+	<VerticalLayout bkcolor="#FF000000" bordercolor="#FFD9D9D9" bordersize="1,1,1,1">
+		<HorizontalLayout height="40">
+			<Control />
+			<Label name="msgText" align="center" width="95" height="40" font="0" textcolor="#FFFFFFFF"/>
+			<Label name="loadProgress" width="34" height="40" font="0" textcolor="#FF2FBE6D"/>
+			<Control />
+		</HorizontalLayout>
+	</VerticalLayout>
+</Window>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="860,580" mininfo="760,400" sizebox="4,4,4,4" caption="0,0,0,105" roundcorner="3,3" dbclicktofullscreen="true"> 
+	<VerticalLayout  bkcolor="#FF2CD0A1">
+		<VerticalLayout height="36" bordercolor="#FF2CD0A1" bordersize="1,1,1,0">
+			<HorizontalLayout height="36">
+				<Label text="QVE视频压缩" float="true" pos="12,4,0,0" width="120" height="18" textcolor="#00FFFFFF" disabledtextcolor="#FFA7A6AA" font="0" />
+				<Control />
+				<Button name="minbtn" width="30" height="23" normalimage="file='imageIM\sysbtn\min.png' source='0,0,30,23'" hotimage="file='imageIM\sysbtn\min.png' source='30,0,60,23'" pushedimage="file='imageIM\sysbtn\min.png' source='60,0,90,23'"/>
+				<Button name="maxbtn" width="30" height="23" normalimage="file='imageIM\sysbtn\max.png' source='0,0,30,23'" hotimage="file='imageIM\sysbtn\max.png' source='30,0,60,23'" pushedimage="file='imageIM\sysbtn\max.png' source='60,0,90,23'"/>
+				<Button name="restorebtn" visible="false" width="30" height="23" normalimage="file='imageIM\sysbtn\restore.png' source='0,0,30,23'" hotimage="file='imageIM\sysbtn\restore.png' source='30,0,60,23'" pushedimage="file='imageIM\sysbtn\restore.png' source='60,0,90,23'"/>
+				<Button name="closebtn" width="30" height="23" normalimage="file='imageIM\sysbtn\close.png' source='0,0,30,23' mask='#FF014A99'" hotimage="file='imageIM\sysbtn\close.png' source='30,0,60,23'" pushedimage="file='imageIM\sysbtn\close.png' source='60,0,90,23'"/>
+			</HorizontalLayout>
+		</VerticalLayout>
+		<VerticalLayout bkcolor="#FFFFFFFF" bordercolor="#FFE5E6E8" bordersize="1,0,1,1" >
+
+		</VerticalLayout>
+    </VerticalLayout>
+</Window>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="340,230" roundcorner="2,2" caption="0,0,0,32">
+	<Style name="radio_style" shared="true" value="align=&quot;left&quot; valign=&quot;vcenter&quot; height=&quot;17&quot; textcolor=&quot;#FF666666&quot; hottextcolor=&quot;#&quot; textpadding=&quot;20,0,6,0&quot; stateimage=&quot;res='radio_normal.png' dest='0,0,17,17'&quot; statecount=&quot;2&quot; selectedstateimage=&quot;res='radio_selected.png' dest='0,0,17,17'&quot; selectedstatecount=&quot;2&quot;" />
+	<VerticalLayout bkcolor="#FFFFFFFF" bordercolor="#FFD9D9D9" bordersize="1,0,1,1">
+		<HorizontalLayout height="32" bkcolor="#FF27B765">
+			<Container>
+				<Label name="payTitle" text="开通VIP" font="0" align="center" width="50" height="18" textcolor="#FFFFFFFF" />
+			</Container>
+			<Button float="true" pos="305 0,0,0" name="closebtn" tooltip="关闭"  width="35" height="20" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" normalimage="file=&apos;sys_close.png&apos; source=&apos;0,0,35,20&apos; corner=&apos;4,4,4,4&apos;" hotimage="file=&apos;sys_close.png&apos; source=&apos;35,0,70,20&apos; corner=&apos;4,4,4,4&apos;" pushedimage="file=&apos;sys_close.png&apos; source=&apos;70,0,105,20&apos; corner=&apos;4,4,4,4&apos;" />
+		</HorizontalLayout>
+		<VerticalLayout>
+			<HorizontalLayout width="340" height="80" padding="10,20,10,0">
+				<Option name="payLevelBtn3m" group="payType" text="30元/3个月" selectedimage="file='btnselect.png' dest='0,0,80,60'" cursor="hand" bordersize="1" borderround="4,4" align="center" padding="10,10,10,0" bordercolor="#FFE2E9EC" textcolor="#FFFD0707" font="0" width="80" height="60"/>
+				<Control />
+				<Option name="payLevelBtn1y" group="payType" selectedimage="file='btnselect.png' dest='0,0,80,60'" text="58元/1年" cursor="hand" bordersize="1" borderround="4,4" align="center" padding="10,10,10,0" bordercolor="#FFE2E9EC" textcolor="#FFFD0707" font="0" width="80" height="60"/>
+				<Control />
+				<Option name="payLevelBtn100y" group="payType" text="99元/终身" selected="true" selectedimage="file='btnselect.png' dest='0,0,80,60'" cursor="hand" bordersize="1" borderround="4,4" align="center" padding="10,10,10,0" bordercolor="#FFE2E9EC" textcolor="#FFFD0707" font="0" width="80" height="60"/>
+			</HorizontalLayout>
+			<HorizontalLayout width="340" height="42" padding="0,10,0,0">
+				<Option name="weixinBtn" group="payMethod" selected="true" font="0" padding="10,0,0,0" group="recorder-origin" selected="true" textcolor="#FF4D4C4C" align="left" valign="vcenter" textpadding="32,0,0,0"  bkimage="file='radio-normal.png' source='0,0,32,32' dest='0,0,32,32'" selectedimage="file='radio-selected.png' dest='0,0,32,32'"  width="32" height="32" />
+				<Button name="weixinBk" cursor="hand" width="100" height="30" foreimage="file='weixin.png' dest='0,0,306,100'" />
+				<Control />
+				<Option name="zhifubaoBtn" group="payMethod" font="0" padding="10,0,0,0" group="recorder-origin" selected="true" textcolor="#FF4D4C4C" align="left" valign="vcenter" textpadding="32,0,0,0"  bkimage="file='radio-normal.png' source='0,0,32,32' dest='0,0,32,32'" selectedimage="file='radio-selected.png' dest='0,0,32,32'"  width="32" height="32" />
+				<Button name="zhifubaoBk" padding="0,0,30,0" cursor="hand" width="100" height="30" foreimage="file='zhifubao.png' dest='0,0,306,100'" />
+			</HorizontalLayout>
+			<HorizontalLayout width="340" height="26" padding="0,10,0,0">
+				<Control />
+				<Button name="payBtn" text="去支付" cursor="hand" textcolor="#FFFFFFFF" width="80" height="26" bordersize="1" borderround="2,2" bkcolor="#FFF1C105"/>
+				<Control />
+			</HorizontalLayout>
+		</VerticalLayout>
+	</VerticalLayout>
+</Window>

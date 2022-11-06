@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="220,120" roundcorner="2,2">
+	<VerticalLayout bkcolor="#FFFFFFFF" bordercolor="#FFD9D9D9" bordersize="1,1,1,1">
+		<HorizontalLayout height="24" padding="0,10,0,5">
+			<Control />
+			<Label text="提示" align="center"  height="24" font="1" textcolor="#FF000000"/>
+			<Control />
+		</HorizontalLayout>
+		<HorizontalLayout height="24" padding="0,15,0,10">
+			<Control />
+			<Label name="delayText" width="20" align="right" height="24" font="5" textcolor="#FF27B765"/>
+			<Label text="秒后开始录制" width="120" align="center" height="24" font="3" textcolor="#FF000000"/>
+			<Control />
+		</HorizontalLayout>
+	</VerticalLayout>
+</Window>

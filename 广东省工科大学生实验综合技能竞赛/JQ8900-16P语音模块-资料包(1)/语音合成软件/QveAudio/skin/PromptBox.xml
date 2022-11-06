@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="200,100" roundcorner="2,2">
+	<VerticalLayout bkcolor="#FFFFFFFF" bordercolor="#FFD9D9D9" bordersize="1,1,1,1">
+		<HorizontalLayout height="40" padding="10,10,10,10">
+			<Label name="msgText" padding="10,10,10,10" minwidth= "100" align="center" height="24" font="0" textcolor="#FF000000"/>
+		</HorizontalLayout>
+		<Control height="1" bkcolor="#FFDBDBDD" />
+		<HorizontalLayout height="40">
+			<Container>
+			<Button name="msgConfirm" text="确定" height="40" font="0" cursor="hand" textcolor="#FF27B765"/>
+			</Container>
+		</HorizontalLayout>
+	</VerticalLayout>
+</Window>

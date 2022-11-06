@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="320,200" roundcorner="2,2" caption="0,0,0,32">
+	<VerticalLayout bkcolor="#FFFFFFFF" bordercolor="#FFD9D9D9" bordersize="1,0,1,1">
+		<HorizontalLayout height="32" bkcolor="#FF27B765">
+			<Container>
+				<Label text="用户登录" font="0" align="center" width="220" height="18" textcolor="#FFFFFFFF" />
+			</Container>
+			<Button float="true" pos="285 0,0,0" name="closebtn" tooltip="关闭"  width="35" height="20" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" normalimage="file=&apos;sys_close.png&apos; source=&apos;0,0,35,20&apos; corner=&apos;4,4,4,4&apos;" hotimage="file=&apos;sys_close.png&apos; source=&apos;35,0,70,20&apos; corner=&apos;4,4,4,4&apos;" pushedimage="file=&apos;sys_close.png&apos; source=&apos;70,0,105,20&apos; corner=&apos;4,4,4,4&apos;" />
+		</HorizontalLayout>
+		<Container>
+			<Label text="账号：" float="true" pos="40, 30, 110, 54" textcolor="#FF000000"/>
+			<Edit name="account" tipvalue="请输入手机号"  float="true" pos="80, 30,0,0"  width="140" height="24" bordercolor="#FFD9D9D9" bordersize="1"  borderround="2,2" focusbordercolor="#FF27B765" /> 
+			<Button name="register" text="{a}我要注册{/a}" showhtml="true" cursor="hand" float="true" pos="230,36,300,54" textcolor="#FF269637" />
+			<Label text="密码：" float="true" pos="40, 74, 110, 105" />
+			<Edit name="password" tipvalue="请输入密码" float="true" pos="80, 74, 0,0" width="140" height="24" password="true" tooltip="输入密码" bordercolor="#FFD9D9D9" bordersize="1"  borderround="2,2" focusbordercolor="#FF27B765" />
+			<Button name="forgotPwd" text="{a}找回密码{/a}" cursor="hand" textcolor="#FF2D2D2D" float="true" pos="230,80,305,105" showhtml="true" />
+			<Label name="errorTips" float="true" align="center" textcolor="#FFFD0707" font="0" pos="0, 100, 0, 0" width="320" height="24"/>
+			<Button name="loginBtn" text="登 录" font="0" float="true" pos="110, 125, 0, 0" cursor="hand" textcolor="#FFFFFFFF" width="80" height="26" bordersize="1" borderround="2,2" bkcolor="#FF27B765"  hotbkcolor="#FF57CB88" />
+		</Container>
+	</VerticalLayout>
+</Window>

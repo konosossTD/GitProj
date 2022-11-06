@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+  <ListContainerElement height="66" >
+	<VerticalLayout>
+		<Control />
+		<CheckBox name="mergeCheckBox" padding="10,10,10,10" font="0" textcolor="#FF9C9A9D" textpadding="20,0,0,0" width="60" height="32" selectedimage="file='check-hot.png' dest='0,0,32,32'" normalimage="file='check-normal.png' dest='0,0,32,32'" />
+		<Control />
+	</VerticalLayout>
+	<VerticalLayout>
+		<Control />
+		<Label name="fileNameLabel" endellipsis="true" align="left" textcolor="#FF464546" font="0" />
+		<Control />
+	</VerticalLayout>
+	<Container>
+		<Label name="fileSizeLabel" align="center" textcolor="#FF464546" font="0" />
+	</Container>
+	<Container>
+		<Label name="durationLabel" align="center" textcolor="#FF464546" font="0" />
+	</Container>
+	<VerticalLayout>
+		<Control />
+		<HorizontalLayout height="30">
+			<Control />
+			<HorizontalLayout width="160" height="30">
+				<Button name="moveUpBtn" text="上移" width="40" height="26" textcolor="#FFFFFFFF"  bkcolor="#FF27B765" hotbkcolor="#FF46C47C" cursor="hand" font="0" />
+				<Button name="moveDownBtn" text="下移" padding="20,0,0,0" width="40" height="26" textcolor="#FFFFFFFF"  bkcolor="#FF27B765" hotbkcolor="#FF46C47C" cursor="hand" font="0" />
+				<Button name="mergeListMenuBtn" tooltip="更多操作" padding="4,0,0,0" width="32" height="32" bkimage="file='list-menu.png'"  cursor="hand" />
+			</HorizontalLayout>
+			<Control />
+		</HorizontalLayout>
+		<Control />
+	</VerticalLayout>
+  </ListContainerElement>
+</Window>

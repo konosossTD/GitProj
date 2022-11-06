@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="150,250" roundcorner="2,2">
+	<VerticalLayout inset="8,8,8,8" bordercolor="#FFE8E8E8" bordersize="1,1,1,1"  bkcolor="#FFFFFFFF">
+		<List header="hidden" inset="10,10,10,10" itemhotbkcolor="#FF27B765" itemhottextcolor="#FFFFFFFF" bordercolor="#FFE8E8E8" bordersize="1,1,1,1">
+			<ListContainerElement name="open-dir"  height="30">
+				<Label text="打开目录" font="0"   align="left" valign="vcenter" textpadding="16,0,0,0" />
+			</ListContainerElement>
+			<ListContainerElement name="add-to-convert" height="30">
+				<Label text="添加到转换" font="0" textcolor="#FF333333" align="left" valign="vcenter" textpadding="16,0,0,0" />
+			</ListContainerElement>
+			<ListContainerElement name="add-to-speed" height="30">
+				<Label text="添加到变速" font="0" textcolor="#FF333333" align="left" valign="vcenter" textpadding="16,0,0,0" />
+			</ListContainerElement>
+			<ListContainerElement name="add-to-noise" height="30">
+				<Label text="添加到噪声消除" font="0" textcolor="#FF333333" align="left" valign="vcenter" textpadding="16,0,0,0" />
+			</ListContainerElement>
+			<ListContainerElement name="add-to-volume" height="30">
+				<Label text="添加到音量调整" font="0" textcolor="#FF333333" align="left" valign="vcenter" textpadding="16,0,0,0" />
+			</ListContainerElement>
+			<ListContainerElement name="remove-file" height="30">
+				<Label text="从列表中移除" font="0" textcolor="#FF333333" align="left" valign="vcenter" textpadding="16,0,0,0" />
+			</ListContainerElement>
+			<ListContainerElement name="delete-file" height="30">
+				<Label text="删除文件" font="0" textcolor="#FF333333" align="left" valign="vcenter" textpadding="16,0,0,0" />
+			</ListContainerElement>
+		</List>
+	</VerticalLayout>
+</Window>

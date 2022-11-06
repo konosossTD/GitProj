@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="420,330" roundcorner="2,2" caption="0,0,0,32">
+	<VerticalLayout bkcolor="#FFFFFFFF" bordercolor="#FFD9D9D9" bordersize="1,0,1,1">
+		<HorizontalLayout height="32" bkcolor="#FF2CD0A1">
+			<Container>
+				<Label text="参数设置"  font="0" align="center" width="50" height="18" textcolor="#FFFFFFFF" />
+			</Container>
+			<Button float="true" pos="385 0,0,0" name="closebtn" tooltip="关闭"  width="35" height="20" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" normalimage="file=&apos;sys_close.png&apos; source=&apos;0,0,35,20&apos; corner=&apos;4,4,4,4&apos;" hotimage="file=&apos;sys_close.png&apos; source=&apos;35,0,70,20&apos; corner=&apos;4,4,4,4&apos;" pushedimage="file=&apos;sys_close.png&apos; source=&apos;70,0,105,20&apos; corner=&apos;4,4,4,4&apos;" />
+		</HorizontalLayout>
+		<VerticalLayout padding="20,0,20,0">
+			<HorizontalLayout height="30" padding="10,10,10,0">
+				<Label text="压缩模式" font="1" textcolor="#FF4D4C4C" padding="0,10,0,0" width="80" height="22" />
+				<Option name="compress-type-general" text="普通压缩" font="1" group="compress-type" selected="true" textcolor="#FF000000" textpadding="6,0,6,0" style="radio_style" padding="0,12,2,0" width="90" autocalcwidth="true" />
+				<Option name="compress-type-deep" text="深度压缩" font="1" group="compress-type" textcolor="#FF000000" textpadding="6,0,6,0" style="radio_style" padding="10,12,2,0" width="90" autocalcwidth="true" />
+				<Option name="compress-type-limit" text="极限压缩" font="1" group="compress-type" textcolor="#FF000000" textpadding="6,0,6,0" style="radio_style" padding="10,12,2,0" width="90" autocalcwidth="true" />
+			</HorizontalLayout>
+			<HorizontalLayout height="30" padding="10,10,10,0">
+				<Label text="输出格式" font="1" textcolor="#FF4D4C4C" padding="0,10,0,0" width="80" height="22" />
+				<Option name="radio_mp4" text="mp4" font="1" group="videoFormat"	selected="true" textcolor="#FF000000" textpadding="6,0,6,0" style="radio_style" padding="0,12,2,0" width="90" autocalcwidth="true"/>
+				<Option name="radio_flv" text="flv" font="1" group="videoFormat" textcolor="#FF000000" textpadding="6,0,6,0" style="radio_style"  padding="10,12,2,0" width="100" autocalcwidth="true" />
+			</HorizontalLayout>
+			<HorizontalLayout height="30" padding="10,10,10,0">
+				<Label text="分辨率" font="1" textcolor="#FF4D4C4C" padding="0,3,0,0" width="80" height="22" />
+				<Combo name="video-ratio" font="0" width="160" height="24" padding="0,3,0,0" itemalign="center" itemtextpadding="4,4,4,4"  normalimage="file='mouse-follow-bk.png' source='0,0,200,22' dest='0,0,200,22'" textpadding="10,1,1,1" >
+						<ListLabelElement text="原分辨率" font="0" selected="true" />
+						<ListLabelElement text="1920*1080 (1080P)" font="0" />
+						<ListLabelElement text="1280*720 (720P)" font="0" />
+						<ListLabelElement text="1024*600" font="0" />
+						<ListLabelElement text="800*600" font="0" />
+						<ListLabelElement text="720*576" font="0" />
+						<ListLabelElement text="720*480" font="0" />
+						<ListLabelElement text="640*480" font="0" />
+						<ListLabelElement text="640*360" font="0" />
+						<ListLabelElement text="480*360" font="0" />
+						<ListLabelElement text="480*272" font="0" />
+						<ListLabelElement text="352*288" font="0" />
+						<ListLabelElement text="320*240" font="0" />
+					</Combo>
+			</HorizontalLayout>
+			<!--HorizontalLayout height="30" padding="10,10,10,0">
+				<Label text="输出码率" font="1" textcolor="#FF4D4C4C" padding="0,3,0,0" width="80" height="22" />
+				<Edit name="bitrate" text="" font="0" align="center" textcolor="#FF666666" width="60" height="22" align="center" padding="0,3,0,0" bordersize="1" bordercolor="#FFE2E9EC" borderround="2,2"/>
+			   <Label text="kbps" font="1" textcolor="#FF4D4C4C" padding="4,3,0,0" width="80" height="22" />
+			</HorizontalLayout -->
+			<HorizontalLayout height="30" padding="10,10,10,0">
+				<Label text="通道数" font="1" textcolor="#FF4D4C4C" padding="0,3,0,0" width="80" height="22" />
+				<Combo name="audio-channel" font="0" width="160" height="24" padding="0,3,0,0" itemalign="center" itemtextpadding="4,4,4,4"  normalimage="file='mouse-follow-bk.png' source='0,0,200,22' dest='0,0,200,22'" textpadding="10,1,1,1" >
+					<ListLabelElement text="立体声" font="0" selected="true" />
+					<ListLabelElement text="单通道" font="0" />
+					</Combo>
+			</HorizontalLayout>
+			<HorizontalLayout height="30" padding="10,10,10,0">
+				<Label text="采样率" font="1" textcolor="#FF4D4C4C" padding="0,3,0,0" width="80" height="22" />
+				<Combo name="audio-sample-rate" font="0" width="160" height="24" padding="0,3,0,0" itemalign="center" itemtextpadding="4,4,4,4"  normalimage="file='mouse-follow-bk.png' source='0,0,200,22' dest='0,0,200,22'" textpadding="10,1,1,1" >
+					<ListLabelElement text="96000Hz" font="0" />
+					<ListLabelElement text="88200Hz" font="0" />
+					<ListLabelElement text="64000Hz" font="0" />
+					<ListLabelElement text="48000Hz" font="0" />
+					<ListLabelElement text="44100Hz" font="0" selected="true" />
+					<ListLabelElement text="32000Hz" font="0" />
+					<ListLabelElement text="24000Hz" font="0" />
+					<ListLabelElement text="22050Hz" font="0" />
+					<ListLabelElement text="16000Hz" font="0" />
+					<ListLabelElement text="12000Hz" font="0" />
+					<ListLabelElement text="11025Hz" font="0" />
+					<ListLabelElement text="8000Hz" font="0" />
+					<ListLabelElement text="7350Hz" font="0" />
+				</Combo>
+			</HorizontalLayout>
+			<HorizontalLayout height="30" padding="10,10,10,0">
+				<Label text="音频比特率" font="1" textcolor="#FF4D4C4C" padding="0,3,0,0" width="80" height="22" />
+				<Combo name="audio-bitrate" font="0" width="160" height="24" padding="0,3,0,0" itemalign="center" itemtextpadding="4,4,4,4"  normalimage="file='mouse-follow-bk.png' source='0,0,200,22' dest='0,0,200,22'" textpadding="10,1,1,1" >
+					<ListLabelElement text="320kbps" font="0" />
+					<ListLabelElement text="128kbps" font="0" selected="true" />
+					<ListLabelElement text="96kbps" font="0" />
+					<ListLabelElement text="64kbps" font="0" />
+				</Combo>
+			</HorizontalLayout>
+			<HorizontalLayout height="30" padding="10,20,10,0">
+				<Control />
+				<Button name="save" text="设置" font="0" cursor="hand" textcolor="#FFFFFFFF" borderround="2,2" bkcolor="#FF2CD0A1"  hotbkcolor="#FF74E0C1" width="50" height="22" />
+				<Button name="cancel" text="恢复默认设置" font="0" cursor="hand" textcolor="#FFFFFFFF" borderround="2,2" bkcolor="#FF2CD0A1"  hotbkcolor="#FF74E0C1" width="86" height="22" padding="40,0,0,0"/>
+				<Control />
+			</HorizontalLayout>
+		</VerticalLayout>
+	</VerticalLayout>
+</Window>

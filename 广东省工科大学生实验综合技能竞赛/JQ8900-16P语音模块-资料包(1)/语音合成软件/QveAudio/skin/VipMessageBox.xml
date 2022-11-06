@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="400,520" roundcorner="2,2" caption="0,0,0,300">
+	<VerticalLayout bkcolor="#FF323232">
+		<VerticalLayout height="54">
+			<HorizontalLayout padding="10,10,10,0">
+				<Control />
+				<Label width="24" height="20" padding="40,10,0,0" bkimage="file='vip-identify.png'"/>
+				<Label text="您尚未开通VIP，存在功能限制" textcolor="#FFF9E957" padding="0,10,10,10" width= "180" align="center" height="24" font="0"/>
+				<Control />
+				<Button name="vip-close-btn" cursor="hand" tooltip="关闭" width="10" height="11" normalimage="file='vip-close-normal.png' source='0,0,10,11'" hotimage="file='vip-close-hot.png' source='0,0,10,11'" pushedimage="file='vip-close-hot.png' source='0,0,10,11'"/>
+			</HorizontalLayout>
+			<Control height="1" bkcolor="#FF6A6552" />
+		</VerticalLayout>
+		<VerticalLayout bkcolor="#FF242424">
+			<HorizontalLayout height="30">
+				<Control />
+				<Label text="普通会员" textcolor="#FFFFFFFF" font="0" width="70" align="center" />
+				<Label text="VIP会员" textcolor="#FFFFFFFF" font="0" width="70" padding="0,0,30,0" align="center" textcolor="#FFF9E957" />
+			</HorizontalLayout>
+			<VerticalLayout padding="20,0,20,0" height="30">
+				<Control height="1" bkcolor="#FF646464" />
+				<HorizontalLayout>
+					<Label bkimage="file='record-duration.png'" width="13" height="13" padding="20,8,0,0" />
+					<Label text="剪辑文件" textcolor="#FFFFFFFF" font="0" width="120" padding="4,0,0,0"/>
+					<Control />
+					<Label text="2M以内" textcolor="#FFFFFFFF" align="center" font="0" width="70" />
+					<Label text="无限制" textcolor="#FFFFFFFF" align="center" font="0" width="70" padding="0,0,10,0" textcolor="#FFF9E957" />
+				</HorizontalLayout>
+			</VerticalLayout>
+			<VerticalLayout padding="20,0,20,0" height="30">
+				<Control height="1" bkcolor="#FF646464" />
+				<HorizontalLayout>
+					<Label bkimage="file='record-duration.png'" width="13" height="13" padding="20,8,0,0" />
+					<Label text="格式转换" textcolor="#FFFFFFFF" font="0" width="120" padding="4,0,0,0"/>
+					<Control />
+					<Label text="2M以内" textcolor="#FFFFFFFF" align="center" font="0" width="70" />
+					<Label text="无限制" textcolor="#FFFFFFFF" align="center" font="0" width="70" padding="0,0,10,0" textcolor="#FFF9E957" />
+				</HorizontalLayout>
+			</VerticalLayout>
+			<VerticalLayout padding="20,0,20,0" height="30">
+				<Control height="1" bkcolor="#FF646464" />
+				<HorizontalLayout>
+					<Label bkimage="file='record-duration.png'" width="13" height="13" padding="20,8,0,0" />
+					<Label text="录音时长" textcolor="#FFFFFFFF" font="0" width="120" padding="4,0,0,0"/>
+					<Control />
+					<Label text="2分钟" textcolor="#FFFFFFFF" align="center" font="0" width="70" />
+					<Label text="无限制" textcolor="#FFFFFFFF" align="center" font="0" width="70" padding="0,0,10,0" textcolor="#FFF9E957" />
+				</HorizontalLayout>
+			</VerticalLayout>
+			<VerticalLayout padding="20,0,20,0" height="30">
+				<Control height="1" bkcolor="#FF646464" />
+				<HorizontalLayout>
+					<Label bkimage="file='record-duration.png'" width="13" height="13" padding="20,8,0,0" />
+					<Label text="合并音频" textcolor="#FFFFFFFF" font="0" width="120" padding="4,0,0,0"/>
+					<Control />
+					<Label text="2M以内" textcolor="#FFFFFFFF" align="center" font="0" width="70" />
+					<Label text="无限制" textcolor="#FFFFFFFF" align="center" font="0" width="70" padding="0,0,10,0" textcolor="#FFF9E957" />
+				</HorizontalLayout>
+			</VerticalLayout>
+			<VerticalLayout padding="20,0,20,0" height="30">
+				<Control height="1" bkcolor="#FF646464" />
+				<HorizontalLayout>
+					<Label bkimage="file='record-duration.png'" width="13" height="13" padding="20,8,0,0" />
+					<Label text="音频变速" textcolor="#FFFFFFFF" font="0" width="120" padding="4,0,0,0"/>
+					<Control />
+					<Label text="2M以内" textcolor="#FFFFFFFF" align="center" font="0" width="70" />
+					<Label text="无限制" textcolor="#FFFFFFFF" align="center" font="0" width="70" padding="0,0,10,0" textcolor="#FFF9E957" />
+				</HorizontalLayout>
+			</VerticalLayout>
+			<VerticalLayout padding="20,0,20,0" height="30">
+				<Control height="1" bkcolor="#FF646464" />
+				<HorizontalLayout>
+					<Label bkimage="file='record-duration.png'" width="13" height="13" padding="20,8,0,0" />
+					<Label text="音频提取" textcolor="#FFFFFFFF" font="0" width="120" padding="4,0,0,0"/>
+					<Control />
+					<Label text="2M以内" textcolor="#FFFFFFFF" align="center" font="0" width="70" />
+					<Label text="无限制" textcolor="#FFFFFFFF" align="center" font="0" width="70" padding="0,0,10,0" textcolor="#FFF9E957" />
+				</HorizontalLayout>
+			</VerticalLayout>
+			<VerticalLayout padding="20,0,20,0" height="30">
+				<Control height="1" bkcolor="#FF646464" />
+				<HorizontalLayout>
+					<Label bkimage="file='record-duration.png'" width="13" height="13" padding="20,8,0,0" />
+					<Label text="噪声消除" textcolor="#FFFFFFFF" font="0" width="120" padding="4,0,0,0"/>
+					<Control />
+					<Label text="2M以内" textcolor="#FFFFFFFF" align="center" font="0" width="70" />
+					<Label text="无限制" textcolor="#FFFFFFFF" align="center" font="0" width="70" padding="0,0,10,0" textcolor="#FFF9E957" />
+				</HorizontalLayout>
+			</VerticalLayout>
+			<VerticalLayout padding="20,0,20,0" height="30">
+				<Control height="1" bkcolor="#FF646464" />
+				<HorizontalLayout>
+					<Label bkimage="file='record-duration.png'" width="13" height="13" padding="20,8,0,0" />
+					<Label text="音量调整" textcolor="#FFFFFFFF" font="0" width="120" padding="4,0,0,0"/>
+					<Control />
+					<Label text="2M以内" textcolor="#FFFFFFFF" align="center" font="0" width="70" />
+					<Label text="无限制" textcolor="#FFFFFFFF" align="center" font="0" width="70" padding="0,0,10,0" textcolor="#FFF9E957" />
+				</HorizontalLayout>
+			</VerticalLayout>
+			<VerticalLayout padding="20,0,20,0" height="30">
+				<Control height="1" bkcolor="#FF646464" />
+				<HorizontalLayout>
+					<Label bkimage="file='record-duration.png'" width="13" height="13" padding="20,8,0,0" />
+					<Label text="背景音乐" textcolor="#FFFFFFFF" font="0" width="120" padding="4,0,0,0"/>
+					<Control />
+					<Label text="2M以内" textcolor="#FFFFFFFF" align="center" font="0" width="70" />
+					<Label text="无限制" textcolor="#FFFFFFFF" align="center" font="0" width="70" padding="0,0,10,0" textcolor="#FFF9E957" />
+				</HorizontalLayout>
+			</VerticalLayout>
+			<VerticalLayout padding="20,0,20,0" height="30">
+				<Control height="1" bkcolor="#FF646464" />
+				<HorizontalLayout>
+					<Label bkimage="file='device.png'" width="13" height="11" padding="20,9,0,0" />
+					<Label text="使用设备" textcolor="#FFFFFFFF" font="0" width="120" padding="4,0,0,0"/>
+					<Control />
+					<Label text="1台" textcolor="#FFFFFFFF" align="center" font="0" width="70" />
+					<Label text="无限制" textcolor="#FFFFFFFF" align="center" font="0" width="70" padding="0,0,10,0" textcolor="#FFF9E957" />
+				</HorizontalLayout>
+			</VerticalLayout>
+			<VerticalLayout padding="20,0,20,0" height="30">
+				<Control height="1" bkcolor="#FF646464" />
+				<HorizontalLayout>
+					<Label bkimage="file='service.png'" width="15" height="15" padding="20,7,0,0" />
+					<Label text="永久技术客服支持" textcolor="#FFFFFFFF" font="0" width="120" padding="4,0,0,0"/>
+					<Control />
+					<HorizontalLayout width="70">
+						<Label bkimage="file='vip-no.png'" width="11" height="11" padding="20,10,0,0" />
+					</HorizontalLayout>
+					<HorizontalLayout width="70">
+						<Label bkimage="file='vip-yes.png'" width="16" height="11" padding="20,10,0,0" />
+					</HorizontalLayout>
+				</HorizontalLayout>
+			</VerticalLayout>
+			<VerticalLayout padding="20,0,20,0" height="30">
+				<Control height="1" bkcolor="#FF646464" />
+				<HorizontalLayout>
+					<Label bkimage="file='upgrade.png'" width="11" height="15" padding="22,7,0,0" />
+					<Label text="永久升级,更新" textcolor="#FFFFFFFF" font="0" width="120" padding="4,0,0,0"/>
+					<Control />
+					<HorizontalLayout width="70">
+						<Label bkimage="file='vip-yes.png'" width="16" height="11" padding="20,10,0,0" />
+					</HorizontalLayout>
+					<HorizontalLayout width="70">
+						<Label bkimage="file='vip-yes.png'" width="16" height="11" padding="20,10,0,0" />
+					</HorizontalLayout>
+				</HorizontalLayout>
+			</VerticalLayout>
+		</VerticalLayout>
+		<HorizontalLayout height="24">
+			<Button name="vip-link" text="{a}优质软件，百万用户的选择!{/a}"  showhtml="true" align="center" textcolor="#FFFF0601" font="0" padding="0,10,0,0" />
+		</HorizontalLayout>
+		<HorizontalLayout height="50">
+			<Button name="probation-btn" padding="100,10,0,0" width="70" height="23" cursor="hand" normalimage="file='probation-normal.png' source='0,0,70,23'" hotimage="file='probation-hot.png' source='0,0,70,23'" pushedimage="file='probation-hot.png' source='0,0,70,23'"/>
+			<Button name="vip-btn" padding="60,10,0,0" cursor="hand"  width="70" height="23" normalimage="file='vip-comfirm-normal.png' source='0,0,70,23'" hotimage="file='vip-comfirm-hot.png' source='0,0,70,23'" pushedimage="file='vip-comfirm-hot.png' source='0,0,70,23'"/>
+		</HorizontalLayout>
+	</VerticalLayout>
+</Window>

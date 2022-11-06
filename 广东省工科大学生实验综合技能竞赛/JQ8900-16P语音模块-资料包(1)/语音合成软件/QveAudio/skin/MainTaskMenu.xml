@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="160,200" roundcorner="2,2">
+	<VerticalLayout bkcolor="#FFFFFFFF" bordercolor="#FFD9D9D9" bordersize="1,1,1,1">
+		<List width="160" header="hidden" itemhotbkcolor="#FF57CB88" itemselectedbkcolor="#FF57CB88" padding="1,10,1,10">
+			<ListContainerElement name="main_menu_item_home" width="160" height="30">
+				<Label text="打开主界面"  font="0" align="left" mouse="false" textcolor="#FF505050" textpadding="40,0,0,0" bkimage="file='menu_item_home.png' dest='6,4,28,26'" />
+			</ListContainerElement>
+			<ListContainerElement name="main_menu_item_feedback" width="160" height="30">
+				<Label text="意见反馈" font="0" align="left" textcolor="#FF505050" textpadding="40,0,0,0" bkimage="file='menu_item_feedback.png' dest='6,4,28,26'" />
+			</ListContainerElement>
+			<ListContainerElement name="main_menu_item_help" width="160" height="30">
+				<Label text="帮助" mouse="false" font="0" align="left" textcolor="#FF505050" textpadding="40,0,0,0" bkimage="file='menu_item_help.png' dest='6,4,28,26'" />
+			</ListContainerElement>
+			<ListContainerElement name="main_menu_item_upgrade" width="160" height="30">
+				<Label text="检查更新" mouse="false" font="0" align="left" textcolor="#FF505050" textpadding="40,0,0,0" bkimage="file='menu_item_upgrade.png' dest='6,4,28,26'" />
+			</ListContainerElement>
+			<ListContainerElement name="main_menu_item_seting" width="160" height="30">
+				<Label text="设置" font="0" align="left" textcolor="#FF505050" textpadding="40,0,0,0" bkimage="file='menu_item_setings.png' dest='6,4,28,26'" />
+			</ListContainerElement>
+			<ListContainerElement name="main_menu_item_quit" width="160" height="30">
+				<Label text="退出" font="0" align="left" textcolor="#FF505050" textpadding="40,0,0,0" bkimage="file='menu_item_exit.png' dest='6,4,28,26'" />
+			</ListContainerElement>
+		</List>
+	</VerticalLayout>
+</Window>

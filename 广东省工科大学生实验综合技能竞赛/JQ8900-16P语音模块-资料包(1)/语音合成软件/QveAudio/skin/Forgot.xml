@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="320,260" roundcorner="2,2" caption="0,0,0,32">
+	<VerticalLayout bkcolor="#FFFFFFFF" bordercolor="#FFD9D9D9" bordersize="1,0,1,1">
+		<HorizontalLayout height="32" bkcolor="#FF27B765">
+			<Label text="找回密码" float="true" pos="140,5,0,0" width="220" height="18" textcolor="#FFFFFFFF" />
+			<Control />
+			<Button name="closebtn" tooltip="关闭"  width="35" height="20" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" normalimage="file=&apos;sys_close.png&apos; source=&apos;0,0,35,20&apos; corner=&apos;4,4,4,4&apos;" hotimage="file=&apos;sys_close.png&apos; source=&apos;35,0,70,20&apos; corner=&apos;4,4,4,4&apos;" pushedimage="file=&apos;sys_close.png&apos; source=&apos;70,0,105,20&apos; corner=&apos;4,4,4,4&apos;" />
+		</HorizontalLayout>
+		<VerticalLayout>
+			<Label text="手机号：" float="true" pos="20, 30, 0, 0" align="right" width="60" height="24" textcolor="#FF000000"/>
+			<Edit name="forgotMobilePhone" float="true" pos="80, 30,0,0"  width="140" height="24" bordercolor="#FFD9D9D9" bordersize="1" borderround="2,2" focusbordercolor="#FF27B765" />  
+			<Button name="forgotVerifyCodeBtn" text="获取验证码" float="true" pos="230, 30, 0, 0" cursor="hand" textcolor="#FFFFFFFF" width="80" height="24" bordersize="1" borderround="2,2" bkcolor="#FF27B765"/>
+			<Label text="密码：" float="true" pos="20, 64, 0, 0" align="right" width="60" height="24" />
+			<Edit name="forgotPwd" float="true" pos="80, 64, 0,0" width="140" height="24" password="true" bordercolor="#FFD9D9D9" bordersize="1" borderround="2,2" focusbordercolor="#FF27B765" />
+			<Label text="确认密码：" float="true" pos="20, 98, 0, 0" align="right" width="60" height="24" />
+			<Edit name="forgotConfirmPwd" float="true" pos="80, 98, 0,0" width="140" height="24" password="true" bordercolor="#FFD9D9D9" bordersize="1" borderround="2,2" focusbordercolor="#FF27B765" />
+			<Label text="验证码：" float="true" pos="20, 132, 0, 0" align="right" width="60" height="24" />
+			<Edit name="forgotVerifyCode" float="true" pos="80, 132, 0,0" width="140" height="24" bordercolor="#FFD9D9D9" bordersize="1" borderround="2,2" focusbordercolor="#FF27B765" />
+			<HorizontalLayout float="true" pos="0, 160, 0, 0" width="320" height="24">
+				<Control />
+				<Label name="forgotErrorTips" align="center" textcolor="#FFFD0707" font="0" width="320" height="24"/>
+				<Control />
+			</HorizontalLayout>
+			<HorizontalLayout float="true" pos="0, 184, 0, 0" width="320" height="26">
+				<Control />
+				<Button name="forgotBtn" text="重置密码" cursor="hand" textcolor="#FFFFFFFF" width="80" height="26" bordersize="1" borderround="2,2" bkcolor="#FF27B765" hotbkcolor="#FF57CB88" />
+				<Control />
+			</HorizontalLayout>
+		</VerticalLayout>
+	</VerticalLayout>
+</Window>

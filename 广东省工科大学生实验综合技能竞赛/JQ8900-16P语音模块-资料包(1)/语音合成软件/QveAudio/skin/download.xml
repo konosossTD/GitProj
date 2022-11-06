@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="280,180" roundcorner="2,2" caption="0,0,0,32" showshadow="true" shadowsize="4" shadowcolor="#FF9E9D9D">
+	<VerticalLayout bkcolor="#FFFFFFFF" bordercolor="#FFD9D9D9" bordersize="1,1,1,1">
+		<HorizontalLayout height="24" padding="0,16,0,0">
+			<Control />
+			<Label text="程序升级下载中" font="0" align="center"  height="24" textcolor="#FF000000"/>
+			<Control />
+		</HorizontalLayout>
+		<VerticalLayout>
+			<Control />
+			<HorizontalLayout>
+				<Control />
+				<Label name="download-text" text="0%" font="1"  width="40" height="24" align="center" padding="0,0,0,10" />
+				<Control />
+			</HorizontalLayout>
+			<HorizontalLayout padding="30,0,30,0">
+				<Slider name="download-slider" value="0" height="12"  bkimage="file='download-slider-bk.png' corner='5,10,5,10'" foreimage="file='download-slider-hot.png' corner='10,10,5,10'" />
+			</HorizontalLayout>
+			<Control />
+		</VerticalLayout>
+		<HorizontalLayout height="50">
+			<HorizontalLayout>
+				<Control />
+				<Button name="cancel" text="取消" width="60" height="30" font="0" bkcolor="" cursor="hand" textcolor="#FF6A6969" bkcolor="#FFFFFFFF" />
+				<Control />
+			</HorizontalLayout>
+		</HorizontalLayout>
+	</VerticalLayout>
+</Window>

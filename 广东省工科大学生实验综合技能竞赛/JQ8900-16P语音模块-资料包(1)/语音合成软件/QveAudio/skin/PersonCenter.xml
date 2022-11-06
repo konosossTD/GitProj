@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="220,120" roundcorner="2,2" caption="0,0,0,32" showshadow="true" shadowsize="4" shadowcolor="#FF9E9D9D">
+	<VerticalLayout bkcolor="#FFFFFFFF" bordercolor="#FFD9D9D9" bordersize="1,1,1,1">
+		<Label text="账号：" float="true" pos="20, 30, 0, 0" width="40" height="24" font="0" textcolor="#FF000000"/>
+		<Label name="account" float="true" pos="60, 30,0,0"  font="0" width="80" height="24" />
+		<Button name="logout" text="退出" cursor="hand" textcolor="#FF8F8E8E" hottextcolor="#FFFD0404" float="true" pos="150, 30,0,0"  font="0" width="80" height="24" />
+		<Label text="会员：" float="true" pos="20, 64, 0, 0" width="40" height="24" font="0" textcolor="#FF000000" />
+		<Label name="memberStatus" text="普通用户" float="true" pos="60, 64,0,0"  font="0" width="60" height="24" />
+		<Button name="vip" cursor="hand" float="true" pos="130, 64,0,0"  font="0" width="60" height="24" bkimage="file='vip.png'" />
+		<Button name="againVip" cursor="hand" float="true" pos="130, 64,0,0"  font="0" width="60" height="24" bkimage="file='againvip.png'" />
+		<Label name="expireDes" text="到期时间：" float="true" pos="20, 90, 0, 0" width="60" height="24" font="0" textcolor="#FF000000" />
+		<Label name="expireTime" text="2018-08-21 10:21:44" float="true" pos="80, 90,0,0"  font="0" width="120" height="24" />
+	</VerticalLayout>
+</Window>

@@ -1,0 +1,39 @@
+THRESHOLD = (8, 40, -37, 25, -42, 21)
+import sensor, image, time
+from pyb import LED
+import car
+from pid import PID
+from pyb import Pin
+pin1= Pin('P6',Pin.IN,Pin.PULL_UP)
+rho_pid = PID(p=0.8, i=0.2)
+theta_pid = PID(p=0.001, i=0)
+sensor.reset()
+sensor.set_vflip(True)
+sensor.set_hmirror(True)
+sensor.set_pixformat(sensor.RGB565)
+sensor.set_framesize(sensor.QQQVGA)
+sensor.skip_frames(time = 2000)
+clock = time.clock()
+while(True):
+    clock.tick()
+    img = sensor.snapshot().binary([THRESHOLD])
+    line = img.get_regression([(100,100)], robust = True)
+    img.draw_line((40, 0, 40, 60), color=(255,0,0))
+    key1 = pin1.value()
+    if (line):
+        rho_err = abs(line.rho())-img.width()/2
+        if line.theta()>90:
+            theta_err = line.theta()-180
+        else:
+            theta_err = line.theta()
+        img.draw_line(line.line(), color = 127)
+        if line.magnitude()>8:
+            rho_output = rho_pid.get_pid(rho_err,1)
+            theta_output = theta_pid.get_pid(theta_err,1)
+            output = rho_output+theta_output
+            car.run(90-6.2*output, 90+6.2*output)
+        else:
+            car.run(0,0)
+        pass
+    if key1 == 0:
+       car.run(0,0)

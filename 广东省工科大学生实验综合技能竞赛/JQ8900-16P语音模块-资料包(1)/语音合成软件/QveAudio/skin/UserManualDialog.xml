@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="640,380" roundcorner="2,2" caption="0,0,0,32">
+	<VerticalLayout bkcolor="#FF352B44">
+		<HorizontalLayout height="32">
+			<Container>
+				<Label text="新手使用指南" font="0" align="center" width="220" height="18" textcolor="#FFFFFFFF" />
+			</Container>
+			<Button float="true" pos="605 0,0,0" name="closebtn" tooltip="关闭"  width="35" height="20" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" normalimage="file=&apos;sys_close.png&apos; source=&apos;0,0,35,20&apos; corner=&apos;4,4,4,4&apos;" hotimage="file=&apos;sys_close.png&apos; source=&apos;35,0,70,20&apos; corner=&apos;4,4,4,4&apos;" pushedimage="file=&apos;sys_close.png&apos; source=&apos;70,0,105,20&apos; corner=&apos;4,4,4,4&apos;" />
+		</HorizontalLayout>
+		<HorizontalLayout>
+			<Control />
+			<GifAnim name="image00" bkimage="image00.gif" width="600" height="300" auto="true"/>
+			<GifAnim name="image01" bkimage="image01.gif" width="600" height="300" auto="true" visible="false"/>
+			<GifAnim name="image02" bkimage="image02.gif" width="600" height="300" auto="true" visible="false"/>
+			<GifAnim name="image03" bkimage="image03.gif" width="600" height="300" auto="true" visible="false"/>
+			<GifAnim name="image04" bkimage="image04.gif" width="600" height="300" auto="true" visible="false"/>
+			<GifAnim name="image05" bkimage="image05.gif" width="600" height="300" auto="true" visible="false"/>
+			<GifAnim name="image06" bkimage="image06.gif" width="600" height="300" auto="true" visible="false"/>
+			<Control />
+		</HorizontalLayout>
+		<VerticalLayout height="76">
+			<HorizontalLayout>
+				<Control />
+				<Option name="page00" group="page-item" selected="true" padding="10,15,0,0" font="0" textcolor="#FF4D4C4C"  width="8" height="8"  cursor="hand" normalimage="file='circle-normal.png'"  selectedimage="file='circle-hot.png'" />
+				<Option name="page01" group="page-item" padding="10,15,0,0" font="0" textcolor="#FF4D4C4C" width="8" height="8" cursor="hand" normalimage="file='circle-normal.png'"  selectedimage="file='circle-hot.png'" />
+				<Option name="page02" group="page-item" padding="10,15,0,0" font="0" textcolor="#FF4D4C4C" width="8" height="8"  cursor="hand" normalimage="file='circle-normal.png'"  selectedimage="file='circle-hot.png'" />
+				<Option name="page03" group="page-item" padding="10,15,0,0" font="0" textcolor="#FF4D4C4C" width="8" height="8"  cursor="hand" normalimage="file='circle-normal.png'"  selectedimage="file='circle-hot.png'" />
+				<Option name="page04" group="page-item" padding="10,15,0,0" font="0" textcolor="#FF4D4C4C" width="8" height="8"  cursor="hand" normalimage="file='circle-normal.png'"  selectedimage="file='circle-hot.png'" />
+				<Option name="page05" group="page-item" padding="10,15,0,0" font="0" textcolor="#FF4D4C4C" width="8" height="8"  cursor="hand" normalimage="file='circle-normal.png'"  selectedimage="file='circle-hot.png'" />
+				<Option name="page06" group="page-item" padding="10,15,0,0" font="0" textcolor="#FF4D4C4C" width="8" height="8"  cursor="hand" normalimage="file='circle-normal.png'"  selectedimage="file='circle-hot.png'" />
+				<Control />
+			</HorizontalLayout>
+			<HorizontalLayout>
+				<Control />
+				<Button name="nextBtn" normalimage="file='next-btn-normal.png'" hotimage="file='next-btn-hot.png'" height="27" width="76" font="0" cursor="hand" />
+				<Control />
+			</HorizontalLayout>
+		</VerticalLayout>
+	</VerticalLayout>
+</Window>

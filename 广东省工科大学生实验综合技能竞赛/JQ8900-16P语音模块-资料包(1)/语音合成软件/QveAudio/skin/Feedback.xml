@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="320,300" roundcorner="2,2" caption="0,0,0,32">
+	<VerticalLayout bkcolor="#FFFFFFFF" bordercolor="#FFD9D9D9" bordersize="1,0,1,1">
+		<HorizontalLayout height="32" bkcolor="#FF27B765">
+			<Container>
+				<Label text="意见反馈"  font="0" align="center" width="50" height="18" textcolor="#FFFFFFFF" />
+			</Container>
+			<Button float="true" pos="285 0,0,0" name="closebtn" tooltip="关闭"  width="35" height="20" textcolor="#FF000000" disabledtextcolor="#FFA7A6AA" align="center" normalimage="file=&apos;sys_close.png&apos; source=&apos;0,0,35,20&apos; corner=&apos;4,4,4,4&apos;" hotimage="file=&apos;sys_close.png&apos; source=&apos;35,0,70,20&apos; corner=&apos;4,4,4,4&apos;" pushedimage="file=&apos;sys_close.png&apos; source=&apos;70,0,105,20&apos; corner=&apos;4,4,4,4&apos;" />
+		</HorizontalLayout>
+		<VerticalLayout padding="20,0,20,0">
+			<Label text="您在使用过程中遇到的任何问题,请在这里反馈给我们," height="24" textcolor="#FF5D5D5D" font="0"/>
+			<Label text="我们会参考您的建议来改善我们的服务,感谢您的支持" height="24" textcolor="#FF5D5D5D" font="0"/>
+			<HorizontalLayout height="24">
+				<Label text="如需人工帮助,请联系我们," width="140" height="24" textcolor="#FF5D5D5D" font="0" />
+				<Button name="contact-us" text="{a}请点击{/a}" width="40" height="24" font="0" cursor="hand" textcolor="#FFF43C0F" showhtml="true" />
+			</HorizontalLayout>
+			<RichEdit name="feedbackContent" vscrollbar="true" multiline="true"  rich="true" readonly="false" inset="5,5,5,5" font="0" width="280" height="80" bordercolor="#FFE5E5E5" bordersize="1" borderround="2,2" focusbordercolor="#FF27B765" />
+			<Label text="请输入您的联系方式(QQ或者手机号)" width="280" height="20" padding="0,10,0,0" textcolor="#FF5D5D5D" font="0"/>
+			<Edit name="feedbackContact" textcolor="#FF5D5D5D" inset="5,0,5,0" font="0" width="280" height="26" bordercolor="#FFE5E5E5" bordersize="1" borderround="2,2" focusbordercolor="#FF27B765" />
+		
+			<Label name="feedbackErrorTips" height="26" align="center" textcolor="#FFFD0707" font="0" />
+			
+			<HorizontalLayout height="26">
+				<Control />
+				<Button name="feedbackBtn" text="提 交"  font="0" cursor="hand" textcolor="#FFFFFFFF" width="60" height="26" textcolor="#FFFFFFFF" bordersize="1" borderround="2,2" bkcolor="#FF27B765"  hotbkcolor="#FF57CB88" />
+				<Control />
+			</HorizontalLayout>
+		</VerticalLayout>
+	</VerticalLayout>
+</Window>

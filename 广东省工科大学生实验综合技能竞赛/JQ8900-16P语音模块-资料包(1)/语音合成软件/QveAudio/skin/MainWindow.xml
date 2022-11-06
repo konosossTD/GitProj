@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="860,580" sizebox="4,4,4,4" caption="0,0,0,-1" mininfo="760,500"  roundcorner="3,3">
+   <Font shared="true" id="0" name="微软雅黑" size="12" />
+   <Font shared="true" id="1" name="微软雅黑" size="14" />
+   <Font shared="true" id="2" name="微软雅黑" size="16" />
+   <Font shared="true" id="3" name="微软雅黑" size="18" />
+   <Font shared="true" id="4" name="微软雅黑" size="20" />
+   <Font shared="true" id="5" name="微软雅黑" size="24" />
+   <Font shared="true" id="6" name="微软雅黑" size="30" />
+   
+   <Font shared="true" id="20" name="微软雅黑" size="12" bold="true" />
+   <Font shared="true" id="21" name="微软雅黑" size="14" bold="true" />
+   <Font shared="true" id="22" name="微软雅黑" size="16" bold="true" />
+   <Font shared="true" id="23" name="微软雅黑" size="18" bold="true" />
+   <Font shared="true" id="24" name="微软雅黑" size="20" bold="true" />
+   <Font shared="true" id="25" name="微软雅黑" size="24" bold="true" />
+   <Font shared="true" id="26" name="微软雅黑" size="30" bold="true" />
+   
+   <Font shared="true" id="30" name="宋体" size="12" />
+   
+	<Default name="VScrollBar" shared="true" value="width=&quot;11&quot; showbutton1=&quot;false&quot; showbutton2=&quot;false&quot; thumbnormalimage=&quot;file='thumbnormal.png' source='0,0,11,19' corner='4,4,4,4' mask='#FFFF00FF'&quot; thumbhotimage=&quot;file='thumbhot.png' source='0,0,11,19' corner='4,4,4,4' mask='#FFFF00FF'&quot; thumbpushedimage=&quot;file='thumbpush.png' source='0,0,11,19' corner='4,4,4,4' mask='#FFFF00FF'&quot; thumbdisabledimage=&quot;file='thumbnormal.png' source='0,0,11,19' corner='4,4,4,4' mask='#FFFF00FF'&quot;" />
+	<Default name="HScrollBar" shared="true" value="button1normalimage=&quot;file='scrollbar.bmp' source='0,0,16,16' mask='#FFFF00FF'&quot; button1hotimage=&quot;file='scrollbar.bmp' source='18,0,34,16' mask='#FFFF00FF'&quot; button1pushedimage=&quot;file='scrollbar.bmp' source='36,0,52,16' mask='#FFFF00FF'&quot; button1disabledimage=&quot;file='scrollbar.bmp' source='54,0,70,16' mask='#FFFF00FF'&quot; button2normalimage=&quot;file='scrollbar.bmp' source='0,18,16,34' mask='#FFFF00FF'&quot; button2hotimage=&quot;file='scrollbar.bmp' source='18,18,34,34' mask='#FFFF00FF'&quot; button2pushedimage=&quot;file='imageIM\scrollbar.bmp' source='36,18,52,34' mask='#FFFF00FF'&quot; button2disabledimage=&quot;file='scrollbar.bmp' source='54,18,70,34' mask='#FFFF00FF'&quot; thumbnormalimage=&quot;file='scrollbar.bmp' source='0,36,16,52' corner='2,2,2,2' mask='#FFFF00FF'&quot; thumbhotimage=&quot;file='scrollbar.bmp' source='18,36,34,52' corner='2,2,2,2' mask='#FFFF00FF'&quot; thumbpushedimage=&quot;file='scrollbar.bmp' source='36,36,52,52' corner='2,2,2,2' mask='#FFFF00FF'&quot; thumbdisabledimage=&quot;file='scrollbar.bmp' source='54,36,70,52' corner='2,2,2,2' mask='#FFFF00FF'&quot; railnormalimage=&quot;file='imageIM\scrollbar.bmp' source='0,54,16,70' corner='2,2,2,2' mask='#FFFF00FF'&quot; railhotimage=&quot;file='scrollbar.bmp' source='18,54,34,70' corner='2,2,2,2' mask='#FFFF00FF'&quot; railpushedimage=&quot;file='scrollbar.bmp' source='36,54,52,70' corner='2,2,2,2' mask='#FFFF00FF'&quot; raildisabledimage=&quot;file='scrollbar.bmp' source='54,54,70,70' corner='2,2,2,2' mask='#FFFF00FF'&quot; bknormalimage=&quot;file='scrollbar.bmp' source='0,72,16,88' corner='2,2,2,2' mask='#FFFF00FF'&quot; bkhotimage=&quot;file='scrollbar.bmp' source='18,72,34,88' corner='2,2,2,2' mask='#FFFF00FF'&quot; bkpushedimage=&quot;file='scrollbar.bmp' source='36,72,52,88' corner='2,2,2,2' mask='#FFFF00FF'&quot; bkdisabledimage=&quot;file='scrollbar.bmp' source='54,72,70,88' corner='2,2,2,2' mask='#FFFF00FF'&quot; " />
+    <Style name="radio_style" shared="true" value="align=&quot;left&quot; valign=&quot;vcenter&quot; height=&quot;32&quot; textcolor=&quot;#FF666666&quot; hottextcolor=&quot;#&quot; textpadding=&quot;52,0,0,0&quot; stateimage=&quot;res='radio_normal.png' dest='0,0,32,32'&quot; statecount=&quot;2&quot; selectedstateimage=&quot;res='radio_selected.png' dest='0,0,32,32'&quot; selectedstatecount=&quot;2&quot;" />
+	<VerticalLayout  bkcolor="#FF27B765">
+		<VerticalLayout height="116" bordercolor="#FF27B765" bordersize="1,1,1,0">
+			<HorizontalLayout height="36">
+			    <Control bkimage="file='qve-audio.png'" padding="8,4,0,0" width="20" height="20" />
+				<Label text="QVE音频剪辑" width="100" height="18" font="0" padding="2,6,0,0" textcolor="#00FFFFFF" disabledtextcolor="#FFA7A6AA" font="0" />
+				<Control />
+				<Button name="login" text="登录" cursor="hand" font="0" padding="90,6,0,0" width="30" height="18" textcolor="#00FFFFFF" disabledtextcolor="#FFA7A6AA" align="center" />
+				<Control name="separator" width="1" height="12" bkcolor="#FFFFFFFF" padding="2,9,0,0" />
+				<Button name="register" text="注册" cursor="hand" font="0" padding="2,6,0,0" width="30" height="18" textcolor="#00FFFFFF" disabledtextcolor="#FFA7A6AA" align="center" />
+				<Button name="username" bordercolor="#FFFFFFFF" bordersize="0,0,0,1" cursor="hand" visible="false" font="0" padding="0,6,0,0" width="80" height="18" textcolor="#00FFFFFF" disabledtextcolor="#FFA7A6AA" align="center" />
+				<Button name="vip" text="开通VIP" cursor="hand" font="0" padding="10,6,0,0" width="54" height="18" textcolor="#00FFFFFF" disabledtextcolor="#FFA7A6AA" align="center" />
+				<Button name="feedback" text="意见反馈" cursor="hand" font="0" padding="10,6,0,0" width="54" height="18" textcolor="#00FFFFFF" disabledtextcolor="#FFA7A6AA" align="center" />
+				<Button name="help" text="帮助" cursor="hand" font="0" padding="10,6,0,0" width="30" height="18" textcolor="#00FFFFFF" disabledtextcolor="#FFA7A6AA" align="center" />
+				<Button name="seting" text="设置" cursor="hand" font="0" padding="10,6,20,0" width="30" height="18" textcolor="#00FFFFFF" disabledtextcolor="#FFA7A6AA" align="center" />
+				<Button name="minbtn" width="30" height="23" normalimage="file='min.png' source='0,0,30,23'" hotimage="file='min.png' source='30,0,60,23'" pushedimage="file='min.png' source='60,0,90,23'"/>
+				<Button name="maxbtn" width="30" height="23" normalimage="file='max.png' source='0,0,30,23'" hotimage="file='max.png' source='30,0,60,23'" pushedimage="file='max.png' source='60,0,90,23'"/>
+				<Button name="restorebtn" visible="false" width="30" height="23" normalimage="file='restore.png' source='0,0,30,23'" hotimage="file='restore.png' source='30,0,60,23'" pushedimage="file='restore.png' source='60,0,90,23'"/>
+				<Button name="closebtn" width="30" height="23" normalimage="file='close.png' source='0,0,30,23' mask='#FF014A99'" hotimage="file='close.png' source='30,0,60,23'" pushedimage="file='close.png' source='60,0,90,23'"/>
+			</HorizontalLayout>
+			<HorizontalLayout padding="10,0,0,0">
+				<Option name="audio-cut"  align="bottom"  text="剪辑" font="21" textcolor="#FFFFFF" textpadding="0,58,0,8" width="90" height="80" foreimage="file='audio-cut.png' dest='18,10,72,64'"   hotimage="item_over.png" pushedimage="item_checked.png"  selectedimage="item_checked.png" group="quickbar" selected="true" />
+				<Option name="audio-record"  align="bottom"  text="录音" font="21" textcolor="#FFFFFF" textpadding="0,58,0,8" width="90" height="80" foreimage="file='audio-recorder.png' dest='18,10,72,64'"   hotimage="item_over.png" pushedimage="item_checked.png"  selectedimage="item_checked.png" group="quickbar"  />
+				<Option name="audio-convert"  align="bottom"  text="转换" font="21" textcolor="#FFFFFF" textpadding="0,58,0,8" width="90" height="80" foreimage="file='audio-convert.png' dest='18,10,72,64'"   hotimage="item_over.png" pushedimage="item_checked.png"  selectedimage="item_checked.png" group="quickbar"  />
+				<Option name="audio-merge"  align="bottom"  text="合并" font="21" textcolor="#FFFFFF" textpadding="0,58,0,8" width="90" height="80" foreimage="file='audio-merge.png' dest='18,10,72,64'"   hotimage="item_over.png" pushedimage="item_checked.png"  selectedimage="item_checked.png" group="quickbar"  />
+				<Option name="audio-change-speed"  align="bottom"  text="变速" font="21" textcolor="#FFFFFF" textpadding="0,58,0,8" width="90" height="80" foreimage="file='audio-speed.png' dest='18,10,72,64'"   hotimage="item_over.png" pushedimage="item_checked.png"  selectedimage="item_checked.png" group="quickbar"  />
+				<Option name="audio-extract"  align="bottom"  text="提取" font="21" textcolor="#FFFFFF" textpadding="0,58,0,8" width="90" height="80" foreimage="file='audio-tiqu.png' dest='18,10,72,64'"   hotimage="item_over.png" pushedimage="item_checked.png"  selectedimage="item_checked.png" group="quickbar"  />
+				<Option name="audio-noise"  align="bottom"  text="噪声消除" font="21" textcolor="#FFFFFF" textpadding="0,58,0,8" width="90" height="80" foreimage="file='audio-noise.png' dest='18,10,72,64'"   hotimage="item_over.png" pushedimage="item_checked.png"  selectedimage="item_checked.png" group="quickbar"  />
+				<Option name="audio-volume"  align="bottom"  text="音量调整" font="21" textcolor="#FFFFFF" textpadding="0,58,0,8" width="90" height="80" foreimage="file='audio-volume.png' dest='18,10,72,64'"   hotimage="item_over.png" pushedimage="item_checked.png"  selectedimage="item_checked.png" group="quickbar"  />
+				<Option name="audio-bg-music"  align="bottom"  text="背景音乐" font="21" textcolor="#FFFFFF" textpadding="0,58,0,8" width="90" height="80" foreimage="file='audio-bg-music.png' dest='18,10,72,64'"   hotimage="item_over.png" pushedimage="item_checked.png"  selectedimage="item_checked.png" group="quickbar"  />
+			</HorizontalLayout>
+		</VerticalLayout>
+		<VerticalLayout bkcolor="#FFFFFFFF" bordercolor="#FFE5E6E8" bordersize="1,0,1,1" >
+			<TabLayout name="main-tab">
+				<VerticalLayout>
+					<PaintView name="paint-view" height="190" />
+					<HorizontalLayout height="80" padding="1,0,1,0" bkcolor="#FFFFFFFF" bordercolor="#FFEDEDEE" bordersize="0,0,0,1">
+						<VerticalLayout width="90">
+							<Control />
+							<HorizontalLayout height="32">
+								<Button name="add-audio-file" padding="20,0,0,0" tooltip="添加音频文件" bkimage="file='add-audio-normal.png'" hotimage="file='add-audio-hot.png'" cursor="hand" font="0" width="32" height="32" />
+								<Control />
+							</HorizontalLayout>
+							<Control />
+						</VerticalLayout>
+						<VerticalLayout width="320">
+							<Control />
+							<HorizontalLayout height="32">
+								<Button name="cut-audio-file" padding="4,0,0,0" tooltip="剪辑" bkimage="file='cut-audio-normal.png'" hotimage="file='cut-audio-hot.png'" cursor="hand" font="0" width="32" height="32" />
+								<Button name="cut-audio-left" padding="10,0,0,0" tooltip="截取左侧位置" bkimage="file='cut-audio-left-normal.png'" hotimage="file='cut-audio-left-hot.png'" cursor="hand" font="0" width="32" height="32" />
+								<HorizontalLayout padding="5,5,0,0"  width="90" height="22" bordercolor="#FFE8E8E8" bordersize="1,1,1,1" borderround="2,2">
+									<Edit name="cut-audio-left-position" font="30" width="76" height="20" padding="1,1,1,1" textcolor="#FF888788"  align="center" text="00:00:00.00" />
+									<VerticalLayout width="10" height="22" padding="0,3,0,4">
+										<Button name="audio-left-position-up" width="10" height="8" bkimage="file='up-arrow-normal.png'" hotimage="file='up-arrow-hot.png'" />
+										<Button name="audio-left-position-down" width="10" height="8" bkimage="file='down-arrow-normal.png'" hotimage="file='down-arrow-hot.png'" />
+									</VerticalLayout>
+								</HorizontalLayout>
+								<Button name="cut-audio-right" padding="10,0,0,0" tooltip="截取右侧位置" bkimage="file='cut-audio-right-normal.png'" hotimage="file='cut-audio-right-hot.png'" cursor="hand" font="0" width="32" height="32" />
+								<HorizontalLayout padding="5,5,0,0"  width="90" height="22" bordercolor="#FFE8E8E8" bordersize="1,1,1,1" borderround="2,2">
+									<Edit name="cut-audio-right-position" font="30" width="76" height="20" padding="1,1,1,1" textcolor="#FF888788" align="left" text="00:00:00.00" />
+									<VerticalLayout width="10" height="22" padding="0,3,0,4">
+										<Button name="audio-right-position-up" width="10" height="8" bkimage="file='up-arrow-normal.png'" hotimage="file='up-arrow-hot.png'" />
+										<Button name="audio-right-position-down" width="10" height="8" bkimage="file='down-arrow-normal.png'" hotimage="file='down-arrow-hot.png'" />
+									</VerticalLayout>
+								</HorizontalLayout>
+							</HorizontalLayout>
+							<Control />
+						</VerticalLayout>
+						<Control />
+						<VerticalLayout width="420" >
+							<Label name="audio-filename" textcolor="#FF888788" align="center" font="0" height="24" />
+							<HorizontalLayout>
+								<Button name="left-audition" tooltip="截取左侧试听" bkimage="file='cut-left-normal.png'" hotimage="file='cut-left-hot.png'" cursor="hand" width="32" height="32" />
+								<Button name="middle-audition" tooltip="截取区域音乐试听" bkimage="file='cut-middle-normal.png'" hotimage="file='cut-middle-hot.png'" cursor="hand" width="32" height="32" padding="10,0,0,0" />
+								<Button name="right-audition" tooltip="截取右侧试听" bkimage="file='cut-right-normal.png'" hotimage="file='cut-right-hot.png'" cursor="hand" width="32" height="32" padding="10,0,20,0" />
+								<Button name="rewind" tooltip="后退" bkimage="file='rewind-normal.png'" hotimage="file='rewind-hot.png'" cursor="hand" width="32" height="32" />
+								<Button name="play" tooltip="播放" bkimage="file='play-normal.png'" hotimage="file='play-hot.png'" cursor="hand" width="32" height="32" padding="10,0,0,0" />
+								<Button name="pause" tooltip="暂停" visible="false" bkimage="file='pause-normal.png'" hotimage="file='pause-hot.png'" cursor="hand" width="32" height="32" padding="10,0,0,0" />
+								<Button name="forward" tooltip="快进" bkimage="file='forward-normal.png'" hotimage="file='forward-hot.png'" cursor="hand" width="32" height="32" padding="10,0,0,0" />
+								<Button name="sound" tooltip="声音" bkimage="file='sound-normal.png'" cursor="hand" width="32" height="32" padding="10,0,0,0" />
+								<Slider name="sound-slider" value="50" width="100" height="8" padding="0,12,0,0"  bkimage="file='slider-normal.png' " foreimage="file='slider-hot.png'" thumbimage="slider-thumb.png" thumbhotimage="slider-thumb.png" thumbpushedimage="slider-thumb.png" thumbsize="8,8"/>
+							</HorizontalLayout>
+						</VerticalLayout>
+					</HorizontalLayout>
+					<HorizontalLayout>
+						<List name="audio-cut-list" padding="10,0,10,10" bkcolor="#FFFFFFFF" itemvalign="vcenter" itemshowhtml="true" vscrollbar="true" hscrollbar="false" itemalign="center"  menu="true" itemselectedbkcolor="#FFF0F1F3" itemhotbkcolor="#FFF8F9FA">
+							<ListHeader height="40">
+								<ListHeaderItem padding="10,0,0,0" endellipsis="true" textcolor="#FF9C9A9D"  text="文件名称" font="0"   name="fileSeq"   align="left" height="40" minwidth="240" />
+								<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="时长" font="0"   name="duration"  align="center" height="40" minwidth="80" />
+								<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="导出进度" font="0"   name="progress"  align="center" height="40" minwidth="150" />
+								<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="大小" font="0"   name="fileSize"  align="center" height="40" width="80" minwidth="80" />
+								<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="操作" font="0"   name="filename"  align="center" height="40" width="120" minwidth="160" dragable="false" />
+							</ListHeader>
+						</List>
+					</HorizontalLayout>
+				</VerticalLayout>
+				<VerticalLayout>
+					<HorizontalLayout height="210" padding="1,0,1,0" bkcolor="#FFFFFFFF" bordercolor="#FFEDEDEE" bordersize="0,0,0,1">
+						<VerticalLayout>
+							<Control />
+							<HorizontalLayout height="42">
+								<Label text="声音来源" font="0" textcolor="#FF4D4C4C" padding="20,10,0,0" width="80" height="32" />
+								<Option name="recorder-origin-all" text="全部" font="0" padding="0,10,0,0" group="recorder-origin" selected="true" textcolor="#FF4D4C4C" align="left" valign="vcenter" textpadding="32,0,0,0"  bkimage="file='radio-normal.png' source='0,0,32,32' dest='0,0,32,32'" selectedimage="file='radio-selected.png' dest='0,0,32,32'"  width="80" height="32" />
+								<Option name="recorder-origin-microphone" text="麦克风" font="0" padding="10,10,0,0" group="recorder-origin" textcolor="#FF4D4C4C" align="left" valign="vcenter" textpadding="32,0,0,0"  bkimage="file='radio-normal.png' source='0,0,32,32' dest='0,0,32,32'" selectedimage="file='radio-selected.png' dest='0,0,32,32'"  width="80" height="32" />
+								<Option name="recorder-origin-system" text="系统声音" font="0" padding="10,10,0,0" group="recorder-origin" textcolor="#FF4D4C4C" align="left" valign="vcenter" textpadding="32,0,0,0"  bkimage="file='radio-normal.png' source='0,0,32,32' dest='0,0,32,32'" selectedimage="file='radio-selected.png' dest='0,0,32,32'"  width="120" height="32" />
+							</HorizontalLayout>
+							<HorizontalLayout height="36">
+								<Label text="录音格式" font="0" textcolor="#FF4D4C4C" padding="20,4,0,0" width="80" height="32" />
+								<Combo name="record-audio-format" font="0" width="100" height="36" font="0" textcolor="#FF4D4C4C" textpadding="30,8,0,0" align="left" itemalign="center" itembkcolor="#FFFFFFFF" itemselectedbkcolor="#FF27B765" itemselectedtextcolor="#FFFFFFFF" itemhotbkcolor="#FF73E1A3" itemtextpadding="4,4,4,4"  normalimage="file='combo-normal.png' source='0,0,100,36' dest='0,0,100,36'" hotimage="file='combo-select.png' source='0,0,100,36' dest='0,0,100,36'" pushedimage="file='combo-select.png'  source='0,0,100,36' dest='0,0,100,36'" >
+									<ListLabelElement text="mp3" font="0" width="100" height="24" selected="true" />
+								</Combo>
+								<Label text="录音音质" font="0" textcolor="#FF4D4C4C" padding="20,4,0,0" width="50" height="32" />
+								<Combo name="record-audio-quality" font="0" width="100" height="36" textcolor="#FF4D4C4C" padding="10,0,0,0" textpadding="20,8,0,0" align="left" itemalign="center" itembkcolor="#FFFFFFFF" itemselectedbkcolor="#FF27B765" itemselectedtextcolor="#FFFFFFFF" itemhotbkcolor="#FF73E1A3" itemtextpadding="4,4,4,4"  normalimage="file='combo-normal.png' source='0,0,100,36' dest='0,0,100,36'" hotimage="file='combo-select.png' source='0,0,100,36' dest='0,0,100,36'" pushedimage="file='combo-select.png'  source='0,0,100,36' dest='0,0,100,36'" >
+									<ListLabelElement text="64kbps" font="0" width="100" height="24" />
+									<ListLabelElement text="96kbps" font="0" width="100" height="24" />
+									<ListLabelElement text="128kbps" font="0" width="100" height="24" selected="true" />
+									<ListLabelElement text="192kbps" font="0" width="100" height="24" />
+									<ListLabelElement text="256kbps" font="0" width="100" height="24" />
+									<ListLabelElement text="320kbps" font="0" width="100" height="24" />
+								</Combo>
+							</HorizontalLayout>
+							<HorizontalLayout height="36">
+								<Label text="音量控制" font="0" textcolor="#FF4D4C4C" padding="20,4,0,0" width="80" height="32" />
+								<Button name="sound" tooltip="麦克风声音" bkimage="file='sound-normal.png'" cursor="hand" width="32" height="32" padding="0,4,0,0" />
+								<Slider name="mic-volume-slider" tooltip="麦克风声音" value="20" width="100" height="8" padding="0,16,0,0"  bkimage="file='slider-normal.png' " foreimage="file='slider-hot.png'" thumbimage="slider-thumb.png" thumbhotimage="slider-thumb.png" thumbpushedimage="slider-thumb.png" thumbsize="8,8"/>
+								<Label name="mic-volume-label" text="100" font="0" textcolor="#FF4D4C4C" padding="10,4,0,0" width="30" height="32" align="left" />
+								<Button name="sound" tooltip="系统声音" bkimage="file='sound-normal.png'" cursor="hand" width="32" height="32" padding="10,4,0,0" />
+								<Slider name="sys-volume-slider" tooltip="系统声音" value="20" width="100" height="8" padding="0,16,0,0"  bkimage="file='slider-normal.png' " foreimage="file='slider-hot.png'" thumbimage="slider-thumb.png" thumbhotimage="slider-thumb.png" thumbpushedimage="slider-thumb.png" thumbsize="8,8"/>
+								<Label name="sys-volume-label" text="100" font="0" textcolor="#FF4D4C4C" padding="10,4,0,0" width="30" height="32" align="left" />
+							</HorizontalLayout>
+							
+							<HorizontalLayout height="36">
+								<Label text="高级设置" font="0" textcolor="#FF4D4C4C" padding="20,4,0,0" width="80" height="32" />
+								<CheckBox name="agc-check" text="声音增强" textcolor="#FF4D4C4C" font="0"  padding="0,4,0,0" textpadding="10,0,0,0" width="100" height="32" selectedimage="file='check-hot.png' dest='0,0,32,32'" normalimage="file='check-normal.png' dest='0,0,32,32'" />
+								<Button name="sound" tooltip="麦克风声音增强" bkimage="file='sound-normal.png'" cursor="hand" width="32" height="32" padding="0,4,0,0" />
+								<Slider name="mic-strengthen-slider" tooltip="麦克风声音增强" value="20" width="100" height="8" padding="0,16,0,0"  bkimage="file='slider-normal.png' " foreimage="file='slider-hot.png'" thumbimage="slider-thumb.png" thumbhotimage="slider-thumb.png" thumbpushedimage="slider-thumb.png" thumbsize="8,8"/>
+								<Label name="mic-strengthen-label" text="100" font="0" textcolor="#FF4D4C4C" padding="10,4,0,0" width="30" height="32" align="left" />
+								<CheckBox name="noise-check" text="去除噪声" textcolor="#FF4D4C4C" font="0"  padding="10,4,0,0" textpadding="10,0,0,0" width="100" height="32" selectedimage="file='check-hot.png' dest='0,0,32,32'" normalimage="file='check-normal.png' dest='0,0,32,32'" />
+							</HorizontalLayout>
+							
+							<HorizontalLayout height="32" padding="20,14,0,10">
+								<Label name="recorder-progress" text="00:00:00" textcolor="#FF259B24" font="5" width="100" height="32" />
+								<Button name="recorder-start" tooltip="开始录制" bkimage="file='play-normal.png'" hotimage="file='play-hot.png'" cursor="hand" width="32" height="32" padding="10,0,0,0" />
+								<Button name="recorder-pause" tooltip="暂停录制" visible="false" bkimage="file='pause-normal.png'" hotimage="file='pause-hot.png'" cursor="hand" width="32" height="32" padding="10,0,0,0" />
+								<Button name="recorder-stop" tooltip="停止录制" bkimage="file='stop-normal.png'" hotimage="file='stop-hot.png'" cursor="hand" width="32" height="32" padding="10,0,0,0" />
+							</HorizontalLayout>
+							<Control />
+						</VerticalLayout>
+					</HorizontalLayout>
+					<HorizontalLayout>
+						<List name="audio-record-list" padding="10,0,10,10" bkcolor="#FFFFFFFF" itemvalign="vcenter" itemshowhtml="true" vscrollbar="true" hscrollbar="false" itemalign="center"  menu="true" itemselectedbkcolor="#FFF0F1F3" itemhotbkcolor="#FFF8F9FA">
+							<ListHeader height="40">
+								<ListHeaderItem padding="10,0,0,0" endellipsis="true" textcolor="#FF9C9A9D"  text="文件名称" font="0"   name="fileSeq"   align="left" height="40" minwidth="340" />
+								<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="大小" font="0"   name="fileSize"  align="center" height="40" width="80" minwidth="80" />
+								<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="时长" font="0"   name="duration"  align="center" height="40" minwidth="80" />
+								<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="操作" font="0"   name="filename"  align="center" height="40" width="120" minwidth="160" dragable="false" />
+							</ListHeader>
+						</List>
+					</HorizontalLayout>
+				</VerticalLayout>
+				<VerticalLayout>
+					<HorizontalLayout height="150" padding="1,0,1,0" bkcolor="#FFFFFFFF" bordercolor="#FFEDEDEE" bordersize="0,0,0,1">
+						<VerticalLayout>
+							<HorizontalLayout height="60">
+								<Label text="转换格式" font="0" textcolor="#FF4D4C4C" padding="20,20,0,0" width="80" height="32" />
+								<Combo name="audio-convert-format" font="0" width="100" height="36" padding="0,20,0,0" font="0" textcolor="#FF4D4C4C" textpadding="30,8,0,0" align="left" itemalign="center" itembkcolor="#FFFFFFFF" itemselectedbkcolor="#FF27B765" itemselectedtextcolor="#FFFFFFFF" itemhotbkcolor="#FF73E1A3" itemtextpadding="4,4,4,4"  normalimage="file='combo-normal.png' source='0,0,100,36' dest='0,0,100,36'" hotimage="file='combo-select.png' source='0,0,100,36' dest='0,0,100,36'" pushedimage="file='combo-select.png'  source='0,0,100,36' dest='0,0,100,36'" >
+									<ListLabelElement text="mp3" font="0" width="100" height="24" selected="true" />
+									<ListLabelElement text="aac" font="0" width="100" height="24" />
+									<ListLabelElement text="wma" font="0" width="100" height="24" />
+									<ListLabelElement text="m4a" font="0" width="100" height="24" />
+									<ListLabelElement text="ogg" font="0" width="100" height="24" />
+									<ListLabelElement text="flac" font="0" width="100" height="24" />
+									<!--ListLabelElement text="ape" font="0" width="100" height="24" /-->
+									<ListLabelElement text="wav" font="0" width="100" height="24" />
+									<ListLabelElement text="amr" font="0" width="100" height="24" />
+									<ListLabelElement text="au" font="0" width="100" height="24" />
+									<ListLabelElement text="caf" font="0" width="100" height="24" />
+									<ListLabelElement text="ac3" font="0" width="100" height="24" />
+									<ListLabelElement text="aiff" font="0" width="100" height="24" />
+									<ListLabelElement text="voc" font="0" width="100" height="24" />
+									<ListLabelElement text="wv" font="0" width="100" height="24" />
+									<ListLabelElement text="mmf" font="0" width="100" height="24" />
+									<ListLabelElement text="aifc" font="0" width="100" height="24" />
+								</Combo>
+							</HorizontalLayout>
+							<HorizontalLayout height="50">
+								<Label text="音频参数设置" font="0" valign="center" textcolor="#FF4D4C4C" padding="20,10,0,0" width="80" height="32" />
+								<Combo name="audio-channel" font="0" width="100" height="36" font="0" padding="0,8,0,0" textpadding="20,8,0,0" align="left" itemalign="center" itembkcolor="#FFFFFFFF" itemselectedbkcolor="#FF27B765" itemselectedtextcolor="#FFFFFFFF" itemhotbkcolor="#FF73E1A3" itemtextpadding="4,4,4,4"  normalimage="file='combo-normal.png' source='0,0,100,36' dest='0,0,100,36'" hotimage="file='combo-select.png' source='0,0,100,36' dest='0,0,100,36'" pushedimage="file='combo-select.png'  source='0,0,100,36' dest='0,0,100,36'" >
+									<ListLabelElement text="原声道数" font="0" selected="true" />
+									<ListLabelElement text="立体声" font="0" />
+									<ListLabelElement text="单声道" font="0" />
+								</Combo>
+								<Combo name="audio-sample-rate" font="0" width="100" height="36" font="0" padding="0,8,0,0" textpadding="20,8,0,0" align="left" itemalign="center" itembkcolor="#FFFFFFFF" itemselectedbkcolor="#FF27B765" itemselectedtextcolor="#FFFFFFFF" itemhotbkcolor="#FF73E1A3" itemtextpadding="4,4,4,4"  normalimage="file='combo-normal.png' source='0,0,100,36' dest='0,0,100,36'" hotimage="file='combo-select.png' source='0,0,100,36' dest='0,0,100,36'" pushedimage="file='combo-select.png'  source='0,0,100,36' dest='0,0,100,36'" >
+									<ListLabelElement text="原采样率" font="0" selected="true" />
+									<ListLabelElement text="96000Hz" font="0" />
+									<ListLabelElement text="88200Hz" font="0" />
+									<ListLabelElement text="64000Hz" font="0" />
+									<ListLabelElement text="48000Hz" font="0" />
+									<ListLabelElement text="44100Hz" font="0" />
+									<ListLabelElement text="32000Hz" font="0" />
+									<ListLabelElement text="24000Hz" font="0" />
+									<ListLabelElement text="22050Hz" font="0" />
+									<ListLabelElement text="16000Hz" font="0" />
+									<ListLabelElement text="12000Hz" font="0" />
+									<ListLabelElement text="11025Hz" font="0" />
+									<ListLabelElement text="8000Hz" font="0" />
+									<ListLabelElement text="7350Hz" font="0" />
+								</Combo>
+								<Combo name="audio-bitrate" font="0" width="100" height="36" font="0" padding="0,8,0,0" textpadding="20,8,0,0" align="left" itemalign="center" itembkcolor="#FFFFFFFF" itemselectedbkcolor="#FF27B765" itemselectedtextcolor="#FFFFFFFF" itemhotbkcolor="#FF73E1A3" itemtextpadding="4,4,4,4"  normalimage="file='combo-normal.png' source='0,0,100,36' dest='0,0,100,36'" hotimage="file='combo-select.png' source='0,0,100,36' dest='0,0,100,36'" pushedimage="file='combo-select.png'  source='0,0,100,36' dest='0,0,100,36'" >
+									<ListLabelElement text="原比特率" font="0" selected="true" />
+									<ListLabelElement text="320kbps" font="0" />
+									<ListLabelElement text="128kbps" font="0" />
+									<ListLabelElement text="96kbps" font="0" />
+									<ListLabelElement text="64kbps" font="0" />
+								</Combo>
+							</HorizontalLayout>
+							<Button name="add-convert-file" padding="20,0,0,0" tooltip="添加音频文件" bkimage="file='add-audio-normal.png'" hotimage="file='add-audio-hot.png'" cursor="hand" font="0" width="32" height="32" />
+						</VerticalLayout>
+					</HorizontalLayout>
+					<HorizontalLayout>
+						<List name="audio-convert-list" padding="10,0,10,10" bkcolor="#FFFFFFFF" itemvalign="vcenter" itemshowhtml="true" vscrollbar="true" hscrollbar="false" itemalign="center"  menu="true" itemselectedbkcolor="#FFF0F1F3" itemhotbkcolor="#FFF8F9FA">
+								<ListHeader height="40">
+									<ListHeaderItem padding="10,0,0,0" endellipsis="true" textcolor="#FF9C9A9D"  text="文件名称" font="0"   name="fileSeq"   align="left" height="40" minwidth="300" />
+									<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="大小" font="0"   name="fileSize"  align="center" height="40" width="80" minwidth="80" />
+									<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="时长" font="0"   name="duration"  align="center" height="40" minwidth="80" />
+									<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="进度" font="0"   name="duration"  align="center" width="140" height="40" minwidth="150" />
+									<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="操作" font="0"   name="filename"  align="center" height="40" width="120" minwidth="160" dragable="false" />
+								</ListHeader>
+						</List>
+					</HorizontalLayout>
+				</VerticalLayout>
+				<VerticalLayout>
+					<VerticalLayout height="120" padding="1,0,1,0" bkcolor="#FFFFFFFF" bordercolor="#FFEDEDEE" bordersize="0,0,0,1">
+						<HorizontalLayout height="60">
+							<Label text="合并输出格式" font="0" textcolor="#FF4D4C4C" padding="20,20,0,0" width="80" height="32" />
+							<Combo name="audio-merge-format" font="0" width="100" height="36" padding="0,20,0,0" font="0" textcolor="#FF4D4C4C" textpadding="30,8,0,0" align="left" itemalign="center" itembkcolor="#FFFFFFFF" itemselectedbkcolor="#FF27B765" itemselectedtextcolor="#FFFFFFFF" itemhotbkcolor="#FF73E1A3" itemtextpadding="4,4,4,4"  normalimage="file='combo-normal.png' source='0,0,100,36' dest='0,0,100,36'" hotimage="file='combo-select.png' source='0,0,100,36' dest='0,0,100,36'" pushedimage="file='combo-select.png'  source='0,0,100,36' dest='0,0,100,36'" >
+								<ListLabelElement text="mp3" font="0" width="100" height="24" selected="true" />
+								<ListLabelElement text="aac" font="0" width="100" height="24" />
+								<ListLabelElement text="wma" font="0" width="100" height="24" />
+								<ListLabelElement text="m4a" font="0" width="100" height="24" />
+								<ListLabelElement text="ogg" font="0" width="100" height="24" />
+								<ListLabelElement text="flac" font="0" width="100" height="24" />
+								<!-- ListLabelElement text="ape" font="0" width="100" height="24" /-->
+								<ListLabelElement text="wav" font="0" width="100" height="24" />
+							</Combo>
+						</HorizontalLayout>
+						<HorizontalLayout height="60">
+							<Button name="add-merge-file" padding="20,10,0,0" tooltip="添加音频文件" bkimage="file='add-audio-normal.png'" hotimage="file='add-audio-hot.png'" cursor="hand" font="0" width="32" height="32" />
+							<Control height="60" />
+							<Label text="进度" font="0" textcolor="#FF4D4C4C" padding="0,10,0,0" width="36" height="32" />
+							<Slider name="merge-progress" value="0" step="1" width="140" height="12" padding="0,20,20,0" enabled="false" bkimage="file='progress-slider-bk.png' corner='5,10,5,10'" foreimage="file='progress-slider-fore.png' corner='10,10,5,10'" />
+							<Label name="merge-progress-label" font="0" textcolor="#FF4D4C4C" padding="0,10,0,0" width="36" height="32" />
+							<Button name="merge-btn" padding="20,15,20,0" text="合 并" font="0" cursor="hand" textcolor="#FF4D4C4C" borderround="2,2" bordercolor="#FF27B765" bkcolor="#FFFFFFFF"  bordersize="1" width="40" height="22" />
+							<Button name="mixer-btn" padding="0,15,20,0" text="混 音" font="0" cursor="hand" textcolor="#FF4D4C4C" borderround="2,2" bordercolor="#FF27B765" bkcolor="#FFFFFFFF"  bordersize="1" width="40" height="22" />
+							<Button name="merge-open-dir-btn" padding="0,15,100,0" text="打开目录" font="0" cursor="hand" textcolor="#FF4D4C4C" bkcolor="#FFFFFFFF" borderround="2,2" bordercolor="#FF27B765" bordersize="1" width="100" height="22" />
+						</HorizontalLayout>
+					</VerticalLayout>
+					<HorizontalLayout>
+						<List name="audio-merge-list" padding="10,0,10,10" bkcolor="#FFFFFFFF" itemvalign="vcenter" itemshowhtml="true" vscrollbar="true" hscrollbar="false" itemalign="center"  menu="true" itemselectedbkcolor="#FFF0F1F3" itemhotbkcolor="#FFF8F9FA">
+							<ListHeader height="40">
+								<ListHeaderItem endellipsis="true" height="40" width="80"  dragable="false">
+									<VerticalLayout>
+										<CheckBox padding="10,4,10,4" name="merge-checkbox-all" text="全选" font="0" textcolor="#FF9C9A9D" textpadding="20,0,0,0" width="60" height="32" selectedimage="file='check-hot.png' dest='0,0,32,32'" normalimage="file='check-normal.png' dest='0,0,32,32'" />
+									</VerticalLayout>
+								</ListHeaderItem>
+								<ListHeaderItem padding="10,0,0,0" endellipsis="true" textcolor="#FF9C9A9D"  text="文件名称" font="0"   name="fileSeq"   align="left" height="40" minwidth="340" />
+								<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="大小" font="0"   name="fileSize"  align="center" height="40" width="80" minwidth="80" />
+								<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="时长" font="0"   name="duration"  align="center" height="40" minwidth="80" />
+								<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="操作" font="0"   name="filename"  align="center" height="40" width="120" minwidth="160" dragable="false" />
+							</ListHeader>
+						</List>
+					</HorizontalLayout>
+				</VerticalLayout>
+				<VerticalLayout>
+					<VerticalLayout height="150" padding="1,0,1,0" bkcolor="#FFFFFFFF" bordercolor="#FFEDEDEE" bordersize="0,0,0,1">
+						<HorizontalLayout height="60">
+							<Label text="播放速度" font="0" valign="center" textcolor="#FF4D4C4C" padding="20,20,0,0" width="80" height="32" />
+							<Option name="speed-0-5" group="speed-level" padding="20,25,0,0"  text="0.5" font="0" textcolor="#FF4D4C4C" width="36" height="22" cursor="hand" normalimage="file='speed-normal.png'"  selectedimage="file='speed-select.png'"  />
+							<Option name="speed-0-7-5" group="speed-level" padding="20,25,0,0" text="0.75" font="0" textcolor="#FF4D4C4C"  width="36" height="22"  cursor="hand" normalimage="file='speed-normal.png'"  selectedimage="file='speed-select.png'" />
+							<Option name="speed-1-0" group="speed-level" padding="20,25,0,0" text="1.0" font="0" textcolor="#FF4D4C4C" selected="true" width="36" height="22"  cursor="hand" normalimage="file='speed-normal.png'"  selectedimage="file='speed-select.png'" />
+							<Option name="speed-1-2-5" group="speed-level" padding="20,25,0,0" text="1.25" font="0" textcolor="#FF4D4C4C" width="36" height="22"  cursor="hand" normalimage="file='speed-normal.png'"  selectedimage="file='speed-select.png'" />
+							<Option name="speed-1-5" group="speed-level" padding="20,25,0,0" text="1.5" font="0" textcolor="#FF4D4C4C" width="36" height="22"  cursor="hand" normalimage="file='speed-normal.png'"  selectedimage="file='speed-select.png'" />
+							<Option name="speed-2-0" group="speed-level" padding="20,25,0,0" text="2.0" font="0" textcolor="#FF4D4C4C" width="36" height="22"  cursor="hand" normalimage="file='speed-normal.png'"  selectedimage="file='speed-select.png'" />
+						</HorizontalLayout>
+						<HorizontalLayout height="50">
+							<CheckBox name="speed-check" text="自定义调速" textcolor="#FF4D4C4C" font="0"  padding="13,10,0,0" textpadding="24,0,0,0" width="100" height="32" selectedimage="file='check-hot.png' dest='0,0,32,32'" normalimage="file='check-normal.png' dest='0,0,32,32'" />
+							<Slider name="change-speed-slider" value="100" min="50" max="200" step="10" width="100" height="8" padding="8,21,0,0" bkimage="file='slider-normal.png' " foreimage="file='slider-hot.png'" thumbimage="slider-thumb.png" thumbhotimage="slider-thumb.png" thumbpushedimage="slider-thumb.png" thumbsize="8,8"/>
+							<Label name="speed-label" text="1.0倍" font="0" valign="center" textcolor="#FF4D4C4C" padding="10,10,0,0" width="80" height="32" />
+						</HorizontalLayout>
+						<Button name="add-speed-file" padding="20,0,0,0" tooltip="添加音频文件" bkimage="file='add-audio-normal.png'" hotimage="file='add-audio-hot.png'" cursor="hand" font="0" width="32" height="32" />
+					</VerticalLayout>
+					<HorizontalLayout>
+						<List name="audio-speed-list" padding="10,0,10,10" bkcolor="#FFFFFFFF" itemvalign="vcenter" itemshowhtml="true" vscrollbar="true" hscrollbar="false" itemalign="center"  menu="true" itemselectedbkcolor="#FFF0F1F3" itemhotbkcolor="#FFF8F9FA">
+								<ListHeader height="40">
+									<ListHeaderItem padding="10,0,0,0" endellipsis="true" textcolor="#FF9C9A9D"  text="文件名称" font="0"   name="fileSeq"   align="left" height="40" minwidth="300" />
+									<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="大小" font="0"   name="fileSize"  align="center" height="40" width="80" minwidth="80" />
+									<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="时长" font="0"   name="duration"  align="center" height="40" minwidth="80" />
+									<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="进度" font="0"   name="duration"  align="center" width="140" height="40" minwidth="150" />
+									<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="操作" font="0"   name="filename"  align="center" height="40" width="120" minwidth="160" dragable="false" />
+								</ListHeader>
+						</List>
+					</HorizontalLayout>
+				</VerticalLayout>
+				<VerticalLayout>
+					<VerticalLayout height="120" padding="1,0,1,0" bkcolor="#FFFFFFFF" bordercolor="#FFEDEDEE" bordersize="0,0,0,1">
+						<HorizontalLayout height="60">
+							<Label text="提取音频格式" font="0" textcolor="#FF4D4C4C" padding="20,20,0,0" width="80" height="32" />
+							<Combo name="audio-extract-format" font="0" width="100" height="36" padding="0,20,0,0" font="0" textcolor="#FF4D4C4C" textpadding="30,8,0,0" align="left" itemalign="center" itembkcolor="#FFFFFFFF" itemselectedbkcolor="#FF27B765" itemselectedtextcolor="#FFFFFFFF" itemhotbkcolor="#FF73E1A3" itemtextpadding="4,4,4,4"  normalimage="file='combo-normal.png' source='0,0,100,36' dest='0,0,100,36'" hotimage="file='combo-select.png' source='0,0,100,36' dest='0,0,100,36'" pushedimage="file='combo-select.png'  source='0,0,100,36' dest='0,0,100,36'" >
+								<ListLabelElement text="mp3" font="0" width="100" height="24" selected="true" />
+								<ListLabelElement text="aac" font="0" width="100" height="24" />
+								<ListLabelElement text="wma" font="0" width="100" height="24" />
+								<ListLabelElement text="m4a" font="0" width="100" height="24" />
+								<ListLabelElement text="ogg" font="0" width="100" height="24" />
+								<ListLabelElement text="flac" font="0" width="100" height="24" />
+								<!--ListLabelElement text="ape" font="0" width="100" height="24" /-->
+								<ListLabelElement text="wav" font="0" width="100" height="24" />
+							</Combo>
+						</HorizontalLayout>
+						<Button name="add-extract-file" padding="20,10,0,0" tooltip="添加视频文件" bkimage="file='add-audio-normal.png'" hotimage="file='add-audio-hot.png'" cursor="hand" font="0" width="32" height="32" />
+					</VerticalLayout>
+					<HorizontalLayout>
+						<List name="audio-extract-list" padding="10,0,10,10" bkcolor="#FFFFFFFF" itemvalign="vcenter" itemshowhtml="true" vscrollbar="true" hscrollbar="false" itemalign="center"  menu="true" itemselectedbkcolor="#FFF0F1F3" itemhotbkcolor="#FFF8F9FA">
+								<ListHeader height="40">
+									<ListHeaderItem padding="10,0,0,0" endellipsis="true" textcolor="#FF9C9A9D"  text="文件名称" font="0"   name="fileSeq"   align="left" height="40" minwidth="200" />
+									<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="大小" font="0"  align="center" height="40" width="80" minwidth="80" />
+									<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="时长" font="0"  align="center" height="40" width="80" />
+									<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="类型" font="0"  align="center" height="40" minwidth="100" />
+									<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="进度" font="0"  align="center" width="140" height="40" minwidth="150" />
+									<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="操作" font="0"  align="center" height="40" width="120" minwidth="160" dragable="false" />
+								</ListHeader>
+						</List>
+					</HorizontalLayout>
+				</VerticalLayout>
+				<VerticalLayout>
+					<VerticalLayout height="150" padding="1,0,1,0" bkcolor="#FFFFFFFF" bordercolor="#FFEDEDEE" bordersize="0,0,0,1">
+						<HorizontalLayout height="60">
+							<Label text="输出视频格式" font="0" textcolor="#FF4D4C4C" padding="20,20,0,0" width="80" height="32" />
+							<Combo name="video-noise-format" font="0" width="100" height="36" padding="0,20,0,0" font="0" textcolor="#FF4D4C4C" textpadding="30,8,0,0" align="left" itemalign="center" itembkcolor="#FFFFFFFF" itemselectedbkcolor="#FF27B765" itemselectedtextcolor="#FFFFFFFF" itemhotbkcolor="#FF73E1A3" itemtextpadding="4,4,4,4"  normalimage="file='combo-normal.png' source='0,0,100,36' dest='0,0,100,36'" hotimage="file='combo-select.png' source='0,0,100,36' dest='0,0,100,36'" pushedimage="file='combo-select.png'  source='0,0,100,36' dest='0,0,100,36'" >
+								<ListLabelElement text="mp4" font="0" width="100" height="24" selected="true" />
+								<ListLabelElement text="flv" font="0" width="100" height="24" />
+							</Combo>
+							<Label text="输出音频格式" font="0" textcolor="#FF4D4C4C" padding="20,20,0,0" width="80" height="32" />
+							<Combo name="audio-noise-format" font="0" width="100" height="36" padding="0,20,0,0" font="0" textcolor="#FF4D4C4C" textpadding="30,8,0,0" align="left" itemalign="center" itembkcolor="#FFFFFFFF" itemselectedbkcolor="#FF27B765" itemselectedtextcolor="#FFFFFFFF" itemhotbkcolor="#FF73E1A3" itemtextpadding="4,4,4,4"  normalimage="file='combo-normal.png' source='0,0,100,36' dest='0,0,100,36'" hotimage="file='combo-select.png' source='0,0,100,36' dest='0,0,100,36'" pushedimage="file='combo-select.png'  source='0,0,100,36' dest='0,0,100,36'" >
+								<ListLabelElement text="mp3" font="0" width="100" height="24" selected="true" />
+								<ListLabelElement text="aac" font="0" width="100" height="24" />
+							</Combo>
+						</HorizontalLayout>
+						<HorizontalLayout height="50">
+							<Label text="消噪级别" font="0" valign="center" textcolor="#FF4D4C4C" padding="20,10,0,0" width="80" height="32" />
+							<Option name="noise-level-0" group="noise-level" padding="10,15,0,0"  text="弱" font="0" textcolor="#FF4D4C4C" width="36" height="22" cursor="hand" normalimage="file='speed-normal.png'"  selectedimage="file='speed-select.png'"  />
+							<Option name="noise-level-1" group="noise-level" padding="20,15,0,0" text="一般" font="0" textcolor="#FF4D4C4C" width="36" height="22" selected="true"  cursor="hand" normalimage="file='speed-normal.png'"  selectedimage="file='speed-select.png'" />
+							<Option name="noise-level-2" group="noise-level" padding="20,15,0,0" text="强" font="0" textcolor="#FF4D4C4C" width="36" height="22"  cursor="hand" normalimage="file='speed-normal.png'"  selectedimage="file='speed-select.png'" />
+						</HorizontalLayout>
+						<Button name="add-noise-file" padding="20,0,0,0" tooltip="添加音视频文件" bkimage="file='add-audio-normal.png'" hotimage="file='add-audio-hot.png'" cursor="hand" font="0" width="32" height="32" />
+					</VerticalLayout>
+					<HorizontalLayout>
+						<List name="audio-noise-list" padding="10,0,10,10" bkcolor="#FFFFFFFF" itemvalign="vcenter" itemshowhtml="true" vscrollbar="true" hscrollbar="false" itemalign="center"  menu="true" itemselectedbkcolor="#FFF0F1F3" itemhotbkcolor="#FFF8F9FA">
+							<ListHeader height="40">
+								<ListHeaderItem padding="10,0,0,0" endellipsis="true" textcolor="#FF9C9A9D"  text="文件名称" font="0"   name="fileSeq"   align="left" height="40" minwidth="300" />
+								<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="大小" font="0"   name="fileSize"  align="center" height="40" width="80" minwidth="80" />
+								<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="时长" font="0"   name="duration"  align="center" height="40" minwidth="80" />
+								<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="进度" font="0"   name="duration"  align="center" width="140" height="40" minwidth="150" />
+								<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="操作" font="0"   name="filename"  align="center" height="40" width="120" minwidth="160" dragable="false" />
+							</ListHeader>
+						</List>
+					</HorizontalLayout>
+				</VerticalLayout>
+				<VerticalLayout>
+					<VerticalLayout height="180" padding="1,0,1,0" bkcolor="#FFFFFFFF" bordercolor="#FFEDEDEE" bordersize="0,0,0,1">
+						<HorizontalLayout height="60">
+							<Label text="调整音量大小" font="0" textcolor="#FF4D4C4C" padding="20,20,0,0" width="80" height="32" />
+							<Slider name="change-volume-slider" value="100" min="0" max="200" step="10" width="100" height="8" padding="0,30,0,0"  bkimage="file='slider-normal.png' " foreimage="file='slider-hot.png'" thumbimage="slider-thumb.png" thumbhotimage="slider-thumb.png" thumbpushedimage="slider-thumb.png" thumbsize="8,8"/>
+							<Label name="volume-label" text="1.0倍" font="0" valign="center" textcolor="#FF4D4C4C" padding="10,20,0,0" width="80" height="32" />
+						</HorizontalLayout>
+						<HorizontalLayout height="40">
+							<CheckBox name="fade-in" text="淡入" textcolor="#FF4D4C4C" font="0"  padding="13,0,0,0" textpadding="24,0,0,0" width="60" height="32" selectedimage="file='check-hot.png' dest='0,0,32,32'" normalimage="file='check-normal.png' dest='0,0,32,32'" />
+							<Label text="起始位置：" font="0" textcolor="#FF4D4C4C" padding="10,0,0,0" width="60" height="32" />
+							<Edit name="fade-in-start" text="0" font="0" textcolor="#FF666666" align="center" padding="10,4,0,0" width="40" height="22" bordersize="1" bordercolor="#FFE2E9EC" borderround="2,2"/>
+							<Label text="秒" font="0" textcolor="#FF4D4C4C" padding="4,0,0,0" width="14" height="32" />
+							<Label text="淡入时长：" font="0" textcolor="#FF4D4C4C" padding="4,0,0,0" width="60" height="32" />
+							<Edit name="fade-in-duration" text="15" font="0" textcolor="#FF666666" align="center" padding="10,4,0,0" width="40" height="22" bordersize="1" bordercolor="#FFE2E9EC" borderround="2,2"/>
+							<Label text="秒" font="0" textcolor="#FF4D4C4C" padding="4,0,0,0" width="14" height="32" />
+						</HorizontalLayout>
+						<HorizontalLayout height="40">
+							<CheckBox name="fade-out" text="淡出" textcolor="#FF4D4C4C" font="0"  padding="13,0,0,0" textpadding="24,0,0,0" width="60" height="32" selectedimage="file='check-hot.png' dest='0,0,32,32'" normalimage="file='check-normal.png' dest='0,0,32,32'" />
+							<Label text="起始位置：" font="0" textcolor="#FF4D4C4C" padding="10,0,0,0" width="60" height="32" />
+							<Edit name="fade-out-start" text="0" font="0" textcolor="#FF666666" align="center" padding="10,4,0,0" width="40" height="22" bordersize="1" bordercolor="#FFE2E9EC" borderround="2,2"/>
+							<Label text="秒" font="0" textcolor="#FF4D4C4C" padding="4,0,0,0" width="14" height="32" />
+							<Label text="淡出时长：" font="0" textcolor="#FF4D4C4C" padding="4,0,0,0" width="60" height="32" />
+							<Edit name="fade-out-duration" text="15" font="0" textcolor="#FF666666" align="center" padding="10,4,0,0" width="40" height="22" bordersize="1" bordercolor="#FFE2E9EC" borderround="2,2"/>
+							<Label text="秒" font="0" textcolor="#FF4D4C4C" padding="4,0,0,0" width="14" height="32" />
+						</HorizontalLayout>
+						<Button name="add-volume-file" padding="20,0,0,0" tooltip="添加音频文件" bkimage="file='add-audio-normal.png'" hotimage="file='add-audio-hot.png'" cursor="hand" font="0" width="32" height="32" />
+					</VerticalLayout>
+					<HorizontalLayout>
+						<List name="audio-volume-list" padding="10,0,10,10" bkcolor="#FFFFFFFF" itemvalign="vcenter" itemshowhtml="true" vscrollbar="true" hscrollbar="false" itemalign="center"  menu="true" itemselectedbkcolor="#FFF0F1F3" itemhotbkcolor="#FFF8F9FA">
+								<ListHeader height="40">
+									<ListHeaderItem padding="10,0,0,0" endellipsis="true" textcolor="#FF9C9A9D"  text="文件名称" font="0"   name="fileSeq"   align="left" height="40" minwidth="300" />
+									<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="大小" font="0"   name="fileSize"  align="center" height="40" width="80" minwidth="80" />
+									<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="时长" font="0"   name="duration"  align="center" height="40" minwidth="80" />
+									<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="进度" font="0"   name="duration"  align="center" width="140" height="40" minwidth="150" />
+									<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="操作" font="0"   name="filename"  align="center" height="40" width="120" minwidth="160" dragable="false" />
+								</ListHeader>
+						</List>
+					</HorizontalLayout>
+				</VerticalLayout>
+				<VerticalLayout>
+					<VerticalLayout height="180" padding="1,0,1,0" bkcolor="#FFFFFFFF" bordercolor="#FFEDEDEE" bordersize="0,0,0,1">
+						<HorizontalLayout height="40" padding="0,10,0,0">
+							<Label text="背景音乐文件" font="0" textcolor="#FF4D4C4C" padding="20,20,0,0" width="80" height="32" />
+							<Edit name="bg-music-edit" font="0" readonly="true" textcolor="#FF666666" align="left" padding="10,16,0,0" width="200" height="24" bordersize="1" bordercolor="#FFE2E9EC" borderround="2,2"/>
+							<Button name="add-bg-music-btn" text="选择" font="0" cursor="hand" textcolor="#FFFFFFFF" padding="10,16,0,0" width="60" height="24" bordersize="1" borderround="2,2" bkcolor="#FF27B765"  hotbkcolor="#FF57CB88" />
+						</HorizontalLayout>
+						<HorizontalLayout height="40">
+							<Label text="背景音量大小" font="0" textcolor="#FF4D4C4C" padding="20,20,0,0" width="80" height="32" />
+							<Slider name="bg-music-slider" value="0" min="-30" max="30" step="1" width="100" height="8" padding="10,24,0,0"  bkimage="file='slider-normal.png' " foreimage="file='slider-hot.png'" thumbimage="slider-thumb.png" thumbhotimage="slider-thumb.png" thumbpushedimage="slider-thumb.png" thumbsize="8,8"/>
+							<Label name="bg-music-volume-label" text="+0dB" font="0" valign="center" textcolor="#FF4D4C4C" padding="10,20,0,0" width="80" height="32" />
+						</HorizontalLayout>
+						<HorizontalLayout height="40">
+							<Label text="起始位置：" font="0" textcolor="#FF4D4C4C" padding="20,10,0,0" width="60" height="32" />
+							<Edit name="bg-music-start-pos" text="0" font="0" textcolor="#FF666666" align="center" padding="10,14,0,0" width="40" height="22" bordersize="1" bordercolor="#FFE2E9EC" borderround="2,2"/>
+							<Label text="秒" font="0" textcolor="#FF4D4C4C" padding="10,10,0,0" width="20" height="32" />
+							<CheckBox name="bg-music-loop" text="是否循环" selected="true" textcolor="#FF4D4C4C" font="0"  padding="13,10,0,0" textpadding="24,0,0,0" width="80" height="32" selectedimage="file='check-hot.png' dest='0,0,32,32'" normalimage="file='check-normal.png' dest='0,0,32,32'" />
+						</HorizontalLayout>
+						<Button name="add-bg-music-file" padding="20,10,0,0" tooltip="添加音频文件" bkimage="file='add-audio-normal.png'" hotimage="file='add-audio-hot.png'" cursor="hand" font="0" width="32" height="32" />
+					</VerticalLayout>
+					<HorizontalLayout>
+						<List name="audio-bg-music-list" padding="10,0,10,10" bkcolor="#FFFFFFFF" itemvalign="vcenter" itemshowhtml="true" vscrollbar="true" hscrollbar="false" itemalign="center"  menu="true" itemselectedbkcolor="#FFF0F1F3" itemhotbkcolor="#FFF8F9FA">
+								<ListHeader height="40">
+									<ListHeaderItem padding="10,0,0,0" endellipsis="true" textcolor="#FF9C9A9D"  text="文件名称" font="0"   name="fileSeq"   align="left" height="40" minwidth="300" />
+									<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="大小" font="0"   name="fileSize"  align="center" height="40" width="80" minwidth="80" />
+									<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="时长" font="0"   name="duration"  align="center" height="40" minwidth="80" />
+									<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="进度" font="0"   name="duration"  align="center" width="140" height="40" minwidth="150" />
+									<ListHeaderItem  endellipsis="true" textcolor="#FF9C9A9D"  text="操作" font="0"   name="filename"  align="center" height="40" width="120" minwidth="160" dragable="false" />
+								</ListHeader>
+						</List>
+					</HorizontalLayout>
+				</VerticalLayout>
+			</TabLayout>
+		</VerticalLayout>
+    </VerticalLayout>
+</Window>
