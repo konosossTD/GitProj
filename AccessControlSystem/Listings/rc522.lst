@@ -1,0 +1,701 @@
+C51 COMPILER V9.60.0.0   RC522                                                             12/14/2021 09:13:14 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE RC522
+OBJECT MODULE PLACED IN .\Objects\rc522.obj
+COMPILER INVOKED BY: D:\Keil5\MDK\C51\BIN\C51.EXE rc522.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\List
+                    -ings\rc522.lst) OBJECT(.\Objects\rc522.obj)
+
+line level    source
+
+   1          #include <STC12C5A60S2.H>
+   2          #include "rc522.h"
+   3          #include "intrins.h"
+   4          #define uchar unsigned char
+   5          #define uint unsigned int.
+   6          void delay_ns(unsigned int ns)
+   7          {
+   8   1              unsigned int i;
+   9   1              for(i=0;i<ns;i++)
+  10   1              {
+  11   2                      _nop_();
+  12   2                      _nop_();
+  13   2              }
+  14   1      }
+  15          
+  16          unsigned char SPIReadByte(void)// ¶ÁSPIÊý¾Ý
+  17          {
+  18   1              unsigned char SPICount;                                       // Counter used to clock out the data
+  19   1              unsigned char SPIData; 
+  20   1                               
+  21   1              SPIData = 0;
+  22   1              for (SPICount = 0; SPICount < 8; SPICount++)                  // Prepare to clock in the data to be read
+  23   1              {
+  24   2                      SPIData <<=1;                                               // Rotate the data
+  25   2                      CLR_SPI_CK; //nop();//nop();                                         // Raise the clock to clock the dat
+             -a out of the MAX7456
+  26   2                      if(STU_SPI_MISO)
+  27   2                      {
+  28   3                              SPIData|=0x01;
+  29   3                      }
+  30   2                      SET_SPI_CK;   //nop();//nop();                                               // Drop the clock ready for
+             - the next bit
+  31   2              }                                                             // and loop back
+  32   1              return (SPIData);                              // Finally return the read data
+  33   1      } 
+  34          
+  35          void SPIWriteByte(unsigned char SPIData)// Ð´SPIÊý¾Ý
+  36          {
+  37   1              unsigned char SPICount;                                       // Counter used to clock out the data
+  38   1              for (SPICount = 0; SPICount < 8; SPICount++)
+  39   1              {
+  40   2                      if (SPIData & 0x80)
+  41   2                      {
+  42   3                              SET_SPI_MOSI;
+  43   3                      }
+  44   2                      else
+  45   2                      {
+  46   3                              CLR_SPI_MOSI;
+  47   3                      } 
+  48   2                      _nop_();_nop_();
+  49   2                      CLR_SPI_CK;_nop_();_nop_();
+  50   2                      SET_SPI_CK;_nop_();_nop_();
+  51   2                      SPIData <<= 1;
+  52   2              }               
+C51 COMPILER V9.60.0.0   RC522                                                             12/14/2021 09:13:14 PAGE 2   
+
+  53   1      }
+  54          
+  55          
+  56          /********************************************************************
+  57          ¹¦    ÄÜ£º¶ÁRC632¼Ä´æÆ÷
+  58          ²ÎÊýËµÃ÷£ºAddress[IN]:¼Ä´æÆ÷µØÖ·
+  59          ·µ    »Ø£º¶Á³öµÄÖµ
+  60          ***********************************************************************/
+  61          unsigned char ReadRawRC(unsigned char Address)
+  62          {
+  63   1              unsigned char ucAddr;
+  64   1        unsigned char ucResult=0;
+  65   1              CLR_SPI_CS;
+  66   1        ucAddr = ((Address<<1)&0x7E)|0x80;
+  67   1              SPIWriteByte(ucAddr);
+  68   1              ucResult=SPIReadByte();
+  69   1              SET_SPI_CS;
+  70   1              return ucResult;
+  71   1      }
+  72          
+  73          /********************************************************************
+  74          ¹¦    ÄÜ£ºÐ´RC632¼Ä´æÆ÷
+  75          ²ÎÊýËµÃ÷£ºAddress[IN]:¼Ä´æÆ÷µØÖ·
+  76                    value[IN]:Ð´ÈëµÄÖµ
+  77          ***********************************************************************/
+  78          void WriteRawRC(unsigned char Address, unsigned char value)
+  79          {  
+  80   1        unsigned char ucAddr;
+  81   1              CLR_SPI_CS;
+  82   1        ucAddr = ((Address<<1)&0x7E);
+  83   1              SPIWriteByte(ucAddr);
+  84   1              SPIWriteByte(value);
+  85   1              SET_SPI_CS;
+  86   1      }   
+  87          
+  88          /********************************************************************
+  89          ¹¦    ÄÜ£ºÇåRC522¼Ä´æÆ÷Î»
+  90          ²ÎÊýËµÃ÷£ºreg[IN]:¼Ä´æÆ÷µØÖ·
+  91                    mask[IN]:ÇåÎ»Öµ
+  92          ***********************************************************************/
+  93          void ClearBitMask(unsigned char reg,unsigned char mask)  
+  94          {
+  95   1        char tmp = 0x00;
+  96   1        tmp = ReadRawRC(reg);
+  97   1        WriteRawRC(reg, tmp & ~mask);  // clear bit mask
+  98   1      } 
+  99          
+ 100          /********************************************************************
+ 101          ¹¦    ÄÜ£ºÖÃRC522¼Ä´æÆ÷Î»
+ 102          ²ÎÊýËµÃ÷£ºreg[IN]:¼Ä´æÆ÷µØÖ·
+ 103                    mask[IN]:ÖÃÎ»Öµ
+ 104          ***********************************************************************/
+ 105          void SetBitMask(unsigned char reg,unsigned char mask)  
+ 106          {
+ 107   1        char tmp = 0x00;
+ 108   1        tmp = ReadRawRC(reg);
+ 109   1        WriteRawRC(reg,tmp | mask);  // set bit mask
+ 110   1      }
+ 111          
+ 112          /********************************************************************
+ 113          ¹¦    ÄÜ£ºÍ¨¹ýRC522ºÍISO14443¿¨Í¨Ñ¶
+ 114          ²ÎÊýËµÃ÷£ºCommand[IN]:RC522ÃüÁî×Ö
+C51 COMPILER V9.60.0.0   RC522                                                             12/14/2021 09:13:14 PAGE 3   
+
+ 115                    pInData[IN]:Í¨¹ýRC522·¢ËÍµ½¿¨Æ¬µÄÊý¾Ý
+ 116                    InLenByte[IN]:·¢ËÍÊý¾ÝµÄ×Ö½Ú³¤¶È
+ 117                    pOutData[OUT]:½ÓÊÕµ½µÄ¿¨Æ¬·µ»ØÊý¾Ý
+ 118                    *pOutLenBit[OUT]:·µ»ØÊý¾ÝµÄÎ»³¤¶È
+ 119          ***********************************************************************/
+ 120          char PcdComMF522(unsigned char Command, 
+ 121                           unsigned char *pInData, 
+ 122                           unsigned char InLenByte,
+ 123                           unsigned char *pOutData, 
+ 124                           unsigned int *pOutLenBit)
+ 125          {
+ 126   1          char status = MI_ERR;
+ 127   1          unsigned char irqEn   = 0x00;
+ 128   1          unsigned char waitFor = 0x00;
+ 129   1          unsigned char lastBits;
+ 130   1          unsigned char n;
+ 131   1          unsigned int i;
+ 132   1          switch (Command)
+ 133   1          {
+ 134   2            case PCD_AUTHENT:
+ 135   2                                irqEn   = 0x12;
+ 136   2                                waitFor = 0x10;
+ 137   2                                break;
+ 138   2                        case PCD_TRANSCEIVE:
+ 139   2                                irqEn   = 0x77;
+ 140   2                                waitFor = 0x30;
+ 141   2                                break;
+ 142   2                        default:
+ 143   2                                break;
+ 144   2          }
+ 145   1          WriteRawRC(ComIEnReg,irqEn|0x80);
+ 146   1          ClearBitMask(ComIrqReg,0x80);
+ 147   1          WriteRawRC(CommandReg,PCD_IDLE);
+ 148   1          SetBitMask(FIFOLevelReg,0x80);
+ 149   1          for (i=0; i<InLenByte; i++)
+ 150   1          {   
+ 151   2                              WriteRawRC(FIFODataReg, pInData[i]);    
+ 152   2                      }
+ 153   1          WriteRawRC(CommandReg, Command);
+ 154   1          if (Command == PCD_TRANSCEIVE)
+ 155   1          {    
+ 156   2                              SetBitMask(BitFramingReg,0x80);  
+ 157   2                      }
+ 158   1          
+ 159   1          //i = 600;//¸ù¾ÝÊ±ÖÓÆµÂÊµ÷Õû£¬²Ù×÷M1¿¨×î´óµÈ´ýÊ±¼ä25ms
+ 160   1                i = 2000;
+ 161   1          do 
+ 162   1          {
+ 163   2              n = ReadRawRC(ComIrqReg);
+ 164   2              i--;
+ 165   2          }
+ 166   1          while ((i!=0) && !(n&0x01) && !(n&waitFor)) ;
+ 167   1          ClearBitMask(BitFramingReg,0x80);
+ 168   1          if (i!=0)
+ 169   1          {    
+ 170   2              if(!(ReadRawRC(ErrorReg)&0x1B))
+ 171   2              {
+ 172   3                  status = MI_OK;
+ 173   3                  if (n & irqEn & 0x01)
+ 174   3                  {   
+ 175   4                                                                      status = MI_NOTAGERR;   
+ 176   4                                                      }
+C51 COMPILER V9.60.0.0   RC522                                                             12/14/2021 09:13:14 PAGE 4   
+
+ 177   3                  if (Command == PCD_TRANSCEIVE)
+ 178   3                  {
+ 179   4                      n = ReadRawRC(FIFOLevelReg);
+ 180   4                      lastBits = ReadRawRC(ControlReg) & 0x07;
+ 181   4                      if (lastBits)
+ 182   4                      {   
+ 183   5                                                                                      *pOutLenBit = (n-1)*8 + lastBits;   
+ 184   5                                                                      }
+ 185   4                      else
+ 186   4                      {   
+ 187   5                                                                                      *pOutLenBit = n*8;   
+ 188   5                                                                      }
+ 189   4                      if (n == 0)
+ 190   4                      {   
+ 191   5                                                                                      n = 1;    
+ 192   5                                                                      }
+ 193   4                      if (n > MAXRLEN)
+ 194   4                      {   
+ 195   5                                                                                      n = MAXRLEN;   
+ 196   5                                                                      }
+ 197   4                      for (i=0; i<n; i++)
+ 198   4                      {   
+ 199   5                                                                                      pOutData[i] = ReadRawRC(FIFODataReg);    
+ 200   5                                                                      }
+ 201   4                  }
+ 202   3              }
+ 203   2              else
+ 204   2              {   
+ 205   3                                   status = MI_ERR;   
+ 206   3                          }
+ 207   2              
+ 208   2          }
+ 209   1          SetBitMask(ControlReg,0x80);           //Í£Ö¹Ê±¼ä
+ 210   1          WriteRawRC(CommandReg,PCD_IDLE); 
+ 211   1          return status;
+ 212   1      }
+ 213                                
+ 214          /********************************************************************
+ 215          ¹¦    ÄÜ£ºÑ°¿¨
+ 216          ²ÎÊýËµÃ÷: req_code[IN]:Ñ°¿¨·½Ê½
+ 217                    0x52 = Ñ°¸ÐÓ¦ÇøÄÚËùÓÐ·ûºÏ14443A±ê×¼µÄ¿¨
+ 218                    0x26 = Ñ°Î´½øÈëÐÝÃß×´Ì¬µÄ¿¨
+ 219                    pTagType[OUT]£º¿¨Æ¬ÀàÐÍ´úÂë
+ 220                    0x4400 = Mifare_UltraLight
+ 221                    0x0400 = Mifare_One(S50)
+ 222                    0x0200 = Mifare_One(S70)
+ 223                    0x0800 = Mifare_Pro(X)
+ 224                    0x4403 = Mifare_DESFire
+ 225          return: ³É¹¦·µ»ØMI_OK
+ 226          ***********************************************************************/
+ 227          char PcdRequest(unsigned char req_code,unsigned char *pTagType)
+ 228          {
+ 229   1              char status;  
+ 230   1              unsigned int unLen;
+ 231   1              unsigned char ucComMF522Buf[MAXRLEN]; 
+ 232   1      
+ 233   1              ClearBitMask(Status2Reg,0x08);
+ 234   1              WriteRawRC(BitFramingReg,0x07);
+ 235   1              SetBitMask(TxControlReg,0x03);
+ 236   1       
+ 237   1              ucComMF522Buf[0] = req_code;
+ 238   1      
+C51 COMPILER V9.60.0.0   RC522                                                             12/14/2021 09:13:14 PAGE 5   
+
+ 239   1              status = PcdComMF522(PCD_TRANSCEIVE,ucComMF522Buf,1,ucComMF522Buf,&unLen);
+ 240   1      
+ 241   1              if ((status == MI_OK) && (unLen == 0x10))
+ 242   1              {    
+ 243   2                      *pTagType     = ucComMF522Buf[0];
+ 244   2                      *(pTagType+1) = ucComMF522Buf[1];
+ 245   2              }
+ 246   1              else
+ 247   1              {   
+ 248   2                      status = MI_ERR;   
+ 249   2              }
+ 250   1         
+ 251   1              return status;
+ 252   1      }
+ 253          
+ 254          
+ 255          /********************************************************************
+ 256          ¹¦    ÄÜ£º·À³å×²
+ 257          ²ÎÊýËµÃ÷: pSnr[OUT]:¿¨Æ¬ÐòÁÐºÅ£¬4×Ö½Ú
+ 258          ·µ    »Ø: ³É¹¦·µ»ØMI_OK
+ 259          ***********************************************************************/ 
+ 260          char PcdAnticoll(unsigned char *pSnr)
+ 261          {
+ 262   1          char status;
+ 263   1          unsigned char i,snr_check=0;
+ 264   1          unsigned int unLen;
+ 265   1          unsigned char ucComMF522Buf[MAXRLEN]; 
+ 266   1          ClearBitMask(Status2Reg,0x08);
+ 267   1          WriteRawRC(BitFramingReg,0x00);
+ 268   1          ClearBitMask(CollReg,0x80);
+ 269   1          ucComMF522Buf[0] = PICC_ANTICOLL1;
+ 270   1          ucComMF522Buf[1] = 0x20;
+ 271   1          status = PcdComMF522(PCD_TRANSCEIVE,ucComMF522Buf,2,ucComMF522Buf,&unLen);
+ 272   1      
+ 273   1          if (status == MI_OK)
+ 274   1                      {
+ 275   2                              for (i=0; i<4; i++)
+ 276   2                              {   
+ 277   3                                      *(pSnr+i)  = ucComMF522Buf[i];
+ 278   3                                      snr_check ^= ucComMF522Buf[i];
+ 279   3                              }
+ 280   2                              if (snr_check != ucComMF522Buf[i])
+ 281   2                      {   
+ 282   3                                      status = MI_ERR;    
+ 283   3                              }
+ 284   2          }
+ 285   1          
+ 286   1          SetBitMask(CollReg,0x80);
+ 287   1          return status;
+ 288   1      }
+ 289          
+ 290          char PcdReset(void)//¸´Î»RC522
+ 291          {
+ 292   1              SET_RC522RST;
+ 293   1          delay_ns(10);
+ 294   1              CLR_RC522RST;
+ 295   1          delay_ns(10);
+ 296   1              SET_RC522RST;
+ 297   1          delay_ns(10);
+ 298   1        WriteRawRC(CommandReg,PCD_RESETPHASE);
+ 299   1          delay_ns(10);
+ 300   1          
+C51 COMPILER V9.60.0.0   RC522                                                             12/14/2021 09:13:14 PAGE 6   
+
+ 301   1        WriteRawRC(ModeReg,0x3D);            //ºÍMifare¿¨Í¨Ñ¶£¬CRC³õÊ¼Öµ0x6363
+ 302   1        WriteRawRC(TReloadRegL,30);           
+ 303   1        WriteRawRC(TReloadRegH,0);
+ 304   1        WriteRawRC(TModeReg,0x8D);
+ 305   1        WriteRawRC(TPrescalerReg,0x3E);
+ 306   1              WriteRawRC(TxAutoReg,0x40);//±ØÐëÒª
+ 307   1        return MI_OK;
+ 308   1      }
+ 309          
+ 310          char M500PcdConfigISOType(unsigned char type)//ÉèÖÃRC632µÄ¹¤×÷·½Ê½ 
+ 311          {
+ 312   1         if (type == 'A')                     //ISO14443_A
+ 313   1         { 
+ 314   2             ClearBitMask(Status2Reg,0x08);
+ 315   2             WriteRawRC(ModeReg,0x3D);//3F
+ 316   2             WriteRawRC(RxSelReg,0x86);//84
+ 317   2             WriteRawRC(RFCfgReg,0x7F);   //4F
+ 318   2                 WriteRawRC(TReloadRegL,30);//tmoLength);// TReloadVal = 'h6a =tmoLength(dec) 
+ 319   2                               WriteRawRC(TReloadRegH,0);
+ 320   2             WriteRawRC(TModeReg,0x8D);
+ 321   2                   WriteRawRC(TPrescalerReg,0x3E);
+ 322   2                   delay_ns(1000);
+ 323   2             PcdAntennaOn();
+ 324   2         }
+ 325   1         else
+ 326   1               { 
+ 327   2                              return -1; 
+ 328   2               }
+ 329   1         return MI_OK;
+ 330   1      }
+ 331           
+ 332          //Ã¿´ÎÆô¶¯»ò¹Ø±ÕÌìÏÕ·¢ÉäÖ®¼äÓ¦ÖÁÉÙÓÐ1msµÄ¼ä¸ô
+ 333          void PcdAntennaOn(void)//¿ªÆôÌìÏß 
+ 334          {
+ 335   1          unsigned char i;
+ 336   1          i = ReadRawRC(TxControlReg);
+ 337   1          if (!(i & 0x03))
+ 338   1          {
+ 339   2              SetBitMask(TxControlReg, 0x03);
+ 340   2          }
+ 341   1      }
+ 342          
+ 343          void PcdAntennaOff(void)//¹Ø±ÕÌìÏß
+ 344          {
+ 345   1              ClearBitMask(TxControlReg, 0x03);
+ 346   1      }
+ 347          
+ 348          void init_rc522(void)
+ 349          {
+ 350   1        PcdReset();
+ 351   1        PcdAntennaOff();  
+ 352   1        PcdAntennaOn();
+ 353   1        M500PcdConfigISOType( 'A' );
+ 354   1      }
+ 355          
+ 356          
+ 357          uchar IC_READ( void )   //¶Á¿¨
+ 358          {
+ 359   1              uchar i;
+ 360   1              if( PcdRequest( PICC_REQIDL, Card_type ) != MI_OK )    //Ñ°ÌìÏßÇøÄÚÎ´½øÈëÐÝÃß×´Ì¬µÄ¿¨£¬·µ»Ø¿¨Æ¬ÀàÐÍ 2×Ö½Ú
+ 361   1              {
+ 362   2                              return 0;
+C51 COMPILER V9.60.0.0   RC522                                                             12/14/2021 09:13:14 PAGE 7   
+
+ 363   2              }
+ 364   1              if( PcdAnticoll( Card_type ) != MI_OK )                  //·À³å×²£¬·µ»Ø¿¨µÄÐòÁÐºÅ 4×Ö½Ú
+ 365   1              {
+ 366   2                      return 0;
+ 367   2              }                                                                               
+ 368   1              for(i=0; i<4; i++) //¿¨IDºÅ×ª»¯³ÉASCII
+ 369   1              {
+ 370   2                              LCD_Data(Card_type[i],i);
+*** WARNING C206 IN LINE 370 OF rc522.c: 'LCD_Data': missing function-prototype
+*** ERROR C267 IN LINE 370 OF rc522.c: 'LCD_Data': requires ANSI-style prototype
+ 371   2              }
+ 372   1              return 1;
+ 373   1      }
+ 374          
+ 375          
+ 376          
+ 377          
+ 378          
+ 379          
+ 380          
+ 381          
+ 382          
+ 383          void LCD_Data(uchar LCDbyte,uchar i )
+ 384                  {
+*** ERROR C231 IN LINE 384 OF rc522.c: 'LCD_Data': redefinition
+ 385   1                       uchar bai,shi; //Ê®½øÖÆ
+ 386   1                       bai=LCDbyte/100;
+ 387   1                       shi=LCDbyte%100/10;
+ 388   1                       if(i==0)
+ 389   1                       {
+ 390   2                              ID_ASC[0]=bai+0x30;
+*** ERROR C202 IN LINE 390 OF rc522.c: 'ID_ASC': undefined identifier
+ 391   2                              ID_ASC[1]=shi+0x30;
+*** ERROR C202 IN LINE 391 OF rc522.c: 'ID_ASC': undefined identifier
+ 392   2                       }
+ 393   1                       if(i==1)
+ 394   1                       {
+ 395   2                               ID_ASC[2]=bai+0x30;
+*** ERROR C202 IN LINE 395 OF rc522.c: 'ID_ASC': undefined identifier
+ 396   2                               ID_ASC[3]=shi+0x30;
+*** ERROR C202 IN LINE 396 OF rc522.c: 'ID_ASC': undefined identifier
+ 397   2                       }
+ 398   1                       if(i==2)
+ 399   1                       {
+ 400   2                               ID_ASC[4]=bai+0x30;
+*** ERROR C202 IN LINE 400 OF rc522.c: 'ID_ASC': undefined identifier
+ 401   2                         ID_ASC[5]=shi+0x30;
+*** ERROR C202 IN LINE 401 OF rc522.c: 'ID_ASC': undefined identifier
+ 402   2                       }
+ 403   1                       if(i==3)
+ 404   1                       {
+ 405   2                                      ID_ASC[6]=bai+0x30;
+*** ERROR C202 IN LINE 405 OF rc522.c: 'ID_ASC': undefined identifier
+ 406   2                                      ID_ASC[7]=shi+0x30;
+*** ERROR C202 IN LINE 406 OF rc522.c: 'ID_ASC': undefined identifier
+ 407   2                       }
+ 408   1              }       
+*** ERROR C231 IN LINE 408 OF rc522.c: 'LCD_Data': redefinition
+ 409          
+ 410                  uchar IC_READ( void )   //¶Á¿¨
+ 411                  {
+ 412   1                      uchar i;
+C51 COMPILER V9.60.0.0   RC522                                                             12/14/2021 09:13:14 PAGE 8   
+
+ 413   1                      if( PcdRequest( PICC_REQIDL, Card_type ) != MI_OK )    //Ñ°ÌìÏßÇøÄÚÎ´½øÈëÐÝÃß×´Ì¬µÄ¿¨£¬·µ»Ø¿¨Æ¬ÀàÐÍ 2×Ö½
+             -Ú
+ 414   1                      {
+ 415   2                                      return 0;
+ 416   2                      }
+ 417   1                      if( PcdAnticoll( Card_type ) != MI_OK )                  //·À³å×²£¬·µ»Ø¿¨µÄÐòÁÐºÅ 4×Ö½Ú
+ 418   1                      {
+ 419   2                              return 0;
+ 420   2                      }                                                                               
+ 421   1                      for(i=0; i<4; i++) //¿¨IDºÅ×ª»¯³ÉASCII
+ 422   1                      {
+ 423   2                                      LCD_Data(Card_type[i],i);
+ 424   2                      }
+ 425   1                      return 1;
+ 426   1              }
+*** ERROR C237 IN LINE 426 OF rc522.c: 'IC_READ': function already has a body
+ 427          
+ 428          
+ 429                  void checkcard(void)    //Ð£Ñé¿¨
+ 430                  {
+ 431   1                      uchar j;
+ 432   1                      uchar IDAddress;
+ 433   1                      IC_READ();
+ 434   1                      for(idnum=0;idnum<6;idnum++)
+*** ERROR C202 IN LINE 434 OF rc522.c: 'idnum': undefined identifier
+ 435   1                      {
+ 436   2                              IDAddress= numaddress[idnum];
+*** ERROR C202 IN LINE 436 OF rc522.c: 'idnum': undefined identifier
+ 437   2                              for(j=0;j<8;j++)
+ 438   2                              {
+ 439   3                                      IDn[j]= x24c02_read(IDAddress);
+*** ERROR C202 IN LINE 439 OF rc522.c: 'IDn': undefined identifier
+ 440   3                                      delayms(10);
+ 441   3                                      IDAddress++;
+ 442   3                              }
+ 443   2                              if( (ID_ASC[0]==IDn[0])&&(ID_ASC[1]==IDn[1])&&(ID_ASC[2]==IDn[2])&&(ID_ASC[3]==IDn[3])&&(ID_ASC[4]==IDn
+             -[4])&&(ID_ASC[5]==IDn[5])&&(ID_ASC[6]==IDn[6])&&(ID_ASC[7]==IDn[7]) )
+ 444   2                                break;
+ 445   2                      }
+ 446   1                      if(idnum<6) flag_id=1;
+ 447   1                      else flag_id=0; 
+ 448   1              }
+ 449          
+ 450                  void shuaka(void)       //Ë¢¿¨
+ 451                  {
+ 452   1                      if(IC_READ()==1)
+ 453   1                      {
+ 454   2                              checkcard();    
+ 455   2                              if(flag_id==1)//Ë¢¿¨É¨Ãè
+ 456   2                              {
+ 457   3                                      flag_id=0;
+ 458   3                                      LcmClearTXT();
+ 459   3                                      WriteCommand(0x89);
+ 460   3                                      WriteCommand(0x8B);
+ 461   3                                      PutStr(1,2,"ÃÅÒÑ´ò¿ª");
+ 462   3                                      jidianqi=0;
+ 463   3                                      PutStr(2,0,"¿¨ºÅ£º");
+ 464   3                                      WriteCommand(0x8B);
+ 465   3                                      WriteData(ID_ASC[0]);
+ 466   3                                      WriteData(ID_ASC[1]);
+ 467   3                                      WriteData(ID_ASC[2]);
+ 468   3                                      WriteData(ID_ASC[3]);
+C51 COMPILER V9.60.0.0   RC522                                                             12/14/2021 09:13:14 PAGE 9   
+
+ 469   3                                      WriteData(ID_ASC[4]);
+ 470   3                                      WriteData(ID_ASC[5]);
+ 471   3                                      WriteData(ID_ASC[6]);
+ 472   3                                      WriteData(ID_ASC[7]);
+ 473   3                                      delay(2500); 
+ 474   3                                      jidianqi=1;     
+ 475   3                                      delay(1000);
+ 476   3                                      LcmClearTXT();
+ 477   3                                      PutStr(0,0,"    »¶Ó­Ê¹ÓÃ    ");
+ 478   3                                      PutStr(1,0,"  ¶à¹¦ÄÜÃÅ½ûËø  ");
+ 479   3                                      PutStr(2,0,"  ÇëÊäÈëÃÜÂë£º  ");
+ 480   3                              }
+ 481   2                              else
+ 482   2                              {
+ 483   3                                      LcmClearTXT();
+ 484   3                                      PutStr(1,2,"¿¨Î´×¢²á");
+ 485   3                                      PutStr(2,0,"¿¨ºÅ£º");
+ 486   3                                      WriteCommand(0x8B);
+ 487   3                                      WriteData(ID_ASC[0]);
+ 488   3                                      WriteData(ID_ASC[1]);
+ 489   3                                      WriteData(ID_ASC[2]);
+ 490   3                                      WriteData(ID_ASC[3]);
+ 491   3                                      WriteData(ID_ASC[4]);
+ 492   3                                      WriteData(ID_ASC[5]);
+ 493   3                                      WriteData(ID_ASC[6]);
+ 494   3                                      WriteData(ID_ASC[7]);
+ 495   3                                      beep=0;
+ 496   3                                      delay(300);
+ 497   3                                      beep=1;
+ 498   3                                      delay(3000);
+ 499   3                                      LcmClearTXT();
+ 500   3                                      PutStr(0,0,"    »¶Ó­Ê¹ÓÃ    ");
+ 501   3                                      PutStr(1,0,"  ¶à¹¦ÄÜÃÅ½ûËø  ");
+ 502   3                                      PutStr(2,0,"  ÇëÊäÈëÃÜÂë£º  ");
+ 503   3                              }
+ 504   2                      }
+ 505   1              }
+ 506          
+ 507                  void kapianguanli(void) //¿¨Æ¬¹ÜÀí
+ 508                  {
+ 509   1                      uchar numID[6]={0,1,2,3,4,5},i=0,k;
+ 510   1                      uchar j,temp00;
+ 511   1                      LcmClearTXT();
+ 512   1                      PutStr(0,2,"ÇëË¢¿¨");
+ 513   1                      KeyDeal(Keycan());
+ 514   1                      while( Key!=tuichu )
+ 515   1                      {
+ 516   2                              WriteCommand(0x89);
+ 517   2                              WriteData('I');
+ 518   2                              WriteData('D');
+ 519   2                              WriteData(0X30+numID[i]);
+ 520   2                              WriteData(':');
+ 521   2                              
+ 522   2                              IC_READ();
+ 523   2                              Key=Keycan();
+ 524   2                        KeyDeal(Key);
+ 525   2                              temp00=numaddress[i];
+ 526   2                              for(k=0;k<8;k++)
+ 527   2                              {
+ 528   3                                      IDn[k]= x24c02_read(temp00);
+ 529   3                                      delayms(10);
+ 530   3                                      temp00++;
+C51 COMPILER V9.60.0.0   RC522                                                             12/14/2021 09:13:14 PAGE 10  
+
+ 531   3                              }
+ 532   2                              temp00=numaddress[i];
+ 533   2                              if((IDn[0]==0x30)&&(IDn[1]==0x30)&&(IDn[2]==0x30)&&(IDn[3]==0x30)&&(IDn[4]==0x30)&&(IDn[5]==0x30)&&(IDn
+             -[6]==0x30)&&(IDn[7]==0x30))
+ 534   2                              {
+ 535   3                                      if(IC_READ()==1)
+ 536   3                                      {
+ 537   4                                        WriteCommand(0x8B);
+ 538   4                                              WriteData(ID_ASC[0]);
+ 539   4                                              WriteData(ID_ASC[1]);
+ 540   4                                              WriteData(ID_ASC[2]);
+ 541   4                                              WriteData(ID_ASC[3]);
+ 542   4                                              WriteData(ID_ASC[4]);
+ 543   4                                              WriteData(ID_ASC[5]);
+ 544   4                                              WriteData(ID_ASC[6]);
+ 545   4                                              WriteData(ID_ASC[7]);
+ 546   4                                      }
+ 547   3                                      else
+ 548   3                                      {
+ 549   4                                              WriteCommand(0x8B);
+ 550   4                                              WriteData(' ');
+ 551   4                                              WriteData(' ');
+ 552   4                                              WriteData(' ');
+ 553   4                                              WriteData(' ');
+ 554   4                                              WriteData(' ');
+ 555   4                                              WriteData(' ');
+ 556   4                                              WriteData(' ');
+ 557   4                                              WriteData(' ');
+ 558   4                                      }
+ 559   3                              }                       
+ 560   2                              else
+ 561   2                              {
+ 562   3                                      WriteCommand(0x8B);
+ 563   3                                      WriteData(IDn[0]);
+ 564   3                                      WriteData(IDn[1]);
+ 565   3                                      WriteData(IDn[2]);
+ 566   3                                      WriteData(IDn[3]);
+ 567   3                                      WriteData(IDn[4]);
+ 568   3                                      WriteData(IDn[5]);
+ 569   3                                      WriteData(IDn[6]);
+ 570   3                                      WriteData(IDn[7]);      
+ 571   3                              }
+ 572   2                              if(Key==0x82)   //´æ´¢¿¨
+ 573   2                              {
+ 574   3                                       IC_READ();
+ 575   3                                       if(IC_READ()==1)
+ 576   3                                       {
+ 577   4                                               checkcard();
+ 578   4                                               if(flag_id==1)
+ 579   4                                               {       
+ 580   5                                                       flag_id=0;
+ 581   5                                                       LcmClearTXT();
+ 582   5                                                       PutStr(0,2,"¿¨ÒÑ×¢²á");
+ 583   5                                                       PutStr(1,2,"Çë»»¿¨Æ¬");
+ 584   5                                                       PutStr(2,1,"°´ÈÎÒâ¼ü¼ÌÐø");
+ 585   5                                                       while(Keycan()==0);
+ 586   5                                                       LcmClearTXT();
+ 587   5                                                       PutStr(0,2,"ÇëË¢¿¨");
+ 588   5                                               }
+ 589   4                                               else
+ 590   4                                               {
+ 591   5                                                      for(j=0;j<8;j++)
+C51 COMPILER V9.60.0.0   RC522                                                             12/14/2021 09:13:14 PAGE 11  
+
+ 592   5                                                       {
+ 593   6                                                               x24c02_write(temp00,ID_ASC[j]);
+ 594   6                                                               delayms(10);
+ 595   6                                                               temp00++;
+ 596   6                                                       }
+ 597   5                                                       LcmClearTXT();
+ 598   5                                                       PutStr(0,2,"×¢²á³É¹¦");
+ 599   5                                                       PutStr(1,1,"°´ÈÎÒâ¼ü¼ÌÐø");
+ 600   5                                                       while(Keycan()==0);
+ 601   5                                                       LcmClearTXT();
+ 602   5                                                       PutStr(0,2,"ÇëË¢¿¨");
+ 603   5                                               }
+ 604   4                                       }
+ 605   3                              }
+ 606   2                              if(Key==0x84)   //É¾³ý¿¨
+ 607   2                              {
+ 608   3                                       if((IDn[0]==0x30)&&(IDn[1]==0x30)&&(IDn[2]==0x30)&&(IDn[3]==0x30)&&(IDn[4]==0x30)&&(IDn[5]==0x30)&&(I
+             -Dn[6]==0x30)&&(IDn[7]==0x30))
+ 609   3                                       {
+ 610   4                                               LcmClearTXT();
+ 611   4                                               PutStr(1,2,"Î´´æ´¢¿¨");
+ 612   4                                               PutStr(2,1,"°´ÈÎÒâ¼ü¼ÌÐø");
+ 613   4                                               while(Keycan()==0);
+ 614   4                                               LcmClearTXT();
+ 615   4                                               PutStr(0,2,"ÇëË¢¿¨");
+ 616   4                                       }
+ 617   3                                       else
+ 618   3                                      {
+ 619   4                                              for(j=0;j<8;j++)
+ 620   4                                               {
+ 621   5                                                       IDn[j]=0;
+ 622   5                                                       x24c02_write(temp00,IDn[j]+0x30);
+ 623   5                                                       delayms(10);
+ 624   5                                                       temp00++;
+ 625   5                                               }
+ 626   4                                               delayms(50);
+ 627   4                                               LcmClearTXT();
+ 628   4                                               PutStr(0,2,"É¾È¥³É¹¦");
+ 629   4                                               PutStr(1,1,"°´ÈÎÒâ¼ü¼ÌÐø");
+ 630   4                                               while(Keycan()==0);
+ 631   4                                               LcmClearTXT();
+ 632   4                                               PutStr(0,2,"ÇëË¢¿¨");
+ 633   4                                       }      
+ 634   3                              }
+ 635   2                              if(Key==0x81)   //¿¨ÐòºÅÇÐ»»
+ 636   2                              {
+ 637   3                                      i++;
+ 638   3                              }
+ 639   2                              if(i==6)
+ 640   2                              {
+ 641   3                                      i=0;
+ 642   3                              }
+ 643   2                      
+ 644   2                      }
+ 645   1              }
+ 646          
+ 647                  
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  15 ERROR(S)

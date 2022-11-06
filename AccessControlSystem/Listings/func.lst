@@ -1,0 +1,201 @@
+C51 COMPILER V9.60.0.0   FUNC                                                              12/24/2021 12:27:58 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE FUNC
+OBJECT MODULE PLACED IN .\Objects\func.obj
+COMPILER INVOKED BY: D:\Keil5\MDK\C51\BIN\C51.EXE func.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listi
+                    -ngs\func.lst) OBJECT(.\Objects\func.obj)
+
+line level    source
+
+   1          #include "delay.h"
+   2          #include "key.h"
+   3          #include "beep.h"
+   4          #include "1602.h"
+   5          #include "uart.h"
+   6          #include "user.h"
+   7          #include "func.h"
+   8          extern short lastkey;
+   9          #define uchar unsigned char
+  10          #define uint unsigned int 
+  11          extern login;
+  12          extern root[6];
+  13          extern usercode[3][8];
+  14          extern box[6];
+  15          
+  16          
+  17          //def                                                   11&12:backspace  
+  18          //                                                                      13&14:quit  
+  19          //                                                                      15&16：enter
+  20          short trans(int lastkey)
+  21          {
+  22   1              if (lastkey<10 && lastkey>0)
+  23   1                      return 1;//密码比对模式
+  24   1              else if (lastkey>14 &&lastkey<16)
+  25   1                      return 2;//设置
+  26   1              else if  (lastkey>12 &&lastkey<15)
+  27   1                      return 9;//quit
+  28   1              else
+  29   1                      return -1;
+  30   1      }
+  31          
+  32          
+  33          int pwdcheck(bit r)     // -1:error  0:wrong;  1:su;  2:user etc...  seg:   r:only root
+  34          {       
+  35   1              int i;
+  36   1              int j=0;
+  37   1              int flag=-1;
+  38   1      
+  39   1              for(i=0;i<6;i++)
+  40   1              {
+  41   2                      box[i]=waitkey(0); 
+  42   2                      delay100(1);
+  43   2      
+  44   2                      while(box[i]>9 || box[i]<0)     //非正常输入
+  45   2                      {       
+  46   3                              
+  47   3                              if(box[i]==11||box[i]==12){
+  48   4      
+  49   4                                      if(i<=0)
+  50   4                                      {       
+  51   5                                              i=0;
+  52   5                                              box[i]=waitkey(0);
+  53   5                                              DisplayOneChar(8+i,1,':');
+  54   5                                      }
+C51 COMPILER V9.60.0.0   FUNC                                                              12/24/2021 12:27:58 PAGE 2   
+
+  55   4                                      else{
+  56   5                                              i--;
+  57   5                                              
+  58   5                                              DisplayOneChar(9+i,1,'*');
+  59   5                                      }
+  60   4                              }
+  61   3                              if(box[i]==13||box[i]==14){return -1;}
+  62   3                              
+  63   3                              box[i]=waitkey(0);
+  64   3                      }
+  65   2                      DisplayOneChar(9+i,1,box[i]+0x30);//8&16reg
+  66   2      
+  67   2                      if(box[i]!=root[i])
+  68   2                      {
+  69   3                              flag=0;
+  70   3                      }
+  71   2                      
+  72   2              }
+  73   1      
+  74   1              if (flag==-1)
+  75   1              {
+  76   2                      flag=1;
+  77   2                      return flag;
+  78   2              }
+  79   1              if(!r){return 0;}
+  80   1              else if(flag==0)//开始用户匹配
+  81   1              {       
+  82   2                      int u;
+  83   2                      Send_Byte(usercode[0][7]);Send_Byte(usercode[1][7]);Send_Byte(usercode[2][7]);
+  84   2                      
+  85   2                      for(j=0;j<3;j++)
+  86   2                      {
+  87   3                              if(usercode[j][7]==1)
+  88   3                              {
+  89   4                                      
+  90   4                                      flag=-1;
+  91   4                                      u=usercode[j][6];
+  92   4                                      Send_Byte(usercode[j][6]);
+  93   4                                      for(i=0;i<6;i++)
+  94   4                                      {
+  95   5                                              
+  96   5                                              Send_Byte(box[i]);
+  97   5                                              Send_Byte(usercode[j][i]);
+  98   5                                              
+  99   5                                              if(box[i]!=usercode[j][i]){flag=0;}
+ 100   5                                      }
+ 101   4                                      if(flag==-1){flag=u;return flag;}  //返回值有问题 和外部没有建立联系 记得调试 //done
+ 102   4                              }
+ 103   3                              
+ 104   3                      }
+ 105   2                      
+ 106   2              }
+ 107   1              lastkey=-1;
+ 108   1              return 0;//
+ 109   1      }
+ 110          
+ 111          
+ 112          void chgpwd()
+ 113          {       
+ 114   1      
+ 115   1              int i;
+ 116   1              int tmp;
+C51 COMPILER V9.60.0.0   FUNC                                                              12/24/2021 12:27:58 PAGE 3   
+
+ 117   1              int usr=0;
+ 118   1              lastkey=-1;
+ 119   1      //      Send_Byte(login);
+ 120   1              if(login==1)
+ 121   1              {
+ 122   2                      LCD_write_line(1,"    CHOOSE  USERS   ");
+ 123   2                      LCD_write_line(2,"     1.[ROOT]       ");
+ 124   2                      LCD_write_line(3,"    [2] [3] [4]     ");
+ 125   2                      LCD_write_line(4,"                    ");
+ 126   2              
+ 127   2                      while(1){
+ 128   3                              waitkey(0);
+ 129   3                              if(lastkey==13 ||lastkey==14){mainpage();break;}
+ 130   3                              if(lastkey>0 &&lastkey<5){usr=lastkey;break;}
+ 131   3                      }
+ 132   2              }
+ 133   1              else
+ 134   1              {
+ 135   2                      usr=login;
+ 136   2              }
+ 137   1              LCD_write_line(1,"   INPUT NEW CODE   ");
+ 138   1              LCD_write_line(2,"Password: ******    ");
+ 139   1              LCD_write_line(3,"                    ");
+ 140   1              LCD_write_line(4,"                    ");
+ 141   1              for(i=0;i<6;i++)
+ 142   1              {       
+ 143   2                      Send_Byte(usr);
+ 144   2                      Send_Byte(login);
+ 145   2                      tmp=waitkey(0);
+ 146   2                      delay100(1);
+ 147   2                      while(tmp>=11)
+ 148   2                      {
+ 149   3                              bee(1);
+ 150   3                              delay100(1);
+ 151   3                              tmp=waitkey(0);
+ 152   3                      }
+ 153   2                      box[i]=tmp;
+ 154   2                      if(usr==1)
+ 155   2                      {
+ 156   3                              root[i]=box[i];
+ 157   3                      }
+ 158   2                      else{
+ 159   3                      
+ 160   3                              usercode[usr-2][i]=box[i];
+ 161   3                              usercode[usr-2][7]=1;
+ 162   3                      }
+ 163   2                      
+ 164   2                      DisplayOneChar(10+i,1,box[i]+0x30);//8&16reg
+ 165   2      
+ 166   2              }
+ 167   1      
+ 168   1              
+ 169   1              
+ 170   1      }
+ 171          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1510    ----
+   CONSTANT SIZE    =    126    ----
+   XDATA SIZE       =   ----      14
+   PDATA SIZE       =   ----    ----
+C51 COMPILER V9.60.0.0   FUNC                                                              12/24/2021 12:27:58 PAGE 4   
+
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

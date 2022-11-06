@@ -1,0 +1,96 @@
+C51 COMPILER V9.60.0.0   TIMER0                                                            12/24/2021 12:27:59 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE TIMER0
+OBJECT MODULE PLACED IN .\Objects\timer0.obj
+COMPILER INVOKED BY: D:\Keil5\MDK\C51\BIN\C51.EXE timer0.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Lis
+                    -tings\timer0.lst) OBJECT(.\Objects\timer0.obj)
+
+line level    source
+
+   1          #include <STC12C5A60S2.H>
+   2          #include "servo.h"
+   3          #include "beep.h"
+   4          #include "timer0.h"
+   5          #include "1602.h"
+   6          #define uchar unsigned char
+   7          #define uint unsigned int 
+   8                  
+   9          uint servo_period=0,servo_val=0;second_val=0,minute_val=0;
+  10          extern bit homepage;
+  11          bit time_flag=0;
+  12          
+  13          void Timer0Init(void)           //100微秒@11.0592MHz
+  14          {
+  15   1              AUXR |= 0x80;           //定时器时钟1T模式
+  16   1              TMOD &= 0xF0;           //设置定时器模式
+  17   1              TMOD |= 0x01;   //16noreload
+  18   1              TL0 = 0xAE;             //设置定时初始值
+  19   1              TH0 = 0xFB;             //设置定时初始值
+  20   1              TF0 = 0;                //清除TF0标志.
+  21   1              ET0=1;
+  22   1              TR0 = 1;                //定时器0开始计时
+  23   1              EA=1;
+  24   1      }
+  25          
+  26          
+  27          
+  28          
+  29          void timer0(void) interrupt 1 using 1
+  30          {
+  31   1      
+  32   1              if(second_val==10000){
+  33   2                      minute_val++;
+  34   2                      second_val=0;
+  35   2      
+  36   2      
+  37   2      
+  38   2              }
+  39   1              if(minute_val==55)
+  40   1              {
+  41   2                      
+  42   2                      minute_val=0;
+  43   2                      time_flag=1;  //1:up to date
+  44   2      
+  45   2              }
+  46   1      
+  47   1              second_val++;
+  48   1              servo_period++;
+  49   1              if(servo_period==200)
+  50   1              {
+  51   2                      servo_period=0;
+  52   2              }
+  53   1              if(servo_period<=servo_val)
+  54   1              {
+C51 COMPILER V9.60.0.0   TIMER0                                                            12/24/2021 12:27:59 PAGE 2   
+
+  55   2                      
+  56   2                      ServoIO =1;
+  57   2              }
+  58   1              else if(servo_period>servo_val)
+  59   1              {
+  60   2      
+  61   2                      ServoIO =0;
+  62   2              }
+  63   1      
+  64   1              
+  65   1              TL0 = 0xAE;             //设置定时初始值
+  66   1              TH0 = 0xFB;             //设置定时初始值
+  67   1      
+  68   1      
+  69   1      
+  70   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    184    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =      8    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

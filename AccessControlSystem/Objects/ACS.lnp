@@ -1,0 +1,18 @@
+".\Objects\main.obj",
+".\Objects\1602.obj",
+".\Objects\beep.obj",
+".\Objects\delay.obj",
+".\Objects\func.obj",
+".\Objects\IIC.obj",
+".\Objects\uart.obj",
+".\Objects\user.obj",
+".\Objects\key.obj",
+".\Objects\ds1302.obj",
+".\Objects\BioSensor.obj",
+".\Objects\timer0.obj",
+".\Objects\eeprom.obj",
+".\Objects\servo.obj",
+".\Objects\int0.obj" 
+TO ".\Objects\ACS" 
+PRINT(".\Listings\ACS.m51") RAMSIZE(256) 
+CODE( 0X0000-0XEFFF )

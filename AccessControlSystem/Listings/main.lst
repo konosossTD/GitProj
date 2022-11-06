@@ -1,0 +1,287 @@
+C51 COMPILER V9.60.0.0   MAIN                                                              12/24/2021 12:27:58 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\Keil5\MDK\C51\BIN\C51.EXE main.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listi
+                    -ngs\main.lst) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "1602.h"
+   2          #include "delay.h"
+   3          #include "beep.h"
+   4          #include "uart.h"
+   5          #include "key.h"
+   6          #include "func.h"
+   7          #include "user.h"
+   8          #include "ds1302.h"
+   9          #include "BioSensor.h"
+  10          #include <STC12C5A60S2.H>
+  11          #include "rc522.h"
+  12          #include "eeprom.h"
+  13          #include "servo.h"
+  14          #include "timer0.h"
+  15          
+  16          #define uchar unsigned char
+  17          #define uint unsigned int 
+  18                  
+  19          //uchar Card_type[20];
+  20          
+  21          extern uint root[6]={5,5,4,8,9,4};      //su
+  22                                                                                                                          //us      column/       pwd[0-5]        [id]    [1/0(active/deactive)][三组指纹ID]
+  23          extern uint usercode[3][8]={
+  24                                                                  {1,1,1,1,1,1,2,0}, 
+  25                                                                  {2,2,2,2,2,2,3,0}, 
+  26                                                                  {3,3,3,3,3,3,4,0}};
+  27          extern uint box[6]={0,0,0,0,0,0};                                       //codebuffer                                                                                            
+  28          uchar flag='x';                                                                         //增删标志位
+  29          extern int lastkey=-1;//
+  30          bit homepage;
+  31          extern int login=0; //current user      只可被pwdcheck赋值
+  32          int usr;
+  33          uint i;
+  34          //def                                                           11&12:backspace  
+  35          //                                                                      13&14:quit  
+  36          //                                                                      15&16：enter
+  37          uchar byte=0x77;
+  38          void main(){
+  39   1      //————————————LCD,clock,uart,iic,fingerprint,keypadinition————————————//        
+  40   1      
+  41   1              beep();
+  42   1              eeprom_init();
+  43   1              Clock_Init();
+  44   1              Timer0Init();
+  45   1              Init_Lcd();
+  46   1              Uart_Init();
+  47   1              set_servo_value(0);
+  48   1      //      Clock_write_time(); 
+  49   1              mainpage();
+  50   1      
+  51   1              beeps(2);
+  52   1      
+  53   1      //——————————————————mainpage————————————————————————//
+  54   1              while(1)
+C51 COMPILER V9.60.0.0   MAIN                                                              12/24/2021 12:27:58 PAGE 2   
+
+  55   1              {       
+  56   2      
+  57   2                      
+  58   2                      homepage=1;
+  59   2                      lastkey=-1;
+  60   2                      if(waitkey(1)==77)      
+  61   2                      {
+  62   3                              lastkey=-1;
+  63   3                              continue;
+  64   3                      }
+  65   2      //              else if(lastkey==0)
+  66   2      //              {
+  67   2      //                      PCON|=0x02;
+  68   2      //                      lastkey=-1;
+  69   2      
+  70   2      //              }
+  71   2                      
+  72   2                      
+  73   2                      
+  74   2      //              rfidunlock扫描
+  75   2      //              指纹unlock扫描
+  76   2      //              键盘扫描
+  77   2      
+  78   2      //              waitforaccess(buffer);
+  79   2      //              Send_Byte('s');
+  80   2      //              Send_Str("\n");
+  81   2      //              Send_Byte(root[i]);
+  82   2                      switch(trans(lastkey))
+  83   2                      {
+  84   3                              
+  85   3                              case 1://口令模式
+  86   3      
+  87   3                                      password(); //lcdupdate
+  88   3                                      
+  89   3                                      login=pwdcheck(1);
+  90   3                                      while(login==0)
+  91   3                                      {       bee(1);
+  92   4                                              LCD_write_line(1,"--------WRONG-------");
+  93   4                                              LCD_write_line(2,"PassWord:******     ");
+  94   4                                              login=pwdcheck(1);
+  95   4                                      }
+  96   3                                      if(login>0) //判断用户(返回)
+  97   3                                      {       
+  98   4                                              
+  99   4                                              beep();
+ 100   4                                              LCD_write_line(1,"    Welcome NO. !   ");
+ 101   4                                              DisplayOneChar(15, 0,login+'0');//正确
+ 102   4                                              set_servo_value(13);
+ 103   4                                              delay300(2);
+ 104   4                                              set_servo_value(0);
+ 105   4                                              beeps(6);
+ 106   4      
+ 107   4                                              
+ 108   4                                      }
+ 109   3                                      else
+ 110   3                                      {
+ 111   4                                              bee(1);//错误                                   
+ 112   4                                      }
+ 113   3                                      
+ 114   3                                      mainpage();
+ 115   3                                      break;
+ 116   3                              case 2://15&16 设置
+C51 COMPILER V9.60.0.0   MAIN                                                              12/24/2021 12:27:58 PAGE 3   
+
+ 117   3                                      password();
+ 118   3                                      login=pwdcheck(1);
+ 119   3                                      if(login<1){bee(1);mainpage();break;}
+ 120   3                                      menu();//验证类型  密码指纹读卡器
+ 121   3                                      lastkey=-1;
+ 122   3                                      while(1)
+ 123   3                                      {
+ 124   4                                              lastkey=waitkey(0);
+ 125   4                                              delay50(1);
+ 126   4                                              if(lastkey==13 ||lastkey==14){break;}
+ 127   4                                              if(lastkey==1 ||lastkey==2||lastkey==3){break;}
+ 128   4                                      }
+ 129   3                                      
+ 130   3                                      
+ 131   3                                      flag='x'; 
+ 132   3                                      if(lastkey==13 ||lastkey==14){mainpage();break;}
+ 133   3                                      switch(lastkey)
+ 134   3                                      {
+ 135   4                                              case 1:
+ 136   4      //                                              settings();
+ 137   4                                                      flag='P';//assword
+ 138   4                                                      break;
+ 139   4                                              case 2:
+ 140   4      //                                              settings();
+ 141   4                                                      flag='F';//ingerprint
+ 142   4                                                      break;
+ 143   4                                              case 3:
+ 144   4      //                                              settings();
+ 145   4                                                      flag='C';//ard
+ 146   4                                                      break;
+ 147   4                                      }
+ 148   3                                      settings();
+ 149   3                                      delay50(1);
+ 150   3                                      while(1)
+ 151   3                                      {
+ 152   4                                              lastkey=waitkey(0);
+ 153   4                                              delay1(20);
+ 154   4                                              if(lastkey==13 ||lastkey==14){break;}
+ 155   4                                              if(lastkey==1 ||lastkey==2){break;}
+ 156   4                                      }
+ 157   3                                      if(lastkey==13 ||lastkey==14){flag='x';mainpage();break;}
+ 158   3                                      switch(flag)
+ 159   3                                      {
+ 160   4                                              case 'P':
+ 161   4                                                      if(lastkey==1)                                  //-密码-CHANGE
+ 162   4                                                      {
+ 163   5                                                              chgpwd();
+ 164   5                                                              lastkey=-1;
+ 165   5                                                      }
+ 166   4                                                      else if(lastkey==2 &&login==1)                                  //-密码-Delete
+ 167   4                                                      {
+ 168   5                                                              
+ 169   5                                                              LCD_write_line(1,"  SELECT  USER  ID ");
+ 170   5                                                              LCD_write_line(2,"   [2]  [3]  [4]   ");
+ 171   5                                                              usr=waitkey(0);
+ 172   5                                                              if(usr==13||usr==14){break;}
+ 173   5                                                              while(usr>8||usr<2)
+ 174   5                                                              {
+ 175   6                                                                      bee(1);
+ 176   6                                                                      usr=waitkey(0);
+ 177   6                                                              }
+ 178   5                                                              if(usr>5||usr<=8)
+C51 COMPILER V9.60.0.0   MAIN                                                              12/24/2021 12:27:58 PAGE 4   
+
+ 179   5                                                              {
+ 180   6                                                                      usercode[usr-6][7]=1;
+ 181   6                                                              }
+ 182   5      //                                                      Send_Byte(usr);
+ 183   5                                                              usercode[usr-2][7]=0;
+ 184   5      //                                                      Send_Byte(usercode[usr][7]);
+ 185   5                                                              LCD_write_line(1,"------SUCCEED------");
+ 186   5                                                              LCD_write_line(2," NO.  ---- DELETED!");
+ 187   5                                                              DisplayOneChar(5,1,usr+'0');
+ 188   5                                                              LCD_write_line(3,"                   ");
+ 189   5                                                              LCD_write_line(4,"                   ");
+ 190   5                                                              bee(1);
+ 191   5                                                      }
+ 192   4                                                      mainpage();
+ 193   4                                                      break;
+ 194   4                                                              
+ 195   4                                              case 'F':
+ 196   4                                                      if(lastkey==1&&login==1)//add
+ 197   4                                                      {
+ 198   5      //                                              Send_Byte(login);
+ 199   5                                                      BIO_Add_Fingerprint(login);
+ 200   5                                                      
+ 201   5                                                      
+ 202   5                                                      }
+ 203   4                                                      else if(lastkey==2&&login==1)           //flag='x'
+ 204   4                                                      {
+ 205   5                                                              
+ 206   5                                                              BIO_Cmd_Delete_All_Model();
+ 207   5                                                              clear();
+ 208   5                                                              LCD_write_line(4,"  ALL DELETED!!!   ");
+ 209   5                                                              beeps(2);
+ 210   5                                                      
+ 211   5                                                      }
+ 212   4                                                      else
+ 213   4                                                      {
+ 214   5                                                              if(login!=1){
+ 215   6                                                              LCD_write_line(4,"   INVAILD USER!!! ");
+ 216   6                                                              bee(3);
+ 217   6                                                              mainpage();
+ 218   6                                                              }
+ 219   5                                                      
+ 220   5                                                      
+ 221   5                                                      break;
+ 222   5                                                      }
+ 223   4                                              case 'C':
+ 224   4                                                      if(lastkey==1)          //fid
+ 225   4                                                      {       beeps(3);
+ 226   5                                                              download();
+ 227   5                                                              mainpage();
+ 228   5                                                      }
+ 229   4                                                      else                    //flag='x'
+ 230   4                                                      {
+ 231   5                                                              
+ 232   5                                                              upload();
+ 233   5                                                              beeps(5);
+ 234   5                                                      
+ 235   5                                                      
+ 236   5                                                      }
+ 237   4                                                      
+ 238   4                                                      break;
+ 239   4                                      }
+ 240   3                                      lastkey=-1;
+C51 COMPILER V9.60.0.0   MAIN                                                              12/24/2021 12:27:58 PAGE 5   
+
+ 241   3      //                              date_update(0);
+ 242   3      //                              mainpage();
+ 243   3                                      break;
+ 244   3                              case 9:
+ 245   3      
+ 246   3                                      mainpage();
+ 247   3                                      date_update(0);
+ 248   3                                      bee(1);
+ 249   3                                      break;
+ 250   3              
+ 251   3                      }
+ 252   2      
+ 253   2              }
+ 254   1      }
+ 255          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1049    ----
+   CONSTANT SIZE    =    203    ----
+   XDATA SIZE       =     82    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

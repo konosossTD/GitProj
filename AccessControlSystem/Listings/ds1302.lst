@@ -1,0 +1,175 @@
+C51 COMPILER V9.60.0.0   DS1302                                                            12/24/2021 12:27:59 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE DS1302
+OBJECT MODULE PLACED IN .\Objects\ds1302.obj
+COMPILER INVOKED BY: D:\Keil5\MDK\C51\BIN\C51.EXE ds1302.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Lis
+                    -tings\ds1302.lst) OBJECT(.\Objects\ds1302.obj)
+
+line level    source
+
+   1          #include "ds1302.h"
+   2          #include "intrins.h"
+   3          
+   4          
+   5          
+   6          uchar time_buf[8] = {0x20,0x21,0x12,0x13,0x17,0x54,0x00,0x43};//初始时间
+   7          uchar realtime[14];//当前时间
+   8          uchar sec_buf=0;  //秒buf
+   9          uchar sec_flag=0; //秒标志位
+  10          uint time_buf_ten[8];
+  11          bit mute_flag=0;
+  12          
+  13          void Clock_Init(void) 
+  14          {
+  15   1              RST=0;                  //RST脚置低
+  16   1              SCK=0;                  //SCK脚置低
+  17   1      }
+  18          
+  19          void Clock_write(uchar addr, uchar d) 
+  20          {
+  21   1              uchar i;
+  22   1              RST=1;                                  //启动DS1302总线        
+  23   1              //写入目标地址：addr
+  24   1              addr = addr & 0xFE;   //最低位置零，寄存器0位为0时写，为1时读
+  25   1              for (i = 0; i < 8; i ++) {
+  26   2                      if (addr & 0x01) {
+  27   3                              DIO=1;
+  28   3                              }
+  29   2                      else {
+  30   3                              DIO=0;
+  31   3                              }
+  32   2                      SCK=1;      //产生时钟
+  33   2                      SCK=0;
+  34   2                      addr = addr >> 1;
+  35   2                      }       
+  36   1              //写入数据：d
+  37   1              for (i = 0; i < 8; i ++) {
+  38   2                      if (d & 0x01) {
+  39   3                              DIO=1;
+  40   3                              }
+  41   2                      else {
+  42   3                              DIO=0;
+  43   3                              }
+  44   2                      SCK=1;    //产生时钟
+  45   2                      SCK=0;
+  46   2                      d = d >> 1;
+  47   2                      }
+  48   1              RST=0;          //停止总线
+  49   1      }
+  50          
+  51          
+  52          uchar Clock_read(uchar addr) {
+  53   1      
+  54   1              uchar i,temp;   
+C51 COMPILER V9.60.0.0   DS1302                                                            12/24/2021 12:27:59 PAGE 2   
+
+  55   1              RST=1;                                  //启动DS1302总线
+  56   1      
+  57   1              //写入目标地址：addr
+  58   1              addr = addr | 0x01;    //最低位置高，寄存器0位为0时写，为1时读
+  59   1              for (i = 0; i < 8; i ++) {
+  60   2                      if (addr & 0x01) {
+  61   3                              DIO=1;
+  62   3                              }
+  63   2                      else {
+  64   3                              DIO=0;
+  65   3                              }
+  66   2      
+  67   2                      SCK=1;
+  68   2      
+  69   2                      SCK=0;
+  70   2      
+  71   2                      addr = addr >> 1;
+  72   2                      }       
+  73   1              //输出数据：temp
+  74   1              for (i = 0; i < 8; i ++) {
+  75   2                      temp = temp >> 1;
+  76   2                      if (DIO) {
+  77   3                              temp |= 0x80;
+  78   3                              }
+  79   2                      else {
+  80   3                              temp &= 0x7F;
+  81   3                              }
+  82   2      
+  83   2                      SCK=1;
+  84   2      
+  85   2                      SCK=0;
+  86   2                      }       
+  87   1      
+  88   1              RST=0;                                  //停止DS1302总线
+  89   1              return temp;
+  90   1      }
+  91          
+  92          void Clock_write_time(void) 
+  93          {
+  94   1              Clock_write(ds1302_control_add,0x00);                   //关闭写保护 
+  95   1              Clock_write(ds1302_sec_add,0x80);                               //暂停时钟 
+  96   1              Clock_write(ds1302_charger_add,0xa9);           //涓流充电 
+  97   1              Clock_write(ds1302_year_add,time_buf[1]);               //年 
+  98   1              Clock_write(ds1302_month_add,time_buf[2]);      //月 
+  99   1              Clock_write(ds1302_date_add,time_buf[3]);               //日 
+ 100   1              Clock_write(ds1302_hr_add,time_buf[4]);         //时 
+ 101   1              Clock_write(ds1302_min_add,time_buf[5]);                //分
+ 102   1              Clock_write(ds1302_sec_add,time_buf[6]);                //秒
+ 103   1              Clock_write(ds1302_day_add,time_buf[7]);                //周 
+ 104   1              Clock_write(ds1302_control_add,0x80);                   //打开写保护     
+ 105   1      }
+ 106          
+ 107          void Clock_read_time(void)  //读到buffer里
+ 108          {
+ 109   1      
+ 110   1              time_buf[1]=Clock_read(ds1302_year_add);                //年十位和个位 s
+ 111   1              time_buf[2]=Clock_read(ds1302_month_add);               //月十位和个位
+ 112   1              time_buf[3]=Clock_read(ds1302_date_add);                //日十位和个位
+ 113   1              time_buf[4]=Clock_read(ds1302_hr_add);                  //时十位和个位
+ 114   1              time_buf[5]=Clock_read(ds1302_min_add);                 //分十位和个位
+ 115   1              time_buf[6]=(Clock_read(ds1302_sec_add))&0x7f;//秒十位和个位，屏蔽秒的第7位，避免超出59
+ 116   1              time_buf[7]=Clock_read(ds1302_day_add);         //周
+C51 COMPILER V9.60.0.0   DS1302                                                            12/24/2021 12:27:59 PAGE 3   
+
+ 117   1              if(time_buf[4]>0x22 || time_buf[4]<0x07){mute_flag=1;}
+ 118   1              else{mute_flag=0;}
+ 119   1      }
+ 120          
+ 121          void separate()//
+ 122          {
+ 123   1              uint i=0;
+ 124   1              Clock_read_time();  //读取时间 
+ 125   1              realtime[0]=(time_buf[0]>>4);   //年千位
+ 126   1              realtime[1]=(time_buf[0]&0x0F); //年百位 
+ 127   1              realtime[2]=(time_buf[1]>>4);   //年十位
+ 128   1              realtime[3]=(time_buf[1]&0x0F); //年个位 
+ 129   1              realtime[4]=(time_buf[2]>>4);   //月十位
+ 130   1              realtime[5]=(time_buf[2]&0x0F); //月个位 
+ 131   1              realtime[6]=(time_buf[3]>>4);   //日十位
+ 132   1              realtime[7]=(time_buf[3]&0x0F); //日个位 
+ 133   1              realtime[8]=(time_buf[4]>>4);   //小十位
+ 134   1              realtime[9]=(time_buf[4]&0x0F); //小个位 
+ 135   1              realtime[10]=(time_buf[5]>>4);   //分十位
+ 136   1              realtime[11]=(time_buf[5]&0x0F); //分个位
+ 137   1              realtime[12]=(time_buf[6]>>4);   //秒十位
+ 138   1              realtime[13]=(time_buf[6]&0x0F); //秒个位   
+ 139   1      //      for(i=0;i<14;i++)
+ 140   1      //      {       
+ 141   1      //              Send_Byte(realtime[i]+'0');
+ 142   1      
+ 143   1      //      
+ 144   1      //      }
+ 145   1      }
+ 146          
+ 147          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    462    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =     40       2
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

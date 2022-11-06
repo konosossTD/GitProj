@@ -1,0 +1,391 @@
+
+连接器　版本8.7.7.211123
+Input Object File: E:\HT66\代码\HT66F2390_UART_1602\STARTUP1_L.OBJ
+Input Object File: E:\HT66\代码\HT66F2390_UART_1602\MAIN.OBJ
+Input Object File: E:\HT66\代码\HT66F2390_UART_1602\UART.OBJ
+Input Object File: E:\HT66\代码\HT66F2390_UART_1602\DELAY.OBJ
+Input Object File: E:\HT66\代码\HT66F2390_UART_1602\DHT11.OBJ
+Input Object File: E:\HT66\代码\HT66F2390_UART_1602\MQ.OBJ
+Input Object File: E:\HT66\代码\HT66F2390_UART_1602\DUOJI.OBJ
+Input Object File: E:\HT66\代码\HT66F2390_UART_1602\ESP.OBJ
+
+Input Library File: E:\HT66\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB
+Input Library File: E:\HT66\HT-IDE3000V8.x\LIB\v3_lmrmc.lib
+
+
+     Bank    Start     End      Length     Class    AvgIns    Name
+     00h     0000h     0001h    0002h      CODE               @code (E:\HT66\代码\HT66F2390_UART_1602\MAIN.OBJ)
+     00h     0002h     000ch    000bh      CODE               @crom (E:\HT66\代码\HT66F2390_UART_1602\MQ.OBJ)
+     00h     000dh     0015h    0009h      CODE               _DHT11_time_init (E:\HT66\代码\HT66F2390_UART_1602\DHT11.OBJ)
+     00h     0016h     0023h    000eh      CODE               _builtin_holtek_delay_isr00 (E:\HT66\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     0024h     0037h    0014h      CODE               _delay_ms (E:\HT66\代码\HT66F2390_UART_1602\DELAY.OBJ)
+     00h     0038h     003bh    0004h      CODE               __DELAY (E:\HT66\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     003ch     003fh    0004h      CODE               @UART0_code (E:\HT66\代码\HT66F2390_UART_1602\ESP.OBJ)
+     00h     0040h     007ch    003dh      CODE               @start (E:\HT66\代码\HT66F2390_UART_1602\MAIN.OBJ)
+     00h     007dh     0109h    008dh      CODE               _UART0 (E:\HT66\代码\HT66F2390_UART_1602\ESP.OBJ)
+     00h     010ah     0110h    0007h      CODE               @ROMDATA_BASE (E:\HT66\代码\HT66F2390_UART_1602\STARTUP1_L.OBJ)
+     00h     0194h     01d9h    0046h      CODE               @crom (E:\HT66\代码\HT66F2390_UART_1602\ESP.OBJ)
+     00h     01dah     01e3h    000ah      CODE               __DELAYX (E:\HT66\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     01e4h     01ech    0009h      CODE               _send_char (E:\HT66\代码\HT66F2390_UART_1602\ESP.OBJ)
+     00h     01edh     01fch    0010h      CODE               _CROM2PROM (CROM2PROM)
+     00h     01fdh     022bh    002fh      CODE               _ESP8266_SendCmd (E:\HT66\代码\HT66F2390_UART_1602\ESP.OBJ)
+     00h     022ch     0272h    0047h      CODE               _ESP8266_ModeInit (E:\HT66\代码\HT66F2390_UART_1602\ESP.OBJ)
+     00h     0273h     0285h    0013h      CODE               _duoji_start2 (E:\HT66\代码\HT66F2390_UART_1602\DUOJI.OBJ)
+     00h     0286h     029bh    0016h      CODE               _duoji_start1 (E:\HT66\代码\HT66F2390_UART_1602\DUOJI.OBJ)
+     00h     029ch     02ach    0011h      CODE               _duoji_start0 (E:\HT66\代码\HT66F2390_UART_1602\DUOJI.OBJ)
+     00h     02adh     02bch    0010h      CODE               _esp8266_init (E:\HT66\代码\HT66F2390_UART_1602\ESP.OBJ)
+     00h     02bdh     02cch    0010h      CODE               _UART_SET (E:\HT66\代码\HT66F2390_UART_1602\UART.OBJ)
+     00h     02cdh     02deh    0012h      CODE               _main (E:\HT66\代码\HT66F2390_UART_1602\MAIN.OBJ)
+     00h     02dfh     02e7h    0009h      CODE               _UART_Send_Byte (E:\HT66\代码\HT66F2390_UART_1602\UART.OBJ)
+     00h     02e8h     0325h    003eh      CODE               _duoji2 (E:\HT66\代码\HT66F2390_UART_1602\DUOJI.OBJ)
+     00h     0326h     0359h    0034h      CODE               _duoji0 (E:\HT66\代码\HT66F2390_UART_1602\DUOJI.OBJ)
+     00h     035ah     0397h    003eh      CODE               _duoji1 (E:\HT66\代码\HT66F2390_UART_1602\DUOJI.OBJ)
+     00h     0398h     03c7h    0030h      CODE               _re_buff (E:\HT66\代码\HT66F2390_UART_1602\ESP.OBJ)
+     00h     0080h     0080h    0001h      DATA     0         @BITDATASEC (E:\HT66\代码\HT66F2390_UART_1602\STARTUP1_L.OBJ)
+     00h     0081h     0081h    0001h      DATA     39        @data_ra (E:\HT66\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     0082h     0082h    0001h      DATA     22        @data_ra3c (isr:ra~rh)
+     00h     0083h     0083h    0001h      DATA     6         @data_rb3c (isr:ra~rh)
+     00h     0084h     0084h    0001h      DATA     3         @data_rc3c (isr:ra~rh)
+     00h     0085h     0085h    0001h      DATA     2         @data_r13c (isr:ra~rh)
+     00h     0086h     0086h    0001h      DATA     2         @data_r23c (isr:ra~rh)
+     00h     008ch     008dh    0002h      DATA     5         @HCCINIT_u (E:\HT66\代码\HT66F2390_UART_1602\ESP.OBJ)
+     00h     008eh     008fh    0002h      DATA     5         @HCCINIT_data_count2 (E:\HT66\代码\HT66F2390_UART_1602\ESP.OBJ)
+     00h     0090h     0091h    0002h      DATA     0         @HCCINIT_time2_count (E:\HT66\代码\HT66F2390_UART_1602\DHT11.OBJ)
+     00h     0092h     0092h    0001h      DATA     0         @HCCINIT_Humid (E:\HT66\代码\HT66F2390_UART_1602\DHT11.OBJ)
+     00h     0093h     0093h    0001h      DATA     0         @HCCINIT_Temp (E:\HT66\代码\HT66F2390_UART_1602\DHT11.OBJ)
+     00h     0094h     0094h    0001h      DATA     2         @HCCINIT0_TH (E:\HT66\代码\HT66F2390_UART_1602\DHT11.OBJ)
+     00h     0095h     0095h    0001h      DATA     2         @HCCINIT0_RH (E:\HT66\代码\HT66F2390_UART_1602\DHT11.OBJ)
+     00h     0096h     0096h    0001h      DATA     2         @HCCINIT0_T_L (E:\HT66\代码\HT66F2390_UART_1602\DHT11.OBJ)
+     00h     0097h     0097h    0001h      DATA     2         @HCCINIT0_T_H (E:\HT66\代码\HT66F2390_UART_1602\DHT11.OBJ)
+     00h     0098h     0098h    0001h      DATA     2         @HCCINIT0_R_L (E:\HT66\代码\HT66F2390_UART_1602\DHT11.OBJ)
+     00h     0099h     0099h    0001h      DATA     2         @HCCINIT0_R_H (E:\HT66\代码\HT66F2390_UART_1602\DHT11.OBJ)
+     00h     009ah     00aah    0011h      DATA     1         @HCCINIT0_rec_dat (E:\HT66\代码\HT66F2390_UART_1602\DHT11.OBJ)
+     00h     00abh     00abh    0001h      DATA     1         @HCCINIT0_revise (E:\HT66\代码\HT66F2390_UART_1602\DHT11.OBJ)
+     00h     00ach     00ach    0001h      DATA     1         @HCCINIT0_TL (E:\HT66\代码\HT66F2390_UART_1602\DHT11.OBJ)
+     00h     00adh     00adh    0001h      DATA     1         @HCCINIT0_RL (E:\HT66\代码\HT66F2390_UART_1602\DHT11.OBJ)
+     00h     00aeh     00afh    0002h      DATA     1         @HCCINIT0_len0 (E:\HT66\代码\HT66F2390_UART_1602\ESP.OBJ)
+     00h     00b0h     00b1h    0002h      DATA     1         @HCCINIT0_len2 (E:\HT66\代码\HT66F2390_UART_1602\ESP.OBJ)
+     00h     00b2h     00b2h    0001h      DATA     0         @HCCINIT0_RCV_Data_Length (E:\HT66\代码\HT66F2390_UART_1602\UART.OBJ)
+     00h     00b3h     00b3h    0001h      DATA     0         @HCCINIT0_Data_Counter (E:\HT66\代码\HT66F2390_UART_1602\UART.OBJ)
+     00h     00b4h     00b4h    0001h      DATA     0         @HCCINIT0_Rcv_Time_Counter (E:\HT66\代码\HT66F2390_UART_1602\UART.OBJ)
+     00h     00b5h     00b6h    0002h      DATA     0         @HCCINIT0_a (E:\HT66\代码\HT66F2390_UART_1602\DHT11.OBJ)
+     00h     00b7h     00b7h    0001h      DATA     0         @HCCINIT0_i (E:\HT66\代码\HT66F2390_UART_1602\DHT11.OBJ)
+     00h     00b8h     00e9h    0032h      DATA     0         @HCCINIT0_RecBuf0 (E:\HT66\代码\HT66F2390_UART_1602\ESP.OBJ)
+     00h     00eah     00eah    0001h      DATA     0         @HCCINIT0_door (E:\HT66\代码\HT66F2390_UART_1602\ESP.OBJ)
+     00h     00ebh     00ebh    0001h      DATA     2         @data_r33c (isr:ra~rh)
+     00h     00ech     00ech    0001h      DATA     2         @data_r43c (isr:ra~rh)
+     00h     00edh     00edh    0001h      DATA     2         @data_r53c (isr:ra~rh)
+     00h     00eeh     00eeh    0001h      DATA     2         @data_r63c (isr:ra~rh)
+     00h     00efh     00efh    0001h      DATA     2         @data_r73c (isr:ra~rh)
+     01h     0080h     00b1h    0032h      DATA     0         @HCCINIT0_RecBuf2 (E:\HT66\代码\HT66F2390_UART_1602\ESP.OBJ)
+
+     Local Sections
+
+     Bank    Start     End      Length     Class    AvgIns    Name
+     00h     008ch     008ch    0000h      LOCAL    0         @dummy (E:\HT66\代码\HT66F2390_UART_1602\MAIN.OBJ)
+     00h     008ch     008ch    0000h      LOCAL    0         _main (E:\HT66\代码\HT66F2390_UART_1602\MAIN.OBJ)
+     00h     008ch     008ch    0000h      LOCAL    0         _UART_SET (E:\HT66\代码\HT66F2390_UART_1602\UART.OBJ)
+     00h     008ch     008ch    0000h      LOCAL    0         _esp8266_init (E:\HT66\代码\HT66F2390_UART_1602\ESP.OBJ)
+     00h     008ch     008ch    0000h      LOCAL    0         _duoji_start0 (E:\HT66\代码\HT66F2390_UART_1602\DUOJI.OBJ)
+     00h     008ch     008ch    0000h      LOCAL    0         _duoji_start1 (E:\HT66\代码\HT66F2390_UART_1602\DUOJI.OBJ)
+     00h     008ch     008ch    0000h      LOCAL    0         _duoji_start2 (E:\HT66\代码\HT66F2390_UART_1602\DUOJI.OBJ)
+     00h     0088h     0089h    0002h      LOCAL    13        _delay_ms (E:\HT66\代码\HT66F2390_UART_1602\DELAY.OBJ)
+     00h     0087h     0087h    0001h      LOCAL    2         _builtin_holtek_delay_isr00 (E:\HT66\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     008ch     008ch    0000h      LOCAL    0         _ESP8266_ModeInit (E:\HT66\代码\HT66F2390_UART_1602\ESP.OBJ)
+     00h     008ah     008bh    0002h      LOCAL    12        _ESP8266_SendCmd (E:\HT66\代码\HT66F2390_UART_1602\ESP.OBJ)
+     00h     0087h     0087h    0000h      LOCAL    0         _Crom2Prom (CROM2PROM)
+     00h     0087h     0087h    0001h      LOCAL    1         _send_char (E:\HT66\代码\HT66F2390_UART_1602\ESP.OBJ)
+     00h     0087h     0087h    0000h      LOCAL    0         __DELAY (E:\HT66\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     0087h     0087h    0000h      LOCAL    0         __DELAYX (E:\HT66\HT-IDE3000V8.x\LIB\LIBHOLTEKGCC.LIB)
+     00h     008ch     008ch    0000h      LOCAL    0         _DHT11_time_init (E:\HT66\代码\HT66F2390_UART_1602\DHT11.OBJ)
+     00h     008ch     008ch    0000h      LOCAL    0         @dummy60 (E:\HT66\代码\HT66F2390_UART_1602\ESP.OBJ)
+     00h     008ch     008ch    0000h      LOCAL    0         _UART0 (E:\HT66\代码\HT66F2390_UART_1602\ESP.OBJ)
+     00h     0087h     0089h    0003h      LOCAL    2         _re_buff (E:\HT66\代码\HT66F2390_UART_1602\ESP.OBJ)
+     00h     0087h     0087h    0001h      LOCAL    7         _duoji1 (E:\HT66\代码\HT66F2390_UART_1602\DUOJI.OBJ)
+     00h     0087h     0087h    0001h      LOCAL    7         _duoji0 (E:\HT66\代码\HT66F2390_UART_1602\DUOJI.OBJ)
+     00h     0087h     0087h    0001h      LOCAL    7         _duoji2 (E:\HT66\代码\HT66F2390_UART_1602\DUOJI.OBJ)
+     00h     0087h     0087h    0001h      LOCAL    1         _UART_Send_Byte (E:\HT66\代码\HT66F2390_UART_1602\UART.OBJ)
+
+     Public Symbols Information
+     Address            Public by Name
+     01eeh              _Crom2Prom
+     01edh              _Crom2PromNext
+     000dh              _DHT11_time_init
+     00b3h              _Data_Counter
+     022ch              _ESP8266_ModeInit
+     01fdh              _ESP8266_SendCmd
+     008ah              _ESP8266_SendCmd_2
+     0092h              _Humid
+     00b2h              _RCV_Data_Length
+     0080h[0]           _RECEIVE_Finish_Flag
+     0095h              _RH
+     00adh              _RL
+     0099h              _R_H
+     0098h              _R_L
+     00b4h              _Rcv_Time_Counter
+     00b8h              _RecBuf0
+     0180h              _RecBuf2
+     0094h              _TH
+     00ach              _TL
+     0097h              _T_H
+     0096h              _T_L
+     0093h              _Temp
+     007dh              _UART0
+     02bdh              _UART_SET
+     02dfh              _UART_Send_Byte
+     0039h              __DELAY0
+     0039h              __DELAY1
+     0038h              __DELAY2
+     0038h              __DELAY3
+     01ddh              __DELAYX0
+     01dch              __DELAYX1
+     01dch              __DELAYX2
+     01dbh              __DELAYX3
+     01dbh              __DELAYX4
+     01dah              __DELAYX5
+     01dah              __DELAYX6
+     0018h              __DELAYY0_isr00
+     0018h              __DELAYY1_isr00
+     0017h              __DELAYY2_isr00
+     0017h              __DELAYY3_isr00
+     0016h              __DELAYY4_isr00
+     0016h              __DELAYY5_isr00
+     00b5h              _a
+     008eh              _data_count2
+     0024h              _delay_ms
+     00eah              _door
+     0326h              _duoji0
+     035ah              _duoji1
+     02e8h              _duoji2
+     029ch              _duoji_start0
+     0286h              _duoji_start1
+     0273h              _duoji_start2
+     02adh              _esp8266_init
+     00b7h              _i
+     00aeh              _len0
+     00b0h              _len2
+     02cdh              _main
+     0398h              _re_buff
+     0087h              _re_buff_2
+     009ah              _rec_dat
+     00abh              _revise
+     01e4h              _send_char
+     0090h              _time2_count
+     008ch              _u
+     0085h              r13c
+     0086h              r23c
+     00ebh              r33c
+     00ech              r43c
+     00edh              r53c
+     00eeh              r63c
+     00efh              r73c
+     0081h              ra
+     0082h              ra3c
+     0083h              rb3c
+     0084h              rc3c
+     010ah              startup_value_1
+
+     Address            Public by Value
+     000dh              _DHT11_time_init
+     0016h              __DELAYY4_isr00
+     0016h              __DELAYY5_isr00
+     0017h              __DELAYY2_isr00
+     0017h              __DELAYY3_isr00
+     0018h              __DELAYY0_isr00
+     0018h              __DELAYY1_isr00
+     0024h              _delay_ms
+     0038h              __DELAY3
+     0038h              __DELAY2
+     0039h              __DELAY1
+     0039h              __DELAY0
+     007dh              _UART0
+     0081h              ra
+     0082h              ra3c
+     0083h              rb3c
+     0084h              rc3c
+     0085h              r13c
+     0086h              r23c
+     0087h              _re_buff_2
+     008ah              _ESP8266_SendCmd_2
+     008ch              _u
+     008eh              _data_count2
+     0090h              _time2_count
+     0092h              _Humid
+     0093h              _Temp
+     0094h              _TH
+     0095h              _RH
+     0096h              _T_L
+     0097h              _T_H
+     0098h              _R_L
+     0099h              _R_H
+     009ah              _rec_dat
+     00abh              _revise
+     00ach              _TL
+     00adh              _RL
+     00aeh              _len0
+     00b0h              _len2
+     00b2h              _RCV_Data_Length
+     00b3h              _Data_Counter
+     00b4h              _Rcv_Time_Counter
+     00b5h              _a
+     00b7h              _i
+     00b8h              _RecBuf0
+     00eah              _door
+     00ebh              r33c
+     00ech              r43c
+     00edh              r53c
+     00eeh              r63c
+     00efh              r73c
+     010ah              startup_value_1
+     0180h              _RecBuf2
+     01dah              __DELAYX5
+     01dah              __DELAYX6
+     01dbh              __DELAYX3
+     01dbh              __DELAYX4
+     01dch              __DELAYX1
+     01dch              __DELAYX2
+     01ddh              __DELAYX0
+     01e4h              _send_char
+     01edh              _Crom2PromNext
+     01eeh              _Crom2Prom
+     01fdh              _ESP8266_SendCmd
+     022ch              _ESP8266_ModeInit
+     0273h              _duoji_start2
+     0286h              _duoji_start1
+     029ch              _duoji_start0
+     02adh              _esp8266_init
+     02bdh              _UART_SET
+     02cdh              _main
+     02dfh              _UART_Send_Byte
+     02e8h              _duoji2
+     0326h              _duoji0
+     035ah              _duoji1
+     0398h              _re_buff
+     0080h[0]           _RECEIVE_Finish_Flag
+
+Warning(L3009) : 中断(3CH)的CMG与Main主函数CMG存在相同的子函数: _ESP8266_SendCmd
+Warning(L3009) : 中断(3CH)的CMG与Main主函数CMG存在相同的子函数: _send_char
+Warning(L3009) : 中断(3CH)的CMG与Main主函数CMG存在相同的子函数: __DELAY
+Warning(L3009) : 中断(3CH)的CMG与Main主函数CMG存在相同的子函数: _delay_ms
+
+ROM Usage Statistics
+    Bank      Size      Used     Percentage
+     00h       2000h     0345h    10%
+     01h       2000h     0000h    0%
+     02h       2000h     0000h    0%
+     03h       2000h     0000h    0%
+     04h       2000h     0000h    0%
+     05h       2000h     0000h    0%
+     06h       2000h     0000h    0%
+     07h       2000h     0000h    0%
+     Total     10000h     0345h    1%
+
+RAM Usage Statistics
+    Bank      Size      Used     Percentage
+     00h       0080h     0070h    87%
+     01h       0080h     0032h    39%
+     02h       0080h     0000h    0%
+     03h       0080h     0000h    0%
+     04h       0080h     0000h    0%
+     05h       0080h     0000h    0%
+     06h       0080h     0000h    0%
+     07h       0080h     0000h    0%
+     08h       0080h     0000h    0%
+     09h       0080h     0000h    0%
+     0ah       0080h     0000h    0%
+     0bh       0080h     0000h    0%
+     0ch       0080h     0000h    0%
+     0dh       0080h     0000h    0%
+     0eh       0080h     0000h    0%
+     0fh       0080h     0000h    0%
+     10h       0080h     0000h    0%
+     11h       0080h     0000h    0%
+     12h       0080h     0000h    0%
+     13h       0080h     0000h    0%
+     14h       0080h     0000h    0%
+     15h       0080h     0000h    0%
+     16h       0080h     0000h    0%
+     17h       0080h     0000h    0%
+     18h       0080h     0000h    0%
+     19h       0080h     0000h    0%
+     1ah       0080h     0000h    0%
+     1bh       0080h     0000h    0%
+     1ch       0080h     0000h    0%
+     1dh       0080h     0000h    0%
+     1eh       0080h     0000h    0%
+     1fh       0080h     0000h    0%
+     Total     1000h     00a2h    3%
+
+Use Stack Count
+_main: 4
+_UART_Send_buff: 1
+_DHT11_receive: 3
+_MQ_2: 3
+_UART0: 3
+
+Call Tree
+    @dummy
+        _main (0)
+            _UART_SET (1)
+            _esp8266_init (1)
+            _duoji_start0 (1)
+            _duoji_start1 (1)
+            _duoji_start2 (1)
+            _delay_ms (1)
+                _builtin_holtek_delay_isr00 (2)
+            _ESP8266_ModeInit (1)
+                _ESP8266_SendCmd (2)
+                    _Crom2Prom (3)
+                    _send_char (3)
+                    __DELAY (3)
+                    __DELAYX (3)
+                    _delay_ms (3)
+                        _builtin_holtek_delay_isr00 (4)
+                _delay_ms (2)
+                    _builtin_holtek_delay_isr00 (3)
+            _DHT11_time_init (1)
+    _UART_Send_buff
+        _UART_Send_Byte (0)
+        _Crom2Prom (0)
+    _DHT11_receive
+        _DHT11_Rst (0)
+            _delay_ms (1)
+                _builtin_holtek_delay_isr00 (2)
+            __DELAYX (1)
+        __DELAYX (0)
+        _DHT11_rec_byte (0)
+            __DELAYX (1)
+        _builtin_holtek_divmodqi4_isr00 (0)
+    _MQ_2
+        _delay_ms (0)
+            _builtin_holtek_delay_isr00 (1)
+        __DELAY (0)
+        _ESP8266_SendCmd (0)
+            _Crom2Prom (1)
+            _send_char (1)
+            __DELAY (1)
+            __DELAYX (1)
+            _delay_ms (1)
+                _builtin_holtek_delay_isr00 (2)
+        _send_char (0)
+        _duoji1 (0)
+    @dummy60
+        _UART0 (0)
+            _re_buff (1)
+            _ESP8266_SendCmd (1)
+                _Crom2Prom (2)
+                _send_char (2)
+                __DELAY (2)
+                __DELAYX (2)
+                _delay_ms (2)
+                    _builtin_holtek_delay_isr00 (3)
+            _duoji1 (1)
+            _Crom2Prom (1)
+            _send_char (1)
+            _duoji0 (1)
+            _duoji2 (1)
+            _UART_Send_Byte (1)
+
+HLINK : 程序的开始执行点在程序段'@code'（地址0）。定义在'E:\HT66\代码\HT66F2390_UART_1602\MAIN.OBJ' 文件中
+
+错误总数 : 0  警告总数 : 4

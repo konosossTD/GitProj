@@ -1,0 +1,417 @@
+C51 COMPILER V9.60.0.0   BIOSENSOR                                                         12/24/2021 12:27:59 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE BIOSENSOR
+OBJECT MODULE PLACED IN .\Objects\BioSensor.obj
+COMPILER INVOKED BY: D:\Keil5\MDK\C51\BIN\C51.EXE BioSensor.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\
+                    -Listings\BioSensor.lst) OBJECT(.\Objects\BioSensor.obj)
+
+line level    source
+
+   1          #include <STC12C5A60S2.H>
+   2          #include "uart.h"
+   3          #include "beep.h"
+   4          #include "1602.h"
+   5          #include "key.h"
+   6          #include "delay.h"
+   7          #include "servo.h"
+   8          #define uchar unsigned char
+   9          #define uint unsigned int 
+  10          #define FON P22==1
+  11          #define FOFF P22==0
+  12          volatile uchar Bio_Buffer[32];//·ÀÓÅ»¯
+  13          
+  14          extern login;
+  15          extern usercode;
+  16          extern lastkey;
+  17          
+  18          //FINGERPRINTÍ¨ÐÅÐ­Òé¶¨Òå
+  19          
+  20          code uchar Bio_Get_Device[10] ={0x01,0x00,0x07,0x13,0x00,0x00,0x00,0x00,0x00,0x1b};//¿ÚÁîÑéÖ¤
+  21          code uchar Bio_Pack_Head[6] = {0xEF,0x01,0xFF,0xFF,0xFF,0xFF};  //Ð­Òé°üÍ·
+  22          code uchar Bio_Get_Img[6] = {0x01,0x00,0x03,0x01,0x00,0x05};    //»ñµÃÖ¸ÎÆÍ¼Ïñ
+  23          code uchar Bio_Get_Templete_Count[6] ={0x01,0x00,0x03,0x1D,0x00,0x21 }; //»ñµÃÄ£°æ×ÜÊý
+  24          code uchar Bio_Search[11]={0x01,0x00,0x08,0x04,0x01,0x00,0x00,0x03,0xE7,0x00,0xF8}; //ËÑË÷Ö¸ÎÆËÑË÷·¶Î§0 - 
+             -999,Ê¹ÓÃBUFFER1ÖÐµÄÌØÕ÷ÂëËÑË÷
+  25          code uchar Bio_Search_0_9[11]={0x01,0x00,0x08,0x04,0x01,0x00,0x00,0x00,0x13,0x00,0x21}; //ËÑË÷0-9ºÅÖ¸ÎÆ
+  26          code uchar Bio_Img_To_Buffer1[7]={0x01,0x00,0x04,0x02,0x01,0x00,0x08}; //½«Í¼Ïñ·ÅÈëµ½BUFFER1
+  27          code uchar Bio_Img_To_Buffer2[7]={0x01,0x00,0x04,0x02,0x02,0x00,0x09}; //½«Í¼Ïñ·ÅÈëµ½BUFFER2
+  28          code uchar Bio_Reg_Model[6]={0x01,0x00,0x03,0x05,0x00,0x09}; //½«BUFFER1¸úBUFFER2ºÏ³ÉÌØÕ÷Ä£°æ
+  29          code uchar Bio_Delete_All_Model[6]={0x01,0x00,0x03,0x0d,0x00,0x11};//É¾³ýÖ¸ÎÆÄ£¿éÀïËùÓÐµÄÄ£°æ
+  30          volatile uchar  Bio_Save_Finger[9]={0x01,0x00,0x06,0x06,0x01,0x00,0x0B,0x00,0x19};//½«BUFFER1ÖÐµÄÌØÕ÷Âë´æ·
+             -Åµ½Ö¸¶¨µÄÎ»ÖÃ
+  31          //volatile:ÏµÍ³×ÜÊÇÖØÐÂ´ÓËüËùÔÚµÄÄÚ´æ¶ÁÈ¡Êý¾Ý£¬¼´Ê¹ËüÇ°ÃæµÄÖ¸Áî¸Õ¸Õ´Ó¸Ã´¦¶ÁÈ¡¹ýÊý¾Ý
+  32          /*------------------ FINGERPRINTÃüÁî×Ö --------------------------*/
+  33          
+  34          
+  35           finger_detect(void) //77       ºóÐø·µ»Øusernum
+  36          {
+  37   1              if(P22==1)
+  38   1              {
+  39   2                      beep();
+  40   2                      
+  41   2                      return 77;
+  42   2              }
+  43   1              else
+  44   1                      return 0;
+  45   1      
+  46   1      }
+  47          void BIO_Cmd_Send_Pack_Head(void)
+  48          {
+  49   1              int i;  
+  50   1              for(i=0;i<6;i++) //°üÍ·
+  51   1         {
+  52   2           Send_Byte(Bio_Pack_Head[i]);   
+C51 COMPILER V9.60.0.0   BIOSENSOR                                                         12/24/2021 12:27:59 PAGE 2   
+
+  53   2          }           
+  54   1      }
+  55          
+  56          //·¢ËÍÖ¸Áî
+  57          void BIO_Cmd_Check(void)
+  58          {
+  59   1              int i=0;
+  60   1              BIO_Cmd_Send_Pack_Head(); //·¢ËÍÍ¨ÐÅÐ­Òé°üÍ·
+  61   1              for(i=0;i<10;i++)
+  62   1               {              
+  63   2                      Send_Byte(Bio_Get_Device[i]);
+  64   2                }
+  65   1      }
+  66          
+  67          //½ÓÊÕ·´À¡Êý¾Ý»º³å
+  68          void BIO_Receive_Data(uchar ucLength)
+  69          {
+  70   1              uchar n;
+  71   1      
+  72   1              for (n=0;n<ucLength;n++)
+  73   1              {
+  74   2                      
+  75   2                      Bio_Buffer[n] = Uart_Receive_Byte();
+  76   2                      Send_Byte(Bio_Buffer[n]);
+  77   2              }
+  78   1      
+  79   1      }
+  80          
+  81          //FINGERPRINT_»ñµÃÖ¸ÎÆÍ¼ÏñÃüÁî
+  82          void BIO_Cmd_Get_Img(void)
+  83          {
+  84   1          uchar i;
+  85   1          BIO_Cmd_Send_Pack_Head(); //·¢ËÍÍ¨ÐÅÐ­Òé°üÍ·
+  86   1          for(i=0;i<6;i++) //·¢ËÍÃüÁî 0x1d
+  87   1              {
+  88   2             Send_Byte(Bio_Get_Img[i]);
+  89   2              }
+  90   1      }
+  91          
+  92          //Í¼Ïñ×ª»»³ÉÌØÕ÷Âë´æ·ÅÔÚBuffer1ÖÐ
+  93          void BIO_Cmd_Img_To_Buffer1(void)
+  94          {
+  95   1              uchar i;
+  96   1              BIO_Cmd_Send_Pack_Head(); //·¢ËÍÍ¨ÐÅÐ­Òé°üÍ·      
+  97   1              for(i=0;i<7;i++)   //·¢ËÍÃüÁî ½«Í¼Ïñ×ª»»³É ÌØÕ÷Âë ´æ·ÅÔÚ CHAR_buffer1
+  98   1           {
+  99   2            Send_Byte(Bio_Img_To_Buffer1[i]);
+ 100   2                }
+ 101   1      }
+ 102          
+ 103          //½«Í¼Ïñ×ª»»³ÉÌØÕ÷Âë´æ·ÅÔÚBuffer2ÖÐ
+ 104          void BIO_Cmd_Img_To_Buffer2(void)
+ 105          {
+ 106   1           uchar i;
+ 107   1           for(i=0;i<6;i++)    //·¢ËÍ°üÍ·
+ 108   1               {
+ 109   2              Send_Byte(Bio_Pack_Head[i]);   
+ 110   2               }
+ 111   1           for(i=0;i<7;i++)   //·¢ËÍÃüÁî ½«Í¼Ïñ×ª»»³É ÌØÕ÷Âë ´æ·ÅÔÚ CHAR_buffer1
+ 112   1            {
+ 113   2              Send_Byte(Bio_Img_To_Buffer2[i]);
+ 114   2                }
+C51 COMPILER V9.60.0.0   BIOSENSOR                                                         12/24/2021 12:27:59 PAGE 3   
+
+ 115   1      }
+ 116          
+ 117          
+ 118          //ËÑË÷È«²¿ÓÃ»§999Ã¶
+ 119          void BIO_Cmd_Search_Finger(void)
+ 120          {
+ 121   1             uchar i;             
+ 122   1                               BIO_Cmd_Send_Pack_Head(); //·¢ËÍÍ¨ÐÅÐ­Òé°üÍ·
+ 123   1             for(i=0;i<11;i++)
+ 124   1                 {
+ 125   2                    Send_Byte(Bio_Search[i]);   
+ 126   2                         }
+ 127   1      }
+ 128          
+ 129          //½«BUFFER1¸úBUFFER2ºÏ³ÉÌØÕ÷Ä£°æ
+ 130          void BIO_Cmd_Reg_Model(void)
+ 131          {
+ 132   1             uchar i;    
+ 133   1                  
+ 134   1                               BIO_Cmd_Send_Pack_Head(); //·¢ËÍÍ¨ÐÅÐ­Òé°üÍ·
+ 135   1      
+ 136   1             for(i=0;i<6;i++)
+ 137   1                 {
+ 138   2                    Send_Byte(Bio_Reg_Model[i]);   
+ 139   2                         }
+ 140   1      }
+ 141          
+ 142          //É¾³ýÖ¸ÎÆÄ£¿éÀïµÄËùÓÐÖ¸ÎÆÄ£°æ
+ 143          void BIO_Cmd_Delete_All_Model(void)
+ 144          {
+ 145   1           uchar i;    
+ 146   1          for(i=0;i<6;i++) //°üÍ·
+ 147   1            Send_Byte(Bio_Pack_Head[i]);   
+ 148   1          for(i=0;i<6;i++) //ÃüÁîºÏ²¢Ö¸ÎÆÄ£°æ
+ 149   1                 {
+ 150   2            Send_Byte(Bio_Delete_All_Model[i]);   
+ 151   2                       }      
+ 152   1      }
+ 153          
+ 154          
+ 155          //±£´æÖ¸ÎÆ
+ 156          void BIO_Cmd_Save_Finger( uint storeID )
+ 157          {
+ 158   1             unsigned long temp = 0;
+ 159   1                         uchar i;
+ 160   1             Bio_Save_Finger[5] =(storeID&0xFF00)>>8;
+ 161   1             Bio_Save_Finger[6] = (storeID&0x00FF);
+ 162   1                         for(i=0;i<7;i++)   //¼ÆËãÐ£ÑéºÍ
+ 163   1                                 temp = temp + Bio_Save_Finger[i]; 
+ 164   1                         Bio_Save_Finger[7]=(temp & 0x00FF00) >> 8; //´æ·ÅÐ£ÑéÊý¾Ý
+ 165   1                         Bio_Save_Finger[8]= temp & 0x0000FF;            
+ 166   1             BIO_Cmd_Send_Pack_Head(); //·¢ËÍÍ¨ÐÅÐ­Òé°üÍ·     
+ 167   1             for(i=0;i<9;i++)  
+ 168   1                      Send_Byte(Bio_Save_Finger[i]);      //·¢ËÍÃüÁî ½«Í¼Ïñ×ª»»³É ÌØÕ÷Âë ´æ·ÅÔÚ CHAR_buffer1
+ 169   1      }
+ 170          //********************************************************************************************************
+             -***************************************************
+ 171          //Ìí¼ÓÖ¸ÎÆ
+ 172          
+ 173          void BIO_Add_Fingerprint(int login)       //Q:ÓÃ»§ÍË³ö
+ 174          {
+ 175   1              
+C51 COMPILER V9.60.0.0   BIOSENSOR                                                         12/24/2021 12:27:59 PAGE 4   
+
+ 176   1              uchar *p=Bio_Buffer;
+ 177   1              ES=0;
+ 178   1              lastkey=-1;
+ 179   1              LCD_write_line(1,"     FINGER ADD     ");       //beep:continue beeps(2):retry  bee():done
+ 180   1              LCD_write_line(2,"     PRESS ENTER    ");
+ 181   1              
+ 182   1              while(waitkey(0)== 15)
+ 183   1              {       
+ 184   2                      delay300(2);
+ 185   2                      LCD_write_line(1,"  1- Please Finger  ");
+ 186   2                      LCD_write_line(2,"                    ");
+ 187   2                      LCD_write_line(3,"                    ");
+ 188   2                      LCD_write_line(4,"                    ");
+ 189   2      //              while(KEY_CANCEL == 1)
+ 190   2      //              {
+ 191   2      //              //°´ÏÂ·µ»Ø¼üÍË³öÂ¼Èë·µ»ØfingerIDµ÷Õû×´Ì¬   
+ 192   2      //                      if(KEY_CANCEL == 0) 
+ 193   2      //                      {
+ 194   2      //                              while(KEY_CANCEL==0);
+ 195   2      //                              break;
+ 196   2      //                      }
+ 197   2                              
+ 198   2                              BIO_Cmd_Get_Img(); //»ñµÃÖ¸ÎÆÍ¼Ïñ
+ 199   2                              BIO_Receive_Data(12);
+ 200   2                              delay100(1);
+ 201   2                              Send_Byte(Bio_Buffer[9]);
+ 202   2                              
+ 203   2              
+ 204   2                      
+ 205   2                                      //ÅÐ¶Ï½ÓÊÕµ½µÄÈ·ÈÏÂë,µÈÓÚ0Ö¸ÎÆ»ñÈ¡³É¹¦
+ 206   2                              if(Bio_Buffer[9]==0)
+ 207   2                              {
+ 208   3                                      beeps(2);
+ 209   3                                      delay100(1);
+ 210   3                                      BIO_Cmd_Img_To_Buffer1();
+ 211   3                                      BIO_Receive_Data(12);
+ 212   3                                      LCD_write_line(2,"   Scan Successful  ");
+ 213   3      
+ 214   3                                      delay300(3);
+ 215   3                                      LCD_write_line(3,"   2-Please Finger  ");
+ 216   3                                      LCD_write_line(3,"                    ");
+ 217   3                                      LCD_write_line(3,"                   ");
+ 218   3                                      waitkey(0);
+ 219   3                                      while(FON)
+ 220   3                                      {
+ 221   4      //                                      if(KEY_CANCEL == 0) 
+ 222   4      //                                      {
+ 223   4      //                                              while(KEY_CANCEL==0);
+ 224   4      //                                              break;
+ 225   4      //                                      }
+ 226   4                                              BIO_Cmd_Get_Img(); //»ñµÃÖ¸ÎÆÍ¼Ïñ
+ 227   4                                              BIO_Receive_Data(12);
+ 228   4                                              
+ 229   4                                              //ÅÐ¶Ï½ÓÊÕµ½µÄÈ·ÈÏÂë,µÈÓÚ0Ö¸ÎÆ»ñÈ¡³É¹¦
+ 230   4                                              if(Bio_Buffer[9]==0)
+ 231   4                                              {
+ 232   5                                                      
+ 233   5                                                      delay300(1);
+ 234   5                                                      beeps(2);
+ 235   5                                                      BIO_Cmd_Img_To_Buffer2();
+ 236   5                                                      BIO_Receive_Data(12);
+ 237   5                                                      BIO_Cmd_Reg_Model();//×ª»»³ÉÌØÕ÷Âë
+C51 COMPILER V9.60.0.0   BIOSENSOR                                                         12/24/2021 12:27:59 PAGE 5   
+
+ 238   5                                              BIO_Receive_Data(12); 
+ 239   5      //                                              BIO_Cmd_Save_Finger(finger_id); 
+ 240   5                                                      if(login==1)
+ 241   5                                                              BIO_Cmd_Save_Finger(0);
+ 242   5                                                      else
+ 243   5                                                      {
+ 244   6                                                              BIO_Cmd_Save_Finger(login*10);
+ 245   6                                                      
+ 246   6                                                      }
+ 247   5                                                      
+ 248   5      //                                              BIO_Cmd_Save_Finger(login);                                                     
+ 249   5                                              BIO_Receive_Data(12);
+ 250   5                                                      
+ 251   5                                                      LCD_write_line(3,"   Fully Scanned    ");
+ 252   5                                                      LCD_write_line(4,"   Ur ID:           ");
+ 253   5                                                      if(login>=1)
+ 254   5                                                      {
+ 255   6                                                              DisplayOneChar(11, 4, login+'0');
+ 256   6                                                      }
+ 257   5                                                              
+ 258   5                                                      
+ 259   5                                                      delay300(10);
+ 260   5      
+ 261   5                                              break;
+ 262   5                                              }
+ 263   4                                              waitkey(0);
+ 264   4                                              
+ 265   4                                      }
+ 266   3                                       beeps(3); 
+ 267   3      
+ 268   3                              }
+ 269   2                              bee(2);
+ 270   2              }
+ 271   1              ES=1;
+ 272   1              delay300(2);    
+ 273   1      }               
+ 274          
+ 275          //ËÑË÷Ö¸ÎÆ
+ 276          bit BIO_Find_Fingerprint()
+ 277          {
+ 278   1      
+ 279   1              uint find_fingerid = 0;
+ 280   1              uchar id_show[]={0,0,0};
+ 281   1              do
+ 282   1              {
+ 283   2      //              LCD_write_line(1,"   Finger Pls   ");
+ 284   2      //              LCD_write_line(2,"    Decting.... ");
+ 285   2                      
+ 286   2                      BIO_Cmd_Get_Img(); //»ñµÃÖ¸ÎÆÍ¼Ïñ
+ 287   2                      BIO_Receive_Data(12);           
+ 288   2      
+ 289   2                      //ÅÐ¶ÏÈ·ÈÏÂë
+ 290   2                      if(Bio_Buffer[9]==0)
+ 291   2                      {       
+ 292   3      //                      beep();
+ 293   3                              BIO_Cmd_Img_To_Buffer1();
+ 294   3                              BIO_Receive_Data(12);           
+ 295   3                              BIO_Cmd_Search_Finger();
+ 296   3                              BIO_Receive_Data(16);                   
+ 297   3                              if(Bio_Buffer[9] == 0 ) //ËÑË÷µ½  
+ 298   3                              {
+ 299   4      
+C51 COMPILER V9.60.0.0   BIOSENSOR                                                         12/24/2021 12:27:59 PAGE 6   
+
+ 300   4      //                              LCD_write_line(1,"   Finger Pls  ");
+ 301   4      //                              LCD_write_line(2,"   Decting...  ");
+ 302   4                                      beep();                                 
+ 303   4                                      //Æ´½ÓÖ¸ÎÆIDÊý
+ 304   4      //                              find_fingerid = Bio_Buffer[10]*256 + Bio_Buffer[11];
+ 305   4      
+ 306   4                                      set_servo_value(13);
+ 307   4                                      delay300(2);
+ 308   4                                      set_servo_value(0);
+ 309   4                                      delay300(3);            
+ 310   4                                      return 1;
+ 311   4      
+ 312   4                                 }
+ 313   3                                      else //Ã»ÓÐÕÒµ½
+ 314   3                                      {
+ 315   4      //                                      LCD_write_line(1,"    INVAILD    ");
+ 316   4      //                                      LCD_write_line(2,"    FINGER     ");
+ 317   4                                              bee(1);
+ 318   4                                              while(FON);
+ 319   4                                              return 0;
+ 320   4                                      }
+ 321   3                              }               
+ 322   2                      }while(1); //È·ÉÙ·µ»Øº¯Êý
+ 323   1      }
+ 324          //********************************************************************************************************
+             -****************************************
+ 325          /*
+ 326          //É¾³ýËùÓÐ´æÖüµÄÖ¸ÎÆ¿â
+ 327          void BIO_Cmd_Delete_All_Data()
+ 328          {
+ 329                          uchar i=0;
+ 330                                          LCD_write_line(0x80,"   empty all    ",0,16);
+ 331                                          LCD_write_line(0xc0,"   Yes or no ?  ",0,16); 
+ 332                          do
+ 333                           {
+ 334                                  if(KEY_OK==0)
+ 335                                  {
+ 336                                          while(KEY_OK==0);
+ 337                                          LCD_write_line(0x80,"   emptying     ",0,16);
+ 338                                          LCD_write_line(0xc0,"                ",0,16); 
+ 339                                          delay1(300);
+ 340                                          LCD1602_WriteCMD(0xc0);
+ 341                                          for(i=0;i<16;i++)
+ 342                                           {
+ 343                                                  LCD1602_WriteDAT(42);
+ 344                                                  delay1(100);
+ 345                                           }
+ 346                                          FINGERPRINT_0Cmd_Delete_All_Model();
+ 347                                          BIO_Receive_Data(12); 
+ 348                                          LCD_write_line(0x80,"   All empty    ",0,16);
+ 349                                          LCD_write_line(0xc0,"                ",0,16);
+ 350                                          beeps(3);
+ 351                                          break;
+ 352                                  }
+ 353                           }while(KEY_CANCEL==1);
+ 354          }
+ 355          
+ 356          void Device_Check(void)
+ 357          {
+ 358                          uchar i=0;
+ 359                          BIO_RECEICE_BUFFER[9]=1;                                           //´®¿ÚÊý×éµÚ¾ÅÎ»¿ÉÅÐ¶ÏÊÇ·ñÍ¨ÐÅÕý³£
+ 360                                                                                     
+C51 COMPILER V9.60.0.0   BIOSENSOR                                                         12/24/2021 12:27:59 PAGE 7   
+
+ 361                          for(i=0;i<8;i++)                                                           //½ø¶ÈÌõÊ½¸üÐÂ£¬¿´ÆðÀ´ÃÀ¹Û
+ 362                          {
+ 363                                  LCD1602_WriteDAT(42);                          //42¶ÔÓ¦ASICÂëµÄ *
+ 364                                  delay1(200);                                                       //¿ØÖÆ½ø¶ÈÌõËÙ¶È
+ 365                          }                                                                       
+ 366                          BIO_Cmd_Check();                                                                        //µ¥Æ¬»úÏòÖ¸ÎÆÄ£¿é·¢ËÍÐ£¶ÔÃüÁî
+ 367                          LCD_write_line(0xc0,"Device Failure",0,16);      //Òº¾§ÏÈÏÔÊ¾¶Ô½ÓÊ§°Ü£¬Èç¹ûÖ¸ÎÆÄ£¿é²å¶ÔµÄ»°»á½«Æä¸²¸Ç   
+ 368                          
+ 369                          BIO_Receive_Data(12);                                                   //½«´®¿Ú½ÓÊÕµ½µÄÊý¾Ý×ª´æ
+ 370                          if(Bio_RECEICE_BUFFER[9] == 0)                                  //ÅÐ¶ÏÊý¾ÝµÍµÚ9Î»ÊÇ·ñ½ÓÊÕµ½0
+ 371                          {
+ 372                                  LCD_write_line(0xc0,"Device Accessed",0,16);    //·ûºÏ³É¹¦Ìõ¼þÔòÏÔÊ¾¶Ô½Ó³É¹¦
+ 373                          }
+ 374          }
+ 375          
+ 376          */
+ 377          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1230    ----
+   CONSTANT SIZE    =    267    ----
+   XDATA SIZE       =     41      27
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

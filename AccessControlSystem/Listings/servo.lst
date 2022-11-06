@@ -1,0 +1,42 @@
+C51 COMPILER V9.60.0.0   SERVO                                                             12/24/2021 12:27:59 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE SERVO
+OBJECT MODULE PLACED IN .\Objects\servo.obj
+COMPILER INVOKED BY: D:\Keil5\MDK\C51\BIN\C51.EXE servo.c LARGE OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\List
+                    -ings\servo.lst) OBJECT(.\Objects\servo.obj)
+
+line level    source
+
+   1          #include <STC12C5A60S2.H>
+   2          #include "servo.h"
+   3          #include "beep.h"
+   4          #define uchar unsigned char
+   5          #define uint unsigned int 
+   6                  
+   7          
+   8          extern servo_val;
+   9          
+  10          void set_servo_value(uint val)
+  11          {
+  12   1              if((val>=0)&&(val<=25))
+  13   1              {
+  14   2                      servo_val=val;
+  15   2              }
+  16   1              else
+  17   1                      bee(1);
+  18   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     32    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
