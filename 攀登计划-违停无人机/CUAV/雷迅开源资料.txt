@@ -1,3 +1,0 @@
-cuav开源的相关资料    http://www.github.com/cuav
-雷迅官网    https://doc.cuav.net/
-PIX4 用户指南   https://docs.px4.io/master/en/airframes/airframe_reference.html
